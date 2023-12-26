@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
 import {
@@ -10,12 +10,12 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInFrom, setIsSignInFrom] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const email = useRef(null);
@@ -43,7 +43,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/116452735?v=4",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -55,15 +55,11 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/browse");
-              // ...
             })
             .catch((error) => {
               // An error occurred
               setErrorMsg(error.message);
             });
-          console.log(user);
 
           // ...
         })
@@ -81,9 +77,8 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
+          // eslint-disable-next-line no-unused-vars
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
