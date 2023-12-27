@@ -3,12 +3,13 @@ export const LOGO =
 export const USER_AVATAR =
   "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg";
 
-
 export const API_OPTIONS = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYTJlYzc0OGQ4NTE5NGQwMjdkOTc3ZWE1ZDhkZGJiMSIsInN1YiI6IjY1ODk5NjIzNDc3MjE1NWJjMDQzNzcyYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VTnCV2dFLogD2TI0A-0qzuv7WAtS1NhfZ2UnnN894yw'
-    }
-  };
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYTJlYzc0OGQ4NTE5NGQwMjdkOTc3ZWE1ZDhkZGJiMSIsInN1YiI6IjY1ODk5NjIzNDc3MjE1NWJjMDQzNzcyYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VTnCV2dFLogD2TI0A-0qzuv7WAtS1NhfZ2UnnN894yw",
+  },
+};
 
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780";
