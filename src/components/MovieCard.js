@@ -1,12 +1,38 @@
-import React from "react";
-import { IMG_CDN_URL } from "../utils/constants";
+import React, { useState } from "react";
 
-const MovieCard = ({ posterPath }) => {
+import { IMG_CDN_URL } from "../utils/constants";
+import HoverMovieCard from "./HoverMovieCard";
+
+const MovieCard = ({
+  posterPath,
+  title,
+  backImg,
+  genreIds,
+  cardMovieId,
+  overView,
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="w-48 pr-3">
+    <div
+      className={"w-48 mr-3 relative"}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <img className="" alt="movie_card" src={IMG_CDN_URL + posterPath} />
+      {isHovered && (
+        <HoverMovieCard
+          title={title}
+          backImg={backImg}
+          genreIds={genreIds}
+          cardMovieId={cardMovieId}
+          overView={overView}
+        />
+      )}
     </div>
   );
 };
 
 export default MovieCard;
+
+// className="w-48 mr-3 relative"
