@@ -30,15 +30,13 @@ const HoverMovieCard = ({
   // Extract genre names
   const matchingGenreNames = matchingGenres.map((genre) => genre.name);
 
-  console.log(matchingGenreNames);
-
   return (
-    <div className="p-4">
-      <div className="w-80 absolute bottom-20 z-50 rounded-lg bg-neutral-800 box-border">
-        <div>
+    <div className="absolute w-72 bottom-4 bg-slate-800 z-50 rounded-md px-2 pb-4">
+      <div className="">
+        <div className="">
           {/* <img className="" alt="video_card" src={IMG_CDN_URL + backImg} /> */}
           <iframe
-            className="w-80 aspect-video"
+            className="w-[274px] aspect-video"
             src={
               "https://www.youtube.com/embed/" +
               movieTrailerVideo?.key +
@@ -49,17 +47,17 @@ const HoverMovieCard = ({
           ></iframe>
         </div>
         <div>
-          <div className="flex items-center justify-between">
+          <div className="flex justify-between items-center">
             <h1 className="text-white font-bold text-xl p-2 m-1">{title}</h1>{" "}
             <span className="text-white font-semibold text-2xl pr-2">
               <GrAdd />
             </span>
           </div>
 
-          <p className="text-white  p-1 m-1">
-            {matchingGenreNames.join("  . ")}
+          <p className="text-white text-sm  p-1 m-1">
+            {matchingGenreNames.join("  •  ")}
           </p>
-          <p className="text-white text-xs p-2 m-1">{overView}</p>
+          <p className="text-white text-sm mx-2 line-clamp-3">{overView}</p>
         </div>
       </div>
     </div>

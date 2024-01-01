@@ -15,11 +15,16 @@ const MovieCard = ({
 
   return (
     <div
-      className={"w-48 mr-3 relative"}
+      className="w-48 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img className="" alt="movie_card" src={IMG_CDN_URL + posterPath} />
+      <img
+        className="w-full h-auto"
+        alt="movie_card"
+        src={IMG_CDN_URL + posterPath}
+      />
+
       {isHovered && (
         <HoverMovieCard
           title={title}
