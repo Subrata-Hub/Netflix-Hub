@@ -10,6 +10,8 @@ const MovieCard = ({
   genreIds,
   cardMovieId,
   overView,
+  releaseDate,
+  rating,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -32,6 +34,8 @@ const MovieCard = ({
           genreIds={genreIds}
           cardMovieId={cardMovieId}
           overView={overView}
+          releaseDate={releaseDate}
+          rating={rating}
         />
       )}
     </div>

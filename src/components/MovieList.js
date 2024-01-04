@@ -10,11 +10,11 @@ const MovieList = ({ title, movies }) => {
   const handleDirection = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 70;
     if (direction === "left" && sliderPosition > 0) {
-      listRef.current.style.transform = `translateX(${640 + distance}px)`;
+      listRef.current.style.transform = `translateX(${625 + distance}px)`;
       setSliderPosition(sliderPosition - 1);
     }
     if (direction === "right" && sliderPosition < 4) {
-      listRef.current.style.transform = `translateX(${-640 + distance}px)`;
+      listRef.current.style.transform = `translateX(${-625 + distance}px)`;
       setSliderPosition(sliderPosition + 1);
     }
   };
@@ -39,7 +39,7 @@ const MovieList = ({ title, movies }) => {
         </div>
         <div className="">
           <div
-            className="flex gap-2 w-max translate-x-0 transition-all duration-300 ease-in-out"
+            className="flex gap-[7px] w-max translate-x-0 transition-all duration-300 ease-in-out"
             ref={listRef}
           >
             {movies.map((movie) => (
@@ -51,6 +51,8 @@ const MovieList = ({ title, movies }) => {
                 genreIds={movie.genre_ids}
                 cardMovieId={movie.id}
                 overView={movie.overview}
+                releaseDate={movie.release_date}
+                rating={movie.vote_average.toFixed(1)}
               />
             ))}
           </div>

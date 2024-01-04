@@ -1,20 +1,24 @@
 import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -54,14 +58,30 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleGptSearchClicked = () => {
+    dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div
+      className={`absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between`}
+    >
       <div className="flex justify-between items-center gap-24">
         <img className="w-56" src={LOGO} alt="logo" />
 
         {user && (
           <div className="">
             <ul className="text-white flex gap-8 text-lg">
+              {showGptSearch && (
+                <li onClick={handleGptSearchClicked}>
+                  {" "}
+                  <Link to="/browse">Home</Link>
+                </li>
+              )}
               <li>Movies </li>
               <li>TV Shows </li>
               <li>Favarite</li>
@@ -71,9 +91,28 @@ const Header = () => {
       </div>
       {user && (
         <div className="flex p-4 text-center">
-          <button className="px-4 py-2 mx-2 my-2 mb-5 bg-violet-800 font-semibold text-white ">
-            GPT Search
-          </button>
+          {showGptSearch && (
+            <select
+              className="px-4 py-2 mx-2 my-2 mb-5 bg-zinc-800 text-white text-sm"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+          {showGptSearch ? (
+            ""
+          ) : (
+            <button
+              className="px-4 py-2 mx-2 my-2 mb-5 bg-violet-800 font-semibold text-white "
+              onClick={handleGptSearchClicked}
+            >
+              GPT Search
+            </button>
+          )}
           <h1 className="py-2 px-4  text-white font-bold text-lg">
             {user.displayName}
           </h1>
