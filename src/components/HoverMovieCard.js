@@ -24,7 +24,7 @@ const HoverMovieCard = ({
 
   if (!genresData) return;
 
-  if (!movieTrailerVideo) return;
+  // if (!movieTrailerVideo) return;
 
   // Filter genres based on genre IDs
   const matchingGenres = genresData.genres.filter((genre) =>

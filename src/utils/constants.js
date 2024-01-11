@@ -3,6 +3,8 @@ export const LOGO =
 export const USER_AVATAR =
   "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg";
 
+// const TMDB_API = process.env.REACT_APP_TMDB_KEY;
+
 export const API_OPTIONS = {
   method: "GET",
   headers: {
@@ -22,3 +24,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "Bangla", name: "Bangla" },
   { identifier: "Hindi", name: "Hindi" },
 ];
+
+export const OPENAI_KEY = `process.env.REACT_APP_OPENAI_KEY`;

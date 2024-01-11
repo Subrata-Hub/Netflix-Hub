@@ -1,4 +1,7 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
@@ -15,6 +18,11 @@ import { BACKGROUND_IMG, USER_AVATAR } from "../utils/constants";
 const Login = () => {
   const [isSignInFrom, setIsSignInFrom] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
+  const user = useSelector((store) => store.user);
+
+  const navigate = useNavigate();
+
+  // const user = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
 
@@ -79,6 +87,15 @@ const Login = () => {
           // Signed in
           // eslint-disable-next-line no-unused-vars
           const user = userCredential.user;
+          const { uid, email, displayName, photoURL } = user;
+          dispatch(
+            addUser({
+              uid: uid,
+              email: email,
+              displayName: displayName,
+              photoURL: photoURL || USER_AVATAR,
+            })
+          );
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -95,6 +112,8 @@ const Login = () => {
   return (
     <div>
       <Header />
+      {user && navigate("/browse")}
+
       <div className="absolute">
         <img src={BACKGROUND_IMG} alt="bg-img" />
       </div>

@@ -15,6 +15,8 @@ const MovieCard = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  if (!posterPath) return;
+
   return (
     <div
       className="w-48 relative"

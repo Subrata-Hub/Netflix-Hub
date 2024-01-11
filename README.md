@@ -34,6 +34,8 @@
 - TMDB Image cdn Url
 - Made The Browser Page Amazing with Tailwind css
 - Implementing usepopularMovie, useTopratedMovies, and useUpComingMovie
+- Gpt Search page
+- Malti language features in our app
 
 # Features
 
