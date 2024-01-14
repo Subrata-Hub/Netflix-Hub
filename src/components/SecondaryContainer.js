@@ -1,10 +1,17 @@
 import React from "react";
 
 import MovieList from "./MovieList";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeMediaType } from "../utils/configSlice";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
+  const mediaType = useSelector((store) => store.config.mediaType);
+  const dispatch = useDispatch();
+
+  if (mediaType === "tv") {
+    dispatch(changeMediaType("movie"));
+  }
 
   return (
     <div className="bg-black">

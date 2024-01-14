@@ -2,15 +2,17 @@
 
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { useDispatch } from "react-redux";
 import { addMovieTrailer } from "../utils/movieSlice";
 
+import { useDispatch, useSelector } from "react-redux";
+
 const useCardMovieTrailer = (cardMovieId) => {
+  const mediaType = useSelector((store) => store.config.mediaType);
   const dispatch = useDispatch();
 
   const getMovieVideos = async () => {
     const data = await fetch(
-      `https://api.themoviedb.org/3/movie/${cardMovieId}/videos?language=en-US`,
+      `https://api.themoviedb.org/3/${mediaType}/${cardMovieId}/videos`,
       API_OPTIONS
     );
     const json = await data.json();

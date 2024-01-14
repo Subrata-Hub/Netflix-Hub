@@ -5,15 +5,21 @@ import { useSelector, useDispatch } from "react-redux";
 import openai from "../utils/openAI";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptMoviesResult } from "../utils/gptSlice";
+import { changeMediaType } from "../utils/configSlice";
 
 const GptSearch = () => {
   const langKey = useSelector((store) => store.config.lang);
+  const mediaType = useSelector((store) => store.config.mediaType);
   const searchText = useRef(null);
   const dispatch = useDispatch();
 
   // Search movie in TMDB
 
   const searchMovieTmdb = async (movie) => {
+    if (mediaType === "tv") {
+      dispatch(changeMediaType("movie"));
+    }
+
     const data = await fetch(
       `
     https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
@@ -28,8 +34,6 @@ const GptSearch = () => {
   };
 
   const handleGptSearchClick = async () => {
-    // console.log(searchText.current.value);
-
     const gptQuery = `Act as a Movie Recommendation system and suggest some movies for the query : ${searchText.current.value}.only give me names of 5 movies, comma seperated like the example results given ahead.Example results: Gadar, Sholay, Don, Golmal, Dhoom 3`;
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
@@ -46,10 +50,7 @@ const GptSearch = () => {
       searchMovieTmdb(movie.trim())
     );
     const movieResults = await Promise.all(promiseArray);
-    // const filteredMovieResults = movieResults.filter(
-    //   (result) => result.length > 0
-    // );
-    // console.log(filteredMovieResults);
+
     dispatch(
       addGptMoviesResult({
         movieName: gptMovies,
@@ -82,5 +83,3 @@ const GptSearch = () => {
 };
 
 export default GptSearch;
-
-// https://api.themoviedb.org/3/search/collection?query=Dhoom&include_adult=false&language=en-US&page=1

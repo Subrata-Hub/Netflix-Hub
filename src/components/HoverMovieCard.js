@@ -1,6 +1,5 @@
-import React from "react";
 import useGenre from "../hooks/useGenre";
-// import { IMG_CDN_URL } from "../utils/constants";
+
 import { GrAdd } from "react-icons/gr";
 
 import { useSelector } from "react-redux";
@@ -24,16 +23,15 @@ const HoverMovieCard = ({
 
   if (!genresData) return;
 
-  // if (!movieTrailerVideo) return;
-
   // Filter genres based on genre IDs
-  const matchingGenres = genresData.genres.filter((genre) =>
+  const matchingGenres = genresData?.genres?.filter((genre) =>
     genreIds.includes(genre.id)
   );
 
   // Extract genre names
   const matchingGenreNames = matchingGenres.map((genre) => genre.name);
 
+  if (!movieTrailerVideo) return null;
   return (
     <div className="absolute w-72 -bottom-2 bg-slate-800 z-50 rounded-md px-2 shadow-lg">
       <div className="">
@@ -41,11 +39,7 @@ const HoverMovieCard = ({
           {/* <img className="" alt="video_card" src={IMG_CDN_URL + backImg} /> */}
           <iframe
             className="w-[276px] aspect-video"
-            src={
-              "https://www.youtube.com/embed/" +
-              movieTrailerVideo?.key +
-              "?&autoplay=1&mute=0&showinfo=0&controls=0"
-            }
+            src={`https://www.youtube.com/embed/${movieTrailerVideo?.key}?&autoplay=1&mute=0&showinfo=0&controls=0`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           ></iframe>

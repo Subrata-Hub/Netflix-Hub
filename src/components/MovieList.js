@@ -39,7 +39,7 @@ const MovieList = ({ title, movies }) => {
         </div>
         <div className="">
           <div
-            className="flex gap-[7px] w-max translate-x-0 transition-all duration-300 ease-in-out"
+            className="flex gap-3 w-max translate-x-0 transition-all duration-300 ease-in-out"
             ref={listRef}
           >
             {movies.map((movie) => (
