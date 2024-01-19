@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import MovieCard from "./MovieCard";
+import Shimmer from "./Shimmer";
 
-const InfiniteScroll = ({ fetchData, mediaType }) => {
+const InfiniteScroll = ({ fetchData, pageNumber, setPageNumber, key }) => {
   const [items, setItems] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
+
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
@@ -24,7 +25,7 @@ const InfiniteScroll = ({ fetchData, mediaType }) => {
 
       if (node) observer.current.observe(node);
     },
-    [isLoading, hasMore]
+    [isLoading, hasMore, setPageNumber]
   );
 
   useEffect(() => {
@@ -48,34 +49,32 @@ const InfiniteScroll = ({ fetchData, mediaType }) => {
 
     // Trigger fetching when pageNumber changes
     fetchDataAndAppend();
-  }, [pageNumber, fetchData, isLoading]);
+  }, [pageNumber, fetchData, isLoading, setPageNumber, key]);
+
+  if (items.length === 0) return <Shimmer />;
 
   return (
     <div className="">
       <div className="flex flex-wrap gap-3 mx-16">
-        {items.map((item, index) => (
-          <div className="py-4">
+        {items?.map((item, index) => (
+          <div className="py-4" key={index}>
             <MovieCard
-              posterPath={item?.poster_path}
-              key={`${item.id}-${index}`}
-              title={item?.original_title || item.original_name}
-              backImg={item?.backdrop_path}
-              genreIds={item?.genre_ids}
-              cardMovieId={item?.id}
-              overView={item?.overview}
-              releaseDate={item?.release_date || item?.first_air_date}
-              rating={item?.vote_average?.toFixed(1)}
-              // Set the ref only for the last item
-              ref={index === items.length - 1 ? lastItemRef : null}
+              posterPath={item.poster_path}
+              title={item.original_title || item.original_name}
+              backImg={item.backdrop_path}
+              genreIds={item.genre_ids}
+              cardMovieId={item.id}
+              overView={item.overview}
+              releaseDate={item.release_date || item.first_air_date}
+              rating={item.vote_average.toFixed(1)}
             />
           </div>
         ))}
       </div>
 
-      {isLoading && <li>Loading...</li>}
-      {!isLoading && hasMore && <li ref={lastItemRef}>Load more</li>}
+      {isLoading && <Shimmer />}
+      {!isLoading && hasMore && <div ref={lastItemRef}>load more</div>}
     </div>
   );
 };
-
 export default InfiniteScroll;

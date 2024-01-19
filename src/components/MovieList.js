@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import MovieCard from "./MovieCard";
+import Shimmer from "./Shimmer";
 
 const MovieList = ({ title, movies }) => {
   const listRef = useRef();
@@ -19,7 +20,8 @@ const MovieList = ({ title, movies }) => {
     }
   };
 
-  if (!movies || movies.length === 0) return;
+  if (!movies) return null;
+  if (movies.length === 0) return <Shimmer />;
 
   return (
     <div

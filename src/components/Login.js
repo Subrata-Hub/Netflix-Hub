@@ -112,7 +112,7 @@ const Login = () => {
   return (
     <div>
       <Header />
-      {user && navigate("/browse")}
+      {/* {user && navigate("/browse")} */}
 
       <div className="absolute">
         <img src={BACKGROUND_IMG} alt="bg-img" />

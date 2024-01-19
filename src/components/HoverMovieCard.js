@@ -17,6 +17,7 @@ const HoverMovieCard = ({
   rating,
 }) => {
   const genresData = useGenre();
+
   const movieTrailerVideo = useSelector((store) => store.movies?.movieTrailer);
 
   useCardMovieTrailer(cardMovieId);
@@ -31,7 +32,7 @@ const HoverMovieCard = ({
   // Extract genre names
   const matchingGenreNames = matchingGenres.map((genre) => genre.name);
 
-  if (!movieTrailerVideo) return null;
+  // if (!movieTrailerVideo) return null;
   return (
     <div className="absolute w-72 -bottom-2 bg-slate-800 z-50 rounded-md px-2 shadow-lg">
       <div className="">
