@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import MovieCard from "./MovieCard";
-import Shimmer from "./Shimmer";
+// import Shimmer from "./Shimmer";
 
 const GptRecommendation = () => {
   const gpt = useSelector((store) => store.gpt);

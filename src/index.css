@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 /* Chrome, Edge, and Safari */
-/* *::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
-} */
+}
+
+.body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.lazy-load-image-background {
+  width: 100%;
+  height: 100%;
+}

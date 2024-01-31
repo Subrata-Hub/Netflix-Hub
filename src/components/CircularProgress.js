@@ -3,9 +3,9 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "../style.css";
 import "react-circular-progressbar/dist/styles.css";
 
-const CircularProgress = ({ rating }) => {
+const CircularProgress = ({ rating, size }) => {
   return (
-    <div className="circleRating w-12 h-12">
+    <div className={`circleRating ${size}`}>
       <CircularProgressbar
         value={rating}
         text={rating}

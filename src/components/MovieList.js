@@ -11,11 +11,11 @@ const MovieList = ({ title, movies }) => {
   const handleDirection = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 70;
     if (direction === "left" && sliderPosition > 0) {
-      listRef.current.style.transform = `translateX(${625 + distance}px)`;
+      listRef.current.style.transform = `translateX(${740 + distance}px)`;
       setSliderPosition(sliderPosition - 1);
     }
     if (direction === "right" && sliderPosition < 4) {
-      listRef.current.style.transform = `translateX(${-625 + distance}px)`;
+      listRef.current.style.transform = `translateX(${-762 + distance}px)`;
       setSliderPosition(sliderPosition + 1);
     }
   };
@@ -25,12 +25,12 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div
-      className="px-4 py-4 relative flex-col overflow-hidden ml-12"
+      className="mx-20 py-3 relative flex-col overflow-hidden"
       showControls={showControls}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-      <h1 className="text-3xl py-2 text-white">{title}</h1>
+      <h1 className="text-3xl py-4 text-white">{title}</h1>
       <div className="flex">
         <div
           className={`absolute z-50 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 left-0 text-white text-3xl ${
@@ -44,17 +44,17 @@ const MovieList = ({ title, movies }) => {
             className="flex gap-3 w-max translate-x-0 transition-all duration-300 ease-in-out"
             ref={listRef}
           >
-            {movies.map((movie) => (
+            {movies?.map((movie) => (
               <MovieCard
                 posterPath={movie.poster_path}
                 key={movie.id}
-                title={movie.original_title}
+                title={movie?.original_title || movie?.original_name}
                 backImg={movie.backdrop_path}
                 genreIds={movie.genre_ids}
                 cardMovieId={movie.id}
                 overView={movie.overview}
-                releaseDate={movie.release_date}
-                rating={movie.vote_average.toFixed(1)}
+                releaseDate={movie?.release_date || movie?.first_air_date}
+                rating={movie.vote_average?.toFixed(1)}
               />
             ))}
           </div>

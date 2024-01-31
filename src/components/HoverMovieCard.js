@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import useCardMovieTrailer from "../hooks/useCardMovieTrailer";
 
 import CircularProgress from "./CircularProgress";
+import { Link } from "react-router-dom";
 
 const HoverMovieCard = ({
   title,
@@ -16,11 +17,12 @@ const HoverMovieCard = ({
   releaseDate,
   rating,
 }) => {
+  const mediaType = useSelector((store) => store.config.mediaType);
   const genresData = useGenre();
 
   const movieTrailerVideo = useSelector((store) => store.movies?.movieTrailer);
 
-  useCardMovieTrailer(cardMovieId);
+  useCardMovieTrailer(mediaType, cardMovieId);
 
   if (!genresData) return;
 
@@ -30,7 +32,7 @@ const HoverMovieCard = ({
   );
 
   // Extract genre names
-  const matchingGenreNames = matchingGenres.map((genre) => genre.name);
+  const matchingGenreNames = matchingGenres?.map((genre) => genre.name);
 
   // if (!movieTrailerVideo) return null;
   return (
@@ -64,10 +66,12 @@ const HoverMovieCard = ({
           </div>
           <div className="flex justify-between items-center">
             <div className="px-2 py-4">
-              <CircularProgress rating={rating} />
+              <CircularProgress rating={rating} size={"w-12 h-12"} />
             </div>
             <div className="px-12 text-white py-2 mx-2 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg hover:shadow-indigo-500/40">
-              <button>More Info</button>
+              <Link to={`/${mediaType}/${cardMovieId}`}>
+                <button>More Info</button>
+              </Link>
             </div>
           </div>
 

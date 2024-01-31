@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const useGenre = () => {
   const [genreName, setGenreName] = useState(null);
 
-  const mediaType = useSelector((store) => store.config.mediaType);
+  const mediaType = useSelector((store) => store.config?.mediaType);
 
   const getGenreName = async () => {
     const data = await fetch(

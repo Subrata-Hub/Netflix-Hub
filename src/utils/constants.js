@@ -32,4 +32,16 @@ export const sortbyData = [
   { value: "vote_average.asc", label: "Rating Ascending" },
 ];
 
+export const SELECT_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hi", name: "Hindi" },
+  { identifier: "bn", name: "Bangla" },
+];
+
+export const convertHoursAndMinutes = (totalMinutes) => {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
+};
+
 export const OPENAI_KEY = `process.env.REACT_APP_OPENAI_KEY`;

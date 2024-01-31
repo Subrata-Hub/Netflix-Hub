@@ -1,18 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { addMovieTrailer } from "../utils/movieSlice";
+import { addMediaTrailer } from "../utils/mediaSlice";
 
 import { useDispatch } from "react-redux";
 
-const useCardMovieTrailer = (mediaType, cardMovieId) => {
+const useMediaTrailer = (mediaType, id) => {
   // const mediaType = useSelector((store) => store.config.mediaType);
   const dispatch = useDispatch();
 
-  const getMovieVideos = async () => {
+  const getTrailerVideos = async () => {
     const data = await fetch(
-      `https://api.themoviedb.org/3/${mediaType}/${cardMovieId}/videos`,
+      `https://api.themoviedb.org/3/${mediaType}/${id}/videos`,
       API_OPTIONS
     );
     const json = await data.json();
@@ -23,12 +21,12 @@ const useCardMovieTrailer = (mediaType, cardMovieId) => {
     if (!filterData) return;
     const trailer = filterData?.length ? filterData[0] : json.results[0];
 
-    dispatch(addMovieTrailer(trailer));
+    dispatch(addMediaTrailer(trailer));
   };
 
   useEffect(() => {
-    getMovieVideos();
-  }, []);
+    getTrailerVideos();
+  }, [id]);
 };
 
-export default useCardMovieTrailer;
+export default useMediaTrailer;

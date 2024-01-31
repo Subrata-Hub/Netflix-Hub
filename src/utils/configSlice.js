@@ -5,6 +5,7 @@ const configSlice = createSlice({
   initialState: {
     lang: "en",
     mediaType: "movie",
+    showPopup: false,
   },
   reducers: {
     changeLanguage: (state, action) => {
@@ -14,8 +15,13 @@ const configSlice = createSlice({
     changeMediaType: (state, action) => {
       state.mediaType = action.payload;
     },
+
+    setShowPopup: (state, action) => {
+      state.showPopup = action.payload;
+    },
   },
 });
 
-export const { changeLanguage, changeMediaType } = configSlice.actions;
+export const { changeLanguage, changeMediaType, setShowPopup } =
+  configSlice.actions;
 export default configSlice.reducer;
