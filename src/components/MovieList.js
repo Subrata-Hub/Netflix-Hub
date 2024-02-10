@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+
 import MovieCard from "./MovieCard";
 import Shimmer from "./Shimmer";
 
-const MovieList = ({ title, movies }) => {
+const MovieList = ({ title, movies, loading }) => {
   const listRef = useRef();
   const [sliderPosition, setSliderPosition] = useState(0);
   const [showControls, setShowControls] = useState(false);
@@ -20,8 +21,11 @@ const MovieList = ({ title, movies }) => {
     }
   };
 
-  if (!movies) return null;
-  if (movies.length === 0) return <Shimmer />;
+  if (!movies) {
+    return <Shimmer />;
+  }
+
+  // if (loading && (!movies || movies.length === 0)) return <Shimmer />;
 
   return (
     <div
@@ -30,7 +34,7 @@ const MovieList = ({ title, movies }) => {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-      <h1 className="text-3xl py-4 text-white">{title}</h1>
+      <h1 className="text-3xl pb-3 text-white">{title}</h1>
       <div className="flex">
         <div
           className={`absolute z-50 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 left-0 text-white text-3xl ${
@@ -46,15 +50,15 @@ const MovieList = ({ title, movies }) => {
           >
             {movies?.map((movie) => (
               <MovieCard
-                posterPath={movie.poster_path}
-                key={movie.id}
+                posterPath={movie?.poster_path}
+                key={movie?.id}
                 title={movie?.original_title || movie?.original_name}
-                backImg={movie.backdrop_path}
-                genreIds={movie.genre_ids}
-                cardMovieId={movie.id}
-                overView={movie.overview}
+                backImg={movie?.backdrop_path}
+                genreIds={movie?.genre_ids}
+                cardMovieId={movie?.id}
+                overView={movie?.overview}
                 releaseDate={movie?.release_date || movie?.first_air_date}
-                rating={movie.vote_average?.toFixed(1)}
+                rating={movie?.vote_average?.toFixed(1)}
               />
             ))}
           </div>

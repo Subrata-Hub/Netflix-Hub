@@ -1,25 +1,28 @@
 import React, { useState } from "react";
-import useMediaInfo from "../hooks/useMediaInfo";
+
 import { useSelector } from "react-redux";
 import { IMG_CDN_URL } from "../utils/constants";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import PosterFallImage from "../assets/no-poster2.jpeg";
 import CircularProgress from "./CircularProgress";
-import Shimmer from "./Shimmer";
+
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import useDate from "../hooks/useDate";
 import { convertHoursAndMinutes } from "../utils/constants";
 import Cast from "./Cast";
 import useMediaTrailer from "../hooks/useMediaTrailer";
 import VideoPopup from "./VideoPopup";
-// import { setShowPopup } from "../utils/configSlice";
+
+import LeLazyLoadImage from "./LeLazyLoadImage";
 
 const MediaInfo = ({ mediaType, id }) => {
   const [videoPopup, setVideoPopup] = useState(false);
+  // const [loading, setLoading] = useState(true);
   const mediaInfoData = useSelector((store) => store.media?.mediaInfo);
+
   const mediaTrailerVideo = useSelector((store) => store.media?.mediaTrailer);
 
-  useMediaInfo(mediaType, id);
+  // useMediaInfo(mediaType, id);
 
   useMediaTrailer(mediaType, id);
 
@@ -51,32 +54,32 @@ const MediaInfo = ({ mediaType, id }) => {
     setVideoPopup(false);
   };
 
-  if (!mediaInfoData) return <Shimmer />;
+  // if (!mediaInfoData) return <LodingSkeleton />;
+
   return (
     <>
       <div className="pt-52 w-full pb-10">
-        <div className="w-full h-full absolute top-0 left-0 overflow-hidden bg-black opacity-30">
-          <LazyLoadImage
-            className="w-full h-full object-center object-cover"
+        <div className="w-full h-full absolute top-0 left-0 overflow-hidden bg-slate-950 opacity-40">
+          <LeLazyLoadImage
             src={`${IMG_CDN_URL}${mediaInfoData?.backdrop_path}`}
-            alt="media-banar"
-            effect="blur"
+            alt="media_banar"
+            height={850}
+            width={1580}
           />
         </div>
 
-        {/* <div className="absolute w-full bottom-0 left-0 bg-current h-full opacity-80"></div> */}
-        <div className="absolute w-full bottom-0 left-0 bg-gradient-to-t from-black h-[500px] opacity-100"></div>
+        <div className="absolute w-full bottom-0 left-0 bg-slate-950 h-full opacity-40"></div>
+        <div className="absolute w-full bottom-0 left-0 bg-gradient-to-t from-slate-950 h-[500px] opacity-100"></div>
         <div className="relative flex gap-12 pl-52">
           <div className="block w-[20rem]">
-            <LazyLoadImage
-              className="w-full rounded-2xl "
+            <LeLazyLoadImage
               src={
                 mediaInfoData?.poster_path
                   ? `${IMG_CDN_URL}${mediaInfoData?.poster_path}`
                   : PosterFallImage
               }
               alt="poster"
-              effect="blur"
+              width={320}
             />
           </div>
 
@@ -109,42 +112,45 @@ const MediaInfo = ({ mediaType, id }) => {
               <div className="mt-1.5">
                 <CircularProgress
                   rating={mediaInfoData?.vote_average?.toFixed(1)}
-                  size={"w-20 h-20"}
+                  size={"w-16 h-16"}
                 />
               </div>
               <div
                 className="text-white flex items-center gap-2 text-xl"
                 onClick={handleShowPopup}
               >
-                <AiOutlinePlayCircle className="text-yellow-500 text-[88px]" />{" "}
+                <AiOutlinePlayCircle className="text-yellow-500 text-[74px]" />{" "}
                 Watch Trailer
               </div>
             </div>
 
             {videoPopup && (
-              <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
-                <VideoPopup
-                  mediaVideo={mediaTrailerVideo?.key}
-                  videoPopup={videoPopup}
-                />
-                <button
-                  className="absolute top-36 right-[356px] text-white text-2xl cursor-pointer"
-                  onClick={handleHidePopup}
-                >
-                  Close
-                </button>
-              </div>
+              <>
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+                  <VideoPopup
+                    mediaVideo={mediaTrailerVideo?.key}
+                    videoPopup={videoPopup}
+                  />
+                  <button
+                    className="absolute top-36 right-[356px] text-white text-2xl cursor-pointer"
+                    onClick={handleHidePopup}
+                  >
+                    Close
+                  </button>
+                </div>
+                <div className="fixed w-full top-0 left-0 bg-gray-900 h-full opacity-90 z-30"></div>
+              </>
             )}
 
             <div className="text-white text-2xl mt-3">Overview</div>
             <div className="text-white max-w-[45rem] mt-2">
-              {mediaInfoData.overview}
+              {mediaInfoData?.overview}
             </div>
             <div className="flex gap-5 text-white mt-6 items-center">
               <div className="font-semibold text-lg">
                 Status:{" "}
                 <span className="text-slate-300 text-base font-normal ml-1">
-                  {mediaInfoData.status ? mediaInfoData.status : ""}
+                  {mediaInfoData?.status ? mediaInfoData?.status : ""}
                 </span>
               </div>
               {mediaType === "movie" ? (
@@ -184,33 +190,33 @@ const MediaInfo = ({ mediaType, id }) => {
               )}
             </div>
 
-            {directorNames.length > 0 ? (
+            {directorNames?.length > 0 ? (
               <div className="font-semibold text-[17px] text-white mt-4">
                 Director:{" "}
                 <span className="text-slate-300 text-[16px] font-normal ml-1">
-                  {directorNames.join(" ,")}
+                  {directorNames?.join(" ,")}
                 </span>
               </div>
             ) : (
               ""
             )}
 
-            {writerNames.length > 0 ? (
+            {writerNames?.length > 0 ? (
               <div className="font-semibold text-[17px] text-white mt-4 mr-2">
                 Writer:{"  "}
                 <span className="text-slate-300 text-[16px] font-normal ml-1">
-                  {writerNames.join(" ,  ")}
+                  {writerNames?.join(" ,  ")}
                 </span>
               </div>
             ) : (
               ""
             )}
 
-            {creatorNames && creatorNames.length > 0 ? (
+            {creatorNames && creatorNames?.length > 0 ? (
               <div className="font-semibold text-[17px] text-white mt-4 mr-2">
                 Creator:{"  "}
                 <span className="text-slate-300 text-[16px] font-normal ml-1">
-                  {creatorNames.join(" ,  ")}
+                  {creatorNames?.join(" ,  ")}
                 </span>
               </div>
             ) : (

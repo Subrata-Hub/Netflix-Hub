@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { IMG_CDN_URL } from "../utils/constants";
-import HoverMovieCard from "./HoverMovieCard";
-// import LazyImage from "./LazyImage";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+// import HoverMovieCard from "./HoverMovieCard";
 import PosterFallImage from "../assets/no-poster2.jpeg";
+
+import LeLazyLoadImage from "./LeLazyLoadImage";
+
+import { FaRegBookmark } from "react-icons/fa6";
+import useDate from "../hooks/useDate";
 
 const MovieCard = ({
   posterPath,
@@ -13,31 +15,52 @@ const MovieCard = ({
   backImg,
   genreIds,
   cardMovieId,
-
   overView,
   releaseDate,
   rating,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  // const [isHovered, setIsHovered] = useState(false);
+  const mediaType = useSelector((store) => store.config.mediaType);
+  const formattedDate = useDate(releaseDate);
 
-  // if (!posterPath) return;
+  const handleMoreInfoClick = () => {
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
 
   return (
-    <div>
-      <div
-        className="relative w-52 transition-all ease duration-500"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <LazyLoadImage
-          // style={{   }}
-          className="w-full rounded-xl bg-transparent"
-          alt="movie_card"
-          src={posterPath ? IMG_CDN_URL + posterPath : PosterFallImage}
-          effect="blur"
-        />
+    <>
+      <Link to={`/${mediaType}/${cardMovieId}`}>
+        <div
+          className="relative mb-7"
+          // onMouseEnter={() => setIsHovered(true)}
+          // onMouseLeave={() => setIsHovered(false)}
+          onClick={handleMoreInfoClick}
+        >
+          <div className="w-56 movie-card-container bg-slate-950">
+            <LeLazyLoadImage
+              src={posterPath ? IMG_CDN_URL + posterPath : PosterFallImage}
+              alt="poser_img"
+              height={324}
+              width={216}
+            />
 
-        {isHovered && (
+            <div className="flex absolute bottom-2 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
+              {rating}
+            </div>
+
+            <div className=" text-white text-[20px] mt-7 max-w-52  truncate">
+              {title}
+            </div>
+            <div className="text-gray-300 text-[15px] mt-1">
+              {formattedDate}
+            </div>
+
+            <div className="absolute  mr-2 mt-1 top-0 right-0">
+              <FaRegBookmark className="text-yellow-400 text-[24px]" />
+            </div>
+
+            {/* {isHovered && (
           <HoverMovieCard
             title={title}
             backImg={backImg}
@@ -47,10 +70,20 @@ const MovieCard = ({
             releaseDate={releaseDate}
             rating={rating}
           />
-        )}
-      </div>
-    </div>
+        )} */}
+            {/* <div className="flex justify-between  text-white  bg-gradient-to-b from-black opacity-95">
+            <div className="relative  bottom-[70px]">
+              
+            </div>
+           
+          </div> */}
+          </div>
+        </div>
+      </Link>
+    </>
   );
 };
 
 export default MovieCard;
+
+// <FcRating className="text-yellow-300 text-[30px]" />

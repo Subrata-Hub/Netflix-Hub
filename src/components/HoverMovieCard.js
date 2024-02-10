@@ -28,11 +28,16 @@ const HoverMovieCard = ({
 
   // Filter genres based on genre IDs
   const matchingGenres = genresData?.genres?.filter((genre) =>
-    genreIds.includes(genre.id)
+    genreIds?.includes(genre.id)
   );
 
   // Extract genre names
   const matchingGenreNames = matchingGenres?.map((genre) => genre.name);
+
+  const handleMoreInfoClick = () => {
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
 
   // if (!movieTrailerVideo) return null;
   return (
@@ -42,7 +47,7 @@ const HoverMovieCard = ({
           {/* <img className="" alt="video_card" src={IMG_CDN_URL + backImg} /> */}
           <iframe
             className="w-[276px] aspect-video"
-            src={`https://www.youtube.com/embed/${movieTrailerVideo?.key}?&autoplay=1&mute=0&showinfo=0&controls=0`}
+            src={`https://www.youtube.com/embed/${movieTrailerVideo?.key}?&mute=0&showinfo=0&controls=0`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           ></iframe>
@@ -70,7 +75,7 @@ const HoverMovieCard = ({
             </div>
             <div className="px-12 text-white py-2 mx-2 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg hover:shadow-indigo-500/40">
               <Link to={`/${mediaType}/${cardMovieId}`}>
-                <button>More Info</button>
+                <button onClick={handleMoreInfoClick}>More Info</button>
               </Link>
             </div>
           </div>
@@ -83,3 +88,5 @@ const HoverMovieCard = ({
 };
 
 export default HoverMovieCard;
+
+// &autoplay=1

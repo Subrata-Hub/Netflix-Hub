@@ -11,6 +11,7 @@ import MovieCard from "./MovieCard";
 import { changeMediaType } from "../utils/configSlice";
 import useGenre from "../hooks/useGenre";
 import { sortbyData, SELECT_LANGUAGES } from "../utils/constants";
+import Spinner from "./Spinner";
 
 let filters = {};
 
@@ -21,7 +22,7 @@ const ExplorePage = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [selectedLanguages, setSelectedLanguages] = useState("");
-  // const [filters, setFilters] = useState({});
+
   const { mediaType } = useParams();
   const dispatch = useDispatch();
   const genreData = useGenre();
@@ -36,9 +37,29 @@ const ExplorePage = () => {
     );
     const responseData = await response.json();
     setData(responseData);
-    setPageNumber((prev) => prev + 1);
+    setPageNumber(2);
     setLoading(false);
   };
+
+  // const fetchNextPageData = async () => {
+  //   const response = await fetch(
+  //     `https://api.themoviedb.org/3/discover/${mediaType}?page=${pageNumber}&${new URLSearchParams(
+  //       filters
+  //     )}`,
+  //     API_OPTIONS
+  //   );
+  //   const responseData = await response.json();
+
+  //   if (data?.results) {
+  //     setData((prevData) => ({
+  //       ...prevData,
+  //       results: [...prevData.results, ...responseData.results],
+  //     }));
+  //   } else {
+  //     setData(responseData);
+  //   }
+  //   setPageNumber((prev) => prev + 1);
+  // };
 
   const fetchNextPageData = async () => {
     const response = await fetch(
@@ -48,16 +69,11 @@ const ExplorePage = () => {
       API_OPTIONS
     );
     const responseData = await response.json();
-
-    if (data?.results) {
-      setData({
-        ...data,
-        results: [...data?.results, ...(responseData?.results || [])],
-      });
-    } else {
-      setData(responseData);
-    }
-    setPageNumber((prev) => prev + 1);
+    setData((prevData) => ({
+      ...prevData,
+      results: [...prevData.results, ...responseData.results],
+    }));
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
   };
 
   useEffect(() => {
@@ -93,11 +109,11 @@ const ExplorePage = () => {
   };
 
   return (
-    <div className="">
+    <div className="bg-slate-950 overflow-hidden">
       <Header />
 
-      <div className="px-9 py-24 bg-black">
-        <div className="flex justify-between py-4 px-16 align-middle">
+      <div className=" min-h-[700px] pt-24">
+        <div className="px-20 flex justify-between py-4 align-middle">
           <div className="font-semibold text-2xl text-white">
             {mediaType === "tv" ? "Explore TV Shows" : "Explore Movies"}
           </div>
@@ -149,34 +165,32 @@ const ExplorePage = () => {
           </div>
         </div>
 
-        <div className="ml-16">
+        <div className="pl-16">
           {loading && <Shimmer />}
           {!loading && (
             <>
               {data?.results?.length > 0 ? (
                 <InfiniteScroll
                   className="flex flex-wrap gap-3"
-                  dataLength={data?.results?.length || 0}
+                  dataLength={data?.results?.length}
                   next={fetchNextPageData}
-                  hasMore={pageNumber <= data?.total_pages}
-                  loader={<Shimmer />}
+                  hasMore={pageNumber < data?.total_pages}
+                  loader={<Spinner show={true} />}
                 >
                   {data?.results?.map((item, index) => {
-                    const uniqueKey = item.id
-                      ? item.id
-                      : `${index}-${item.title}`;
-
                     return (
-                      <div className="py-5" key={uniqueKey}>
+                      <div className="" key={index}>
                         <MovieCard
-                          posterPath={item.poster_path}
-                          title={item.original_title || item.original_name}
-                          backImg={item.backdrop_path}
-                          genreIds={item.genre_ids}
-                          cardMovieId={item.id}
-                          overView={item.overview}
-                          releaseDate={item.release_date || item.first_air_date}
-                          rating={item.vote_average.toFixed(1)}
+                          posterPath={item?.poster_path}
+                          title={item?.original_title || item.original_name}
+                          backImg={item?.backdrop_path}
+                          genreIds={item?.genre_ids}
+                          cardMovieId={item?.id}
+                          overView={item?.overview}
+                          releaseDate={
+                            item?.release_date || item?.first_air_date
+                          }
+                          rating={item?.vote_average?.toFixed(1)}
                         />
                       </div>
                     );
