@@ -4,6 +4,8 @@ import Login from "./Login";
 import ExplorePage from "./ExplorePage";
 import DetailsPage from "./DetailsPage";
 
+import SearchResultsPage from "./SearchResultsPage";
+
 const Body = () => {
   const appRouter = createBrowserRouter([
     {
@@ -21,6 +23,10 @@ const Body = () => {
     {
       path: "/:mediaType/:id",
       element: <DetailsPage />,
+    },
+    {
+      path: "/search/:query",
+      element: <SearchResultsPage />,
     },
   ]);
 

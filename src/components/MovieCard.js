@@ -18,11 +18,12 @@ const MovieCard = ({
   overView,
   releaseDate,
   rating,
+  mediaTypes,
 }) => {
   // const [isHovered, setIsHovered] = useState(false);
   const mediaType = useSelector((store) => store.config.mediaType);
-  const formattedDate = useDate(releaseDate);
 
+  const formattedDate = useDate(releaseDate);
   const handleMoreInfoClick = () => {
     // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -30,30 +31,30 @@ const MovieCard = ({
 
   return (
     <>
-      <Link to={`/${mediaType}/${cardMovieId}`}>
+      <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
         <div
-          className="relative mb-7"
+          className="relative mb-8"
           // onMouseEnter={() => setIsHovered(true)}
           // onMouseLeave={() => setIsHovered(false)}
           onClick={handleMoreInfoClick}
         >
-          <div className="w-56 movie-card-container bg-slate-950">
+          <div className="w-[216px] movie-card-container bg-slate-900 ">
             <LeLazyLoadImage
               src={posterPath ? IMG_CDN_URL + posterPath : PosterFallImage}
               alt="poser_img"
-              height={324}
+              height={300}
               width={216}
             />
-
-            <div className="flex absolute bottom-2 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
+            <div className="flex absolute bottom-1 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
               {rating}
             </div>
-
-            <div className=" text-white text-[20px] mt-7 max-w-52  truncate">
-              {title}
-            </div>
-            <div className="text-gray-300 text-[15px] mt-1">
-              {formattedDate}
+            <div className="bg-slate-950 pt-6">
+              <div className=" text-white text-[20px]  max-w-52  truncate">
+                {title}
+              </div>
+              <div className="text-gray-300 text-[15px] mt-1">
+                {formattedDate}
+              </div>
             </div>
 
             <div className="absolute  mr-2 mt-1 top-0 right-0">

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from "./Header";
 import { useParams } from "react-router-dom";
 
@@ -40,26 +41,6 @@ const ExplorePage = () => {
     setPageNumber(2);
     setLoading(false);
   };
-
-  // const fetchNextPageData = async () => {
-  //   const response = await fetch(
-  //     `https://api.themoviedb.org/3/discover/${mediaType}?page=${pageNumber}&${new URLSearchParams(
-  //       filters
-  //     )}`,
-  //     API_OPTIONS
-  //   );
-  //   const responseData = await response.json();
-
-  //   if (data?.results) {
-  //     setData((prevData) => ({
-  //       ...prevData,
-  //       results: [...prevData.results, ...responseData.results],
-  //     }));
-  //   } else {
-  //     setData(responseData);
-  //   }
-  //   setPageNumber((prev) => prev + 1);
-  // };
 
   const fetchNextPageData = async () => {
     const response = await fetch(
@@ -112,14 +93,14 @@ const ExplorePage = () => {
     <div className="bg-slate-950 overflow-hidden">
       <Header />
 
-      <div className=" min-h-[700px] pt-24">
-        <div className="px-20 flex justify-between py-4 align-middle">
+      <div className=" min-h-[700px] pt-24 flex mx-12 gap-4">
+        <div className="flex flex-col w-[20%] gap-4">
           <div className="font-semibold text-2xl text-white">
             {mediaType === "tv" ? "Explore TV Shows" : "Explore Movies"}
           </div>
-          <div className="">
+          <div className="flex flex-col gap-8">
             <select
-              className="px-12 py-2 mr-4 text-white bg-slate-500 rounded-lg"
+              className="py-3 text-white bg-slate-500 rounded-lg"
               onChange={(e) => onchange(e, "genre")}
               value={selectedGenre}
             >
@@ -134,7 +115,7 @@ const ExplorePage = () => {
             </select>
 
             <select
-              className="px-8 py-2 rounded-lg text-white bg-slate-500"
+              className="py-3 rounded-lg text-white bg-slate-500"
               onChange={(e) => onchange(e, "sort")}
               value={selectedSort}
             >
@@ -148,7 +129,7 @@ const ExplorePage = () => {
               ))}
             </select>
             <select
-              className="px-8 py-2 rounded-lg text-white bg-slate-500 ml-4"
+              className="py-3 rounded-lg text-white bg-slate-500"
               onChange={(e) => onchange(e, "language")}
               value={selectedLanguages}
             >
@@ -165,7 +146,7 @@ const ExplorePage = () => {
           </div>
         </div>
 
-        <div className="pl-16">
+        <div className="w-[80%] mt-4">
           {loading && <Shimmer />}
           {!loading && (
             <>

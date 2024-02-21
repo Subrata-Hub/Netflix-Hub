@@ -6,7 +6,7 @@ const LodingSkeleton = () => {
       <div className="relative flex flex-col pt-52 w-full h-full pb-10">
         <div className="w-full h-full absolute top-0 left-0 overflow-hidden bg-slate-900 -z-20"></div>
         <div className="flex gap-12 pl-52">
-          <div className="w-[20rem] h-96 bg-slate-700 ">
+          <div className="w-[25rem] h-[440px] bg-slate-700 ">
             <div className="w-full rounded-2xl"></div>
           </div>
           <div className="w-full">

@@ -35,7 +35,7 @@ const MediaVideos = ({ mediaType, id, loading }) => {
         {mediaVideos?.map((video) => (
           <div className="relative cursor-pointer" key={video.id}>
             <div
-              className="w-[330px] h-[190px]"
+              className="w-[330px] h-[190px] bg-slate-900"
               onClick={() => handleShowPopup(video?.key)}
             >
               <LeLazyLoadImage

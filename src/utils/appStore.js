@@ -5,6 +5,7 @@ import GptReducer from "./gptSlice";
 import configReducer from "./configSlice";
 import tvShowReducer from "./tvShowSlice";
 import mediaReducer from "./mediaSlice";
+import searchReducer from "./searchSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const appStore = configureStore({
     config: configReducer,
     tv: tvShowReducer,
     media: mediaReducer,
+    search: searchReducer,
   },
 });
 

@@ -5,6 +5,7 @@ import profileFallbackImage from "../assets/default_Profile.jpg";
 import LeLazyLoadImage from "./LeLazyLoadImage";
 
 const Cast = ({ cast }) => {
+  console.log(cast);
   return (
     <div className="relative px-20 w-full">
       <h1 className="text-white text-3xl font-semibold pb-6">Top Cast</h1>
@@ -12,7 +13,7 @@ const Cast = ({ cast }) => {
         {cast?.map((act, index) => (
           <div key={index} className="flex flex-col items-center text-center ">
             <div className="w-40 h-40 overflow-y-hidden">
-              <div className="rounded-full overflow-hidden">
+              <div className="rounded-full overflow-hidden bg-slate-900">
                 <LeLazyLoadImage
                   src={
                     act?.profile_path

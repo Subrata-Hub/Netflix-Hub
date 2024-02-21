@@ -59,6 +59,7 @@ const MovieList = ({ title, movies, loading }) => {
                 overView={movie?.overview}
                 releaseDate={movie?.release_date || movie?.first_air_date}
                 rating={movie?.vote_average?.toFixed(1)}
+                // mediaTypes={movie.media_type}
               />
             ))}
           </div>

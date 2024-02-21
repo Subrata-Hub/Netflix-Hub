@@ -11,7 +11,7 @@ const SimilarMovieOrShow = ({ mediaType, id, loading }) => {
   if (loading && (!similarData || similarData.length === 0)) return <Shimmer />;
 
   return (
-    <div className="pt-1 text-white">
+    <div className="pt-6 text-white">
       <MovieList title={"Similar"} movies={similarData} />
     </div>
   );

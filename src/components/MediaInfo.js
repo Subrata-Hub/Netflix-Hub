@@ -80,6 +80,7 @@ const MediaInfo = ({ mediaType, id }) => {
               }
               alt="poster"
               width={320}
+              height={470}
             />
           </div>
 
