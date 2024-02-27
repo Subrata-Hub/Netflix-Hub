@@ -10,6 +10,7 @@ import { API_OPTIONS } from "../utils/constants";
 
 import { addMediaInfo } from "../utils/mediaSlice";
 import LodingSkeleton from "./LodingSkeleton";
+import PersonDetailsPage from "./PersonDetailsPage";
 
 const DetailsPage = () => {
   const { mediaType, id } = useParams();
@@ -37,16 +38,38 @@ const DetailsPage = () => {
   }, [dispatch, mediaType, id]);
 
   return (
+    // <div className="bg-slate-950">
+    //   <Header />
+    //   {loading ? (
+    //     <LodingSkeleton />
+    //   ) : (
+
+    //       {mediaType === "person" ? <PersonDetailsPage /> :
+    //       <>
+    //       <MediaInfo mediaType={mediaType} id={id} />
+    //       <MediaVideos mediaType={mediaType} id={id} loading={loading} />
+    //       <SimilarMovieOrShow mediaType={mediaType} id={id} loading={loading} />
+    //       <Recommendations mediaType={mediaType} id={id} loading={loading} />
+    //       </>
+    //   }
+
+    //   )}
+    // </div>
+
     <div className="bg-slate-950">
       <Header />
       {loading ? (
         <LodingSkeleton />
+      ) : mediaType === "person" ? (
+        <PersonDetailsPage />
       ) : (
-        <MediaInfo mediaType={mediaType} id={id} />
+        <>
+          <MediaInfo mediaType={mediaType} id={id} />
+          <MediaVideos mediaType={mediaType} id={id} loading={loading} />
+          {/* <SimilarMovieOrShow mediaType={mediaType} id={id} loading={loading} /> */}
+          <Recommendations mediaType={mediaType} id={id} loading={loading} />
+        </>
       )}
-      <MediaVideos mediaType={mediaType} id={id} loading={loading} />
-      <SimilarMovieOrShow mediaType={mediaType} id={id} loading={loading} />
-      <Recommendations mediaType={mediaType} id={id} loading={loading} />
     </div>
   );
 };

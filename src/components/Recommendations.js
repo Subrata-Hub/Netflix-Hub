@@ -16,7 +16,11 @@ const Recommendations = ({ mediaType, id, loading }) => {
   return (
     <div>
       <div className="pt-1 pb-4 text-white">
-        <MovieList title={"Recommendations"} movies={recommendationData} />
+        <MovieList
+          title={"Recommendations"}
+          movies={recommendationData}
+          mediaType={mediaType}
+        />
       </div>
     </div>
   );

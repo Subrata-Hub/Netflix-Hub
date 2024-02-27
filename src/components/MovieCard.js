@@ -17,6 +17,7 @@ const MovieCard = ({
   cardMovieId,
   overView,
   releaseDate,
+
   rating,
   mediaTypes,
 }) => {
@@ -45,16 +46,25 @@ const MovieCard = ({
               height={300}
               width={216}
             />
+
             <div className="flex absolute bottom-1 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
               {rating}
             </div>
+
             <div className="bg-slate-950 pt-6">
               <div className=" text-white text-[20px]  max-w-52  truncate">
                 {title}
               </div>
+
               <div className="text-gray-300 text-[15px] mt-1">
                 {formattedDate}
               </div>
+
+              {/* {releaseDateYear && (
+                <div className="text-gray-300 text-[15px] mt-1">
+                  {releaseDateYear}
+                </div>
+              )} */}
             </div>
 
             <div className="absolute  mr-2 mt-1 top-0 right-0">

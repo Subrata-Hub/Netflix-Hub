@@ -91,9 +91,9 @@ const SearchResultsPage = () => {
                                 item?.release_date || item?.first_air_date
                               }
                               rating={item?.vote_average?.toFixed(1)}
-                              department={item.known_for_department}
-                              knownFor={item.known_for}
-                              mediaTypes={item.media_type}
+                              department={item?.known_for_department}
+                              knownFor={item?.known_for}
+                              mediaTypes={item?.media_type}
                             />
                           </div>
                         );

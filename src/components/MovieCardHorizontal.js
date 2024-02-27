@@ -24,10 +24,11 @@ const MovieCardHorizontal = ({
   department,
   knownFor,
   mediaTypes,
+  character,
 }) => {
   const mediaType = useSelector((store) => store.config.mediaType);
 
-  const formattedDate = useDate(releaseDate);
+  // const formattedDate = useDate(releaseDate);
   const handleMoreInfoClick = () => {
     // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -37,19 +38,19 @@ const MovieCardHorizontal = ({
   return (
     <>
       <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
-        <div className="mb-6" onClick={handleMoreInfoClick}>
+        <div className="mb-5" onClick={handleMoreInfoClick}>
           <div className="movie-card-container bg-slate-900 flex">
             {mediaTypes !== "person" ? (
-              <div className="w-44">
+              <div className="w-[140px]">
                 <LeLazyLoadImage
                   src={posterPath ? IMG_CDN_URL + posterPath : PosterFallImage}
                   alt="poser_img"
-                  height={200}
-                  width={150}
+                  height={150}
+                  width={110}
                 />
               </div>
             ) : (
-              <div className="w-40">
+              <div className="w-[130px]">
                 <LeLazyLoadImage
                   src={
                     profilePath
@@ -57,8 +58,8 @@ const MovieCardHorizontal = ({
                       : PersonFallbackImage
                   }
                   alt="profile_img"
-                  height={180}
-                  width={140}
+                  height={140}
+                  width={100}
                 />
               </div>
             )}
@@ -66,18 +67,25 @@ const MovieCardHorizontal = ({
             {/* <div className="flex absolute bottom-1 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
             {rating}
           </div> */}
-            <div className="pt-6 text-pretty w-[70%]">
-              <div className=" text-white text-[20px] font-semibold">
+            <div className="pt-4 text-pretty w-[80%]">
+              <div className=" text-white text-[18px] font-semibold max-w-[350px]">
                 {title}
+              </div>
+              <div className="text-gray-100 text-[15px] mt-1">
+                {releaseDate}
               </div>
               {mediaTypes !== "person" ? (
                 <>
-                  <div className="text-gray-100 text-[15px] mt-1">
-                    {formattedDate}
-                  </div>
-                  <div className="text-gray-400 mt-6 line-clamp-3 text-base cursor-default">
-                    {overView}
-                  </div>{" "}
+                  {overView && (
+                    <div className="text-gray-400 mt-4 line-clamp-2 text-base cursor-default">
+                      {overView}
+                    </div>
+                  )}
+                  {character && (
+                    <div className="text-gray-400 mt-4 text-base cursor-default">
+                      as {character}
+                    </div>
+                  )}
                 </>
               ) : (
                 <>
