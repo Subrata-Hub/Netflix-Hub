@@ -10,12 +10,13 @@ import { auth } from "../utils/firebase";
 import { useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { cacheResults } from "../utils/searchSlice";
-import { API_OPTIONS, LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { API_OPTIONS, SUPPORTED_LANGUAGES } from "../utils/constants";
+import LOGO from "../assets/Screenshot_(5)-transformed.png";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { toggleGptSearchView } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 import { IoIosSearch } from "react-icons/io";
-import { IMG_CDN_URL } from "../utils/constants";
+import { IMG_CDN_URL3 } from "../utils/constants";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,10 +46,6 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSearchSugsestion = async () => {
-    // const data = await fetch(
-    //   `https://suggestqueries.google.com/complete/search?client=firefox&q=${searchQuery}`
-    // );
-
     const data = await fetch(
       `https://api.themoviedb.org/3/search/multi?query=${searchQuery}`,
       API_OPTIONS
@@ -143,10 +140,10 @@ const Header = () => {
 
   return (
     <div
-      className={`absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between`}
+      className={`absolute w-screen px-2 pl-12 py-0 bg-gradient-to-b from-black z-20 flex justify-between`}
     >
       <div className="flex justify-between items-center gap-24">
-        <img className="w-56" src={LOGO} alt="logo" />
+        <img className="w-40 bg-black" src={LOGO} alt="logo" />
         {user && (
           <div className="">
             <ul className="text-white flex gap-8 text-lg">
@@ -223,7 +220,7 @@ const Header = () => {
                             {s.poster_path || s.profile_path ? (
                               <img
                                 className="w-full h-full object-cover object-center rounded-lg"
-                                src={`${IMG_CDN_URL}${
+                                src={`${IMG_CDN_URL3}${
                                   s.poster_path || s.profile_path
                                 }`}
                                 alt="search-img"

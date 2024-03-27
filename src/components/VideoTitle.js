@@ -1,21 +1,26 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
-const VideoTitle = ({ title, overview }) => {
+const VideoTitle = ({ title, overview, id, mediaType }) => {
   return (
-    <div className="w-screen aspect-video pt-[14%] px-14 text-white absolute bg-gradient-to-r from-black">
+    <div className="w-[500px] aspect-video top-56 z-30 px-14 text-white absolute">
       <h1 className="text-5xl font-bold">{title}</h1>
-      <p className="py-6 text-sm font-normal w-1/3">{overview}</p>
+      <p className="py-6 text-sm font-normal w-full">
+        {overview.length < 220 ? overview : overview.substring(0, 220)}
+      </p>
       <div className="flex gap-4">
         <button className="p-2 px-12 text-black text-lg bg-white  bg-opacity-90 hover:bg-opacity-80 rounded-md flex items-center gap-2">
           <FaPlay />
           Play
         </button>
-        <button className="p-2 px-10 text-white text-lg bg-gray-500  bg-opacity-50 rounded-lg flex items-center gap-2">
-          <AiOutlineInfoCircle />
-          More info
-        </button>
+        <Link to={`/${mediaType}/${id}`}>
+          <button className="p-2 px-10 text-white text-lg bg-gray-500  bg-opacity-50 rounded-lg flex items-center gap-2">
+            <AiOutlineInfoCircle />
+            More info
+          </button>
+        </Link>
       </div>
     </div>
   );

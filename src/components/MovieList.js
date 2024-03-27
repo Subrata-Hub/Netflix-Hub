@@ -29,7 +29,7 @@ const MovieList = ({ title, movies, loading }) => {
 
   return (
     <div
-      className="mx-20 py-3 relative flex-col overflow-hidden"
+      className="mx-20 py-1 relative flex-col overflow-hidden z-50"
       showControls={showControls}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}

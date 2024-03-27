@@ -1,27 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+
+import React, { forwardRef } from "react";
 import { useSelector } from "react-redux";
-import useMovieTrailer from "../hooks/useMovieTrailer";
+import ReactPlayer from "react-player/youtube";
+// import useMovieTrailer from "../hooks/useMovieTrailer";
+import useMediaTrailer from "../hooks/useMediaTrailer";
 
-const VideoBackground = ({ movieId }) => {
-  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
+const VideoBackground = forwardRef(
+  ({ movieId, mediaType, mute, nextVideo }, ref) => {
+    const mediaTrailerVideo = useSelector((store) => store.media?.mediaTrailer);
+    // useMovieTrailer(movieId);
+    useMediaTrailer(mediaType, movieId);
 
-  useMovieTrailer(movieId);
+    if (!mediaTrailerVideo || !mediaTrailerVideo.key) return null;
 
-  return (
-    <div>
-      <iframe
-        className="w-screen aspect-video"
-        src={
-          "https://www.youtube.com/embed/" +
-          trailerVideo?.key +
-          "?&autoplay=1&mute=1&showinfo=1&controls=0"
-        }
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-      ></iframe>
-    </div>
-  );
-};
+    return (
+      <div className="w-screen relative pb-[56.25%]">
+        <ReactPlayer
+          ref={ref}
+          url={`https://www.youtube.com/watch?v=${mediaTrailerVideo?.key}`}
+          className="video"
+          playing={true}
+          muted={mute}
+          controls={false}
+          pip={true}
+          onEnded={nextVideo}
+        />
+      </div>
+    );
+  }
+);
 
 export default VideoBackground;

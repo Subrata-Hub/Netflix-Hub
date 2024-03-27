@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IMG_CDN_URL } from "../utils/constants";
+import { IMG_CDN_URL2 } from "../utils/constants";
 // import HoverMovieCard from "./HoverMovieCard";
 import PosterFallImage from "../assets/no-poster2.jpeg";
 import PersonFallbackImage from "../assets/person-fallback.png";
@@ -43,7 +43,7 @@ const MovieCardHorizontal = ({
             {mediaTypes !== "person" ? (
               <div className="w-[140px]">
                 <LeLazyLoadImage
-                  src={posterPath ? IMG_CDN_URL + posterPath : PosterFallImage}
+                  src={posterPath ? IMG_CDN_URL2 + posterPath : PosterFallImage}
                   alt="poser_img"
                   height={150}
                   width={110}
@@ -54,7 +54,7 @@ const MovieCardHorizontal = ({
                 <LeLazyLoadImage
                   src={
                     profilePath
-                      ? IMG_CDN_URL + profilePath
+                      ? IMG_CDN_URL2 + profilePath
                       : PersonFallbackImage
                   }
                   alt="profile_img"
@@ -67,8 +67,8 @@ const MovieCardHorizontal = ({
             {/* <div className="flex absolute bottom-1 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
             {rating}
           </div> */}
-            <div className="pt-4 text-pretty w-[80%]">
-              <div className=" text-white text-[18px] font-semibold max-w-[350px]">
+            <div className="pt-4 w-[1000px]">
+              <div className=" text-white text-[18px] font-semibold">
                 {title}
               </div>
               <div className="text-gray-100 text-[15px] mt-1">
@@ -77,7 +77,7 @@ const MovieCardHorizontal = ({
               {mediaTypes !== "person" ? (
                 <>
                   {overView && (
-                    <div className="text-gray-400 mt-4 line-clamp-2 text-base cursor-default">
+                    <div className="text-gray-400 mt-4 line-clamp-2 text-base cursor-default mr-4">
                       {overView}
                     </div>
                   )}

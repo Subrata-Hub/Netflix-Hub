@@ -13,6 +13,7 @@ const SearchResultsPage = () => {
   const [data, setData] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [loading, setLoading] = useState(true);
+
   const { query } = useParams();
 
   const fetchData = async () => {
@@ -55,6 +56,7 @@ const SearchResultsPage = () => {
         <div className="pb-3 pt-2 text-xl text-white">
           Search results for "{query}"
         </div>
+
         <div className="flex gap-5">
           <div className=" text-white w-3/12  bg-slate-900 h-screen">
             <ul className="flex flex-col gap-6 text-lg pl-4">
@@ -63,11 +65,21 @@ const SearchResultsPage = () => {
               <li>People</li>
             </ul>
           </div>
+
           <div className="w-9/12">
             <div className="">
-              {loading && <Shimmer />}
+              {loading && (
+                <Shimmer className="w-full h-44 bg-stone-700 rounded-xl" />
+              )}
               {!loading && (
                 <>
+                  {data.results.length === 0 && (
+                    <div>
+                      <h1 className="text-white text-3xl">
+                        There are no movies that matched your query
+                      </h1>
+                    </div>
+                  )}
                   {data?.results?.length > 0 ? (
                     <InfiniteScroll
                       className=""
