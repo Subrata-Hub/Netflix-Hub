@@ -67,7 +67,7 @@ const MovieCardHorizontal = ({
             {/* <div className="flex absolute bottom-1 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
             {rating}
           </div> */}
-            <div className="pt-4 w-[1000px]">
+            <div className="pt-4 w-[1000px] ml-4 md:ml-0">
               <div className=" text-white text-[18px] font-semibold">
                 {title}
               </div>

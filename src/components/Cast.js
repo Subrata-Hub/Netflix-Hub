@@ -12,8 +12,10 @@ const Cast = ({ cast }) => {
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   return (
-    <div className="relative px-20 w-full">
-      <h1 className="text-white text-3xl font-semibold pb-6">Top Cast</h1>
+    <div className="relative md:px-20 px-4 w-full">
+      <h1 className="text-white md:text-3xl text-2xl pl-4 font-semibold pb-6">
+        Top Cast
+      </h1>
       <div className="flex gap-6 overflow-scroll">
         {cast?.map((act, index) => (
           <Link to={`/person/${act.id}`}>

@@ -12,10 +12,12 @@ import MovieCard from "./MovieCard";
 import MovieCardHorizontal from "./MovieCardHorizontal";
 import { changeMediaType } from "../utils/configSlice";
 import useGenre from "../hooks/useGenre";
+import { useMediaQuery } from "react-responsive";
 import { sortbyData, SELECT_LANGUAGES } from "../utils/constants";
 import Spinner from "./Spinner";
 import { IoGridOutline } from "react-icons/io5";
 import { MdViewList } from "react-icons/md";
+import { IoMdMenu } from "react-icons/io";
 
 let filters = {};
 
@@ -28,10 +30,12 @@ const ExplorePage = () => {
   const [selectedLanguages, setSelectedLanguages] = useState("");
   const [listView, setListView] = useState(false);
   const [gridView, setgridView] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
 
   const { mediaType } = useParams();
   const dispatch = useDispatch();
   const genreData = useGenre();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const fetchData = async () => {
     setLoading(true);
@@ -104,11 +108,19 @@ const ExplorePage = () => {
     setListView(false);
   };
 
+  const toggleShowFilter = () => {
+    setShowFilter(!showFilter);
+  };
+
   return (
     <div className="bg-slate-950 overflow-hidden">
       <Header />
 
-      <div className="pt-24 pb-4 mx-14 flex justify-between items-center">
+      <div className="pt-20 md:pt-[68px] pb-4 mx-4 md:mx-14 flex justify-between items-center">
+        <IoMdMenu
+          className="text-white text-2xl md:hidden"
+          onClick={toggleShowFilter}
+        />
         <div className="font-semibold text-2xl text-white ">
           {mediaType === "tv" ? "Explore TV Shows" : "Explore Movies"}
         </div>
@@ -118,9 +130,13 @@ const ExplorePage = () => {
         </div>
       </div>
 
-      <div className=" min-h-[700px] flex mx-12 gap-4">
-        <div className="flex flex-col w-[20%] gap-4">
-          <div className="flex flex-col gap-8">
+      <div className=" min-h-[700px] flex mx-10 md:mx-12  md:gap-4">
+        <div className={`flex flex-col md:w-[20%] md:gap-4`}>
+          <div
+            className={`flex ${
+              !showFilter && isMobile ? "hidden" : "flex-col"
+            } gap-8 `}
+          >
             <select
               className="py-3 text-white bg-slate-500 rounded-lg"
               onChange={(e) => onchange(e, "genre")}
@@ -168,13 +184,15 @@ const ExplorePage = () => {
           </div>
         </div>
 
-        <div className="w-[80%] mt-0">
-          {loading && <Shimmer className="w-52 h-80 bg-stone-700 rounded-xl" />}
+        <div className="w-full md:w-[80%] mt-0">
+          {loading && (
+            <Shimmer className="w-[125px] md:w-52 h-[185px] md:h-80 bg-stone-700 rounded-xl" />
+          )}
           {!loading && (
             <>
               {data?.results?.length > 0 ? (
                 <InfiniteScroll
-                  className="flex flex-wrap gap-3"
+                  className="flex flex-wrap gap-5 md:gap-3"
                   dataLength={data?.results?.length}
                   next={fetchNextPageData}
                   hasMore={pageNumber < data?.total_pages}

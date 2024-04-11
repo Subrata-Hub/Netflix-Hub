@@ -15,7 +15,7 @@ const VideoBackground = forwardRef(
     if (!mediaTrailerVideo || !mediaTrailerVideo.key) return null;
 
     return (
-      <div className="w-screen relative pb-[56.25%]">
+      <div className="w-screen relative pb-[56.25%] md:-mt-10 mt-10 z-0">
         <ReactPlayer
           ref={ref}
           url={`https://www.youtube.com/watch?v=${mediaTrailerVideo?.key}`}

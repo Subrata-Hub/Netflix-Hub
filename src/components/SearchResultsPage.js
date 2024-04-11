@@ -52,21 +52,21 @@ const SearchResultsPage = () => {
   return (
     <div className="bg-slate-950">
       <Header />
-      <div className="pt-24 min-h-[700px] mx-14">
-        <div className="pb-3 pt-2 text-xl text-white">
+      <div className="pt-16 min-h-[700px] ml-4 md:ml-10">
+        <div className="pb-3 pt-2 text-lg text-white">
           Search results for "{query}"
         </div>
 
-        <div className="flex gap-5">
-          <div className=" text-white w-3/12  bg-slate-900 h-screen">
+        <div className="flex gap-5 md:mx-52 mx-1">
+          {/* <div className=" text-white w-3/12  bg-slate-900 h-screen">
             <ul className="flex flex-col gap-6 text-lg pl-4">
               <li>Movie</li>
               <li>TV Show</li>
               <li>People</li>
             </ul>
-          </div>
+          </div> */}
 
-          <div className="w-9/12">
+          <div className="w-full">
             <div className="">
               {loading && (
                 <Shimmer className="w-full h-44 bg-stone-700 rounded-xl" />

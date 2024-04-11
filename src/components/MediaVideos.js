@@ -3,7 +3,7 @@ import useMediaVideos from "../hooks/useMediaVideos";
 import { useSelector } from "react-redux";
 
 import { AiOutlinePlayCircle } from "react-icons/ai";
-
+import { IoMdClose } from "react-icons/io";
 import VideoPopup from "./VideoPopup";
 import LeLazyLoadImage from "./LeLazyLoadImage";
 import Shimmer from "./Shimmer";
@@ -29,7 +29,7 @@ const MediaVideos = ({ mediaType, id, loading }) => {
   if (loading && (!mediaVideos || mediaVideos.length === 0)) return <Shimmer />;
 
   return (
-    <div className="pt-6 px-20 text-white">
+    <div className="pb-4 md:pb-8 px-4 md:px-20 text-white">
       <div className="font-semibold text-3xl py-5">Official Videos</div>
       <div className="flex gap-6 overflow-scroll">
         {mediaVideos?.map((video) => (
@@ -56,10 +56,10 @@ const MediaVideos = ({ mediaType, id, loading }) => {
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
             <VideoPopup mediaVideo={videoKey} videoPopup={videoPopup} />
             <button
-              className="absolute top-36 right-[356px] text-white text-2xl cursor-pointer"
+              className="absolute top-60 md:top-20 right-0 md:right-[356px] text-white text-2xl cursor-pointer"
               onClick={handleHidePopup}
             >
-              Close
+              <IoMdClose className="text-white text-3xl" />
             </button>
           </div>
           <div className="fixed w-full top-0 left-0 bg-gray-900  h-full opacity-90 z-30"></div>

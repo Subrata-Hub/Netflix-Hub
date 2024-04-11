@@ -14,6 +14,7 @@ import useMediaTrailer from "../hooks/useMediaTrailer";
 import VideoPopup from "./VideoPopup";
 
 import LeLazyLoadImage from "./LeLazyLoadImage";
+import { useMediaQuery } from "react-responsive";
 
 const MediaInfo = ({ mediaType, id }) => {
   const [videoPopup, setVideoPopup] = useState(false);
@@ -25,6 +26,7 @@ const MediaInfo = ({ mediaType, id }) => {
   // useMediaInfo(mediaType, id);
 
   useMediaTrailer(mediaType, id);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const formattedDate = useDate(
     mediaInfoData?.release_date || mediaInfoData?.first_air_date
@@ -58,20 +60,23 @@ const MediaInfo = ({ mediaType, id }) => {
 
   return (
     <>
-      <div className="pt-52 w-full pb-10">
-        <div className="w-full h-full absolute top-0 left-0 overflow-hidden bg-slate-950 opacity-40">
+      <div className="pt-48 md:pt-52 w-full pb-5">
+        <div className="w-full h-full absolute md:top-0 top-0 left-0 overflow-hidden bg-slate-950 opacity-40">
           <LeLazyLoadImage
             src={`${IMG_CDN_URL}${mediaInfoData?.backdrop_path}`}
             alt="media_banar"
-            height={850}
-            width={1580}
+            // height={850}
+            // width={1580}850
+            height={isMobile ? 500 : 850}
+            width={isMobile ? 400 : 1580}
+            className="object-center object-cover"
           />
         </div>
 
         <div className="absolute w-full bottom-0 left-0 bg-slate-950 h-full opacity-40"></div>
         <div className="absolute w-full bottom-0 left-0 bg-gradient-to-t from-slate-950 h-[500px] opacity-100"></div>
-        <div className="relative flex gap-12 pl-52">
-          <div className="block w-[20rem]">
+        <div className="relative  md:flex gap-12 pl-6 md:pl-52">
+          <div className="block w-full md:w-[20rem] px-6 md:px-0">
             <LeLazyLoadImage
               src={
                 mediaInfoData?.poster_path
@@ -79,15 +84,17 @@ const MediaInfo = ({ mediaType, id }) => {
                   : PosterFallImage
               }
               alt="poster"
-              width={320}
-              height={470}
+              // width={320}
+              // height={470}
+              height={isMobile ? 370 : 470}
+              width={isMobile ? 260 : 320}
             />
           </div>
 
           <div className="">
-            <p className="text-white text-[42px] font-sans font-semibold">
+            <p className="text-white md:text-[42px] text-[35px]  font-sans font-semibold">
               {mediaInfoData?.original_title || mediaInfoData?.original_name}{" "}
-              <span className="text-[38px]">
+              <span className="md:text-[38px] text-[28px]">
                 (
                 {new Date(
                   mediaInfoData?.release_date || mediaInfoData?.first_air_date

@@ -44,9 +44,9 @@ const PersonDetailsPage = () => {
       {loading ? (
         <LodingSkeleton />
       ) : (
-        <div className="pt-32 min-h-[700px] text-white mx-24">
-          <div className="flex gap-8">
-            <div className="w-3/12">
+        <div className="pt-20 md:pt-24 min-h-[700px] text-white ml-4 md:mx-24">
+          <div className="block md:flex md:gap-8">
+            <div className="w-full md:w-3/12">
               <LeLazyLoadImage
                 src={
                   data?.profile_path
@@ -57,7 +57,12 @@ const PersonDetailsPage = () => {
                 width={320}
                 height={470}
               />
-              <h1 className="text-3xl mt-6 font-semibold">Personal Info</h1>
+              <div className="md:hidden text-white text-[35px] md:text-[42px] font-sans font-semibold mt-3 md:mt-0">
+                {data?.name}
+              </div>
+              <h1 className="text-2xl md:mt-6 mt-4 font-semibold">
+                Personal Info
+              </h1>
               <div className="flex flex-col gap-4 mt-4">
                 <div className="">
                   <h1 className="text-xl font-semibold">Known For</h1>
@@ -75,7 +80,7 @@ const PersonDetailsPage = () => {
                   <h1 className="text-xl font-semibold">Place of Birth</h1>
                   <h1 className="">{data?.place_of_birth}</h1>
                 </div>
-                <div className="">
+                <div className="hidden md:block">
                   <h1 className="text-xl font-semibold">Also Known As</h1>
                   <div className="">
                     {data?.also_known_as?.map((name) => (
@@ -88,13 +93,13 @@ const PersonDetailsPage = () => {
               </div>
             </div>
 
-            <div className="w-9/12">
-              <div className="text-white text-[42px] font-sans font-semibold">
+            <div className="w-full md:w-9/12">
+              <div className="hidden md:flex text-white text-[42px] font-sans font-semibold">
                 {data?.name}
               </div>
               <h1 className="text-xl pt-6">Biography</h1>
 
-              <p className="pt-4 max-w-[90%] ">
+              <p className="pt-4 w-full md:max-w-[90%] ">
                 {
                   data?.biography &&
                   (showFullBiography || data.biography.length > 500)

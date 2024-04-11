@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IMG_CDN_URL } from "../utils/constants";
+import { IMG_CDN_URL5 } from "../utils/constants";
 // import HoverMovieCard from "./HoverMovieCard";
 import PosterFallImage from "../assets/no-poster2.jpeg";
 
@@ -8,6 +8,7 @@ import LeLazyLoadImage from "./LeLazyLoadImage";
 
 import { FaRegBookmark } from "react-icons/fa6";
 import useDate from "../hooks/useDate";
+import { useMediaQuery } from "react-responsive";
 
 const MovieCard = ({
   posterPath,
@@ -21,8 +22,8 @@ const MovieCard = ({
   rating,
   mediaTypes,
 }) => {
-  // const [isHovered, setIsHovered] = useState(false);
   const mediaType = useSelector((store) => store.config.mediaType);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const formattedDate = useDate(releaseDate);
   const handleMoreInfoClick = () => {
@@ -33,61 +34,42 @@ const MovieCard = ({
   return (
     <>
       <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
-        <div
-          className="relative mb-8"
-          // onMouseEnter={() => setIsHovered(true)}
-          // onMouseLeave={() => setIsHovered(false)}
-          onClick={handleMoreInfoClick}
-        >
-          <div className="w-[216px] movie-card-container bg-slate-900 ">
-            <LeLazyLoadImage
+        <div className="relative md:mb-8 mb-4" onClick={handleMoreInfoClick}>
+          <div
+            className={`w-[${
+              isMobile ? 125 : 216
+            }px] movie-card-container bg-slate-900`}
+          >
+            {/* <LeLazyLoadImage
               src={posterPath ? IMG_CDN_URL + posterPath : PosterFallImage}
               alt="poser_img"
               height={300}
               width={216}
+            /> */}
+            <LeLazyLoadImage
+              src={posterPath ? IMG_CDN_URL5 + posterPath : PosterFallImage}
+              alt="poser_img"
+              height={isMobile ? 185 : 300}
+              width={isMobile ? 130 : 216}
             />
 
-            <div className="flex absolute bottom-1 mb-14 left-1 text-base w-12 h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
+            <div className="flex absolute bottom-1 mb-14 left-1 text-base md:w-12 w-10 h-10 md:h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
               {rating}
             </div>
 
             <div className="bg-slate-950 pt-6">
-              <div className=" text-white text-[20px]  max-w-52  truncate">
+              <div className=" text-white text-[18px] md:text-[20px] max-w-32  md:max-w-52  truncate">
                 {title}
               </div>
 
               <div className="text-gray-300 text-[15px] mt-1">
                 {formattedDate}
               </div>
-
-              {/* {releaseDateYear && (
-                <div className="text-gray-300 text-[15px] mt-1">
-                  {releaseDateYear}
-                </div>
-              )} */}
             </div>
 
             <div className="absolute  mr-2 mt-1 top-0 right-0">
               <FaRegBookmark className="text-yellow-400 text-[24px]" />
             </div>
-
-            {/* {isHovered && (
-          <HoverMovieCard
-            title={title}
-            backImg={backImg}
-            genreIds={genreIds}
-            cardMovieId={cardMovieId}
-            overView={overView}
-            releaseDate={releaseDate}
-            rating={rating}
-          />
-        )} */}
-            {/* <div className="flex justify-between  text-white  bg-gradient-to-b from-black opacity-95">
-            <div className="relative  bottom-[70px]">
-              
-            </div>
-           
-          </div> */}
           </div>
         </div>
       </Link>
@@ -96,5 +78,3 @@ const MovieCard = ({
 };
 
 export default MovieCard;
-
-// <FcRating className="text-yellow-300 text-[30px]" />

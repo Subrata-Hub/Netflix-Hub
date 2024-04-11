@@ -29,15 +29,15 @@ const MovieList = ({ title, movies, loading }) => {
 
   return (
     <div
-      className="mx-20 py-1 relative flex-col overflow-hidden z-50"
+      className="mx-4 md:mx-20 py-1 relative flex-col overflow-x-scroll md:overflow-hidden z-10"
       showControls={showControls}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-      <h1 className="text-3xl pb-3 text-white">{title}</h1>
+      <h1 className="md:text-3xl text-2xl pb-3 text-white">{title}</h1>
       <div className="flex">
         <div
-          className={`absolute z-50 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 left-0 text-white text-3xl ${
+          className={`absolute z-30 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 left-0 text-white text-3xl ${
             !showControls ? "hidden" : ""
           } flex justify-center items-center`}
         >
@@ -52,14 +52,14 @@ const MovieList = ({ title, movies, loading }) => {
               <MovieCard
                 posterPath={movie?.poster_path}
                 key={movie?.id}
-                title={movie?.original_title || movie?.original_name}
+                title={movie?.title || movie?.name}
                 backImg={movie?.backdrop_path}
                 genreIds={movie?.genre_ids}
                 cardMovieId={movie?.id}
                 overView={movie?.overview}
                 releaseDate={movie?.release_date || movie?.first_air_date}
                 rating={movie?.vote_average?.toFixed(1)}
-                mediaTypes={movie?.media_type}
+                mediaTypes={movie?.media_type ? movie?.media_type : "movie"}
               />
             ))}
           </div>

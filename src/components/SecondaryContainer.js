@@ -1,26 +1,23 @@
 import React from "react";
 
 import MovieList from "./MovieList";
-import { useSelector, useDispatch } from "react-redux";
-import { changeMediaType } from "../utils/configSlice";
+import { useSelector } from "react-redux";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
-  const mediaType = useSelector((store) => store.config.mediaType);
-  const dispatch = useDispatch();
-
-  if (mediaType === "tv") {
-    dispatch(changeMediaType("movie"));
-  }
 
   return (
     <div className=" bg-slate-950">
-      <div className="-mt-[120px]">
-        <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
-        <MovieList title={"Popular"} movies={movies.popularMovies} />
-
-        <MovieList title={"Top Rated"} movies={movies.topRatedMovies} />
-        <MovieList title={"Upcoming"} movies={movies.upComingMovies} />
+      <div className="-mt-[16.4rem] md:-mt-[95px]">
+        <MovieList title={"Trending Movies"} movies={movies.nowPlayingMovies} />
+        <MovieList title={"New In India"} movies={movies.newIndianMovies} />
+        <MovieList
+          title={"Fan Favorites Movies"}
+          movies={movies.allTimeFavourites}
+        />
+        <MovieList title={"Trending Show"} movies={movies.trendingShow} />
+        <MovieList title={"Popular Movies"} movies={movies.popularMovies} />
+        <MovieList title={"Top Rated Movies"} movies={movies.topRatedMovies} />
       </div>
     </div>
   );
