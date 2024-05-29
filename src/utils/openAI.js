@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
+import { OPENAI_KEY } from "./constants";
 
 const openai = new OpenAI({
   apiKey: OPENAI_KEY,

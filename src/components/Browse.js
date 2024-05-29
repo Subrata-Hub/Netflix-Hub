@@ -27,23 +27,16 @@ const Browse = () => {
 
   return (
     <div>
-      {/* <Header />
+      <Header />
       {showGptSearch ? (
         <GptSearchPage />
       ) : (
         <>
-          
+          {/* <MainContainer /> */}
           <Baner />
           <SecondaryContainer />
         </>
-      )} */}
-
-      <Header />
-
-      <>
-        <Baner />
-        <SecondaryContainer />
-      </>
+      )}
     </div>
   );
 };
