@@ -27,18 +27,16 @@ const Browse = () => {
 
   return (
     <div>
+      
       <Header />
-      {showGptSearch ? (
-        <GptSearchPage />
-      ) : (
-        <>
-          {/* <MainContainer /> */}
-          <Baner />
-          <SecondaryContainer />
-        </>
-      )}
+
+      <>
+        <Baner />
+        <SecondaryContainer />
+      </>
     </div>
   );
 };
 
 export default Browse;
+
