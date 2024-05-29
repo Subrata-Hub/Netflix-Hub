@@ -198,7 +198,7 @@ const ExplorePage = () => {
                       <button
                         className={`px-3.5 py-1 m-1 rounded-2xl bg-slate-800  border border-gray-400 ${
                           selectedGenre.includes(genre.id.toString())
-                            ? "bg-sky-700"
+                            ? "bg-sky-800"
                             : ""
                         }`}
                         key={genre.id}
@@ -386,4 +386,3 @@ const ExplorePage = () => {
 };
 
 export default ExplorePage;
-

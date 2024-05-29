@@ -48,4 +48,4 @@ export const convertHoursAndMinutes = (totalMinutes) => {
   return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
 };
 
-// export const OPENAI_KEY = `process.env.REACT_APP_OPENAI_KEY`;
+export const OPENAI_KEY = `process.env.REACT_APP_OPENAI_KEY`;
