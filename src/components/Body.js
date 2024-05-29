@@ -5,16 +5,17 @@ import ExplorePage from "./ExplorePage";
 import DetailsPage from "./DetailsPage";
 
 import SearchResultsPage from "./SearchResultsPage";
+import GptSearchPage from "./GptSearchPage";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Login />,
+      element: <Browse />,
     },
     {
-      path: "/browse",
-      element: <Browse />,
+      path: "/login",
+      element: <Login />,
     },
     {
       path: "/explore/:mediaType",
@@ -27,6 +28,10 @@ const Body = () => {
     {
       path: "/search/:query",
       element: <SearchResultsPage />,
+    },
+    {
+      path: "/gptsearch",
+      element: <GptSearchPage />,
     },
   ]);
 
