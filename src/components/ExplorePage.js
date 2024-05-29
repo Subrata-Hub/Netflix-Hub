@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Header from "./Header";
 import { useParams } from "react-router-dom";
-
 import { API_OPTIONS } from "../utils/constants";
-
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Shimmer from "./Shimmer";
@@ -13,11 +11,15 @@ import MovieCardHorizontal from "./MovieCardHorizontal";
 import { changeMediaType } from "../utils/configSlice";
 import useGenre from "../hooks/useGenre";
 import { useMediaQuery } from "react-responsive";
-import { sortbyData, SELECT_LANGUAGES } from "../utils/constants";
+import { sortbyData } from "../utils/constants";
 import Spinner from "./Spinner";
 import { IoGridOutline } from "react-icons/io5";
 import { MdViewList } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import useLanguage from "../hooks/useLanguage";
+import Select from "react-select";
 
 let filters = {};
 
@@ -31,10 +33,12 @@ const ExplorePage = () => {
   const [listView, setListView] = useState(false);
   const [gridView, setgridView] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
+  const [showOptions, setShowOptions] = useState([true, false, false]);
 
   const { mediaType } = useParams();
   const dispatch = useDispatch();
   const genreData = useGenre();
+  const languages = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const fetchData = async () => {
@@ -79,19 +83,48 @@ const ExplorePage = () => {
     dispatch(changeMediaType(mediaType));
   }, [mediaType]);
 
+  const onchanges = (selectedOption, selectType) => {
+    console.log("onchange called");
+    // const value = selectedOption ? selectedOption.iso_639_1 : e.target.value;
+    const value = selectedOption ? selectedOption.iso_639_1 : "";
+
+    console.log(value);
+
+    if (selectType === "language") {
+      setSelectedLanguages(value);
+      filters.with_original_language = value;
+    }
+
+    setPageNumber(1);
+    fetchData();
+  };
+
   const onchange = (e, selectType) => {
     console.log("onchange called");
+    // const value = selectedOption ? selectedOption.iso_639_1 : e.target.value;
     const value = e.target.value;
 
+    console.log(value);
+
     if (selectType === "genre") {
-      setSelectedGenre(value);
-      filters.with_genres = value;
+      let updatedGenre;
+      if (selectedGenre.includes(value)) {
+        // If already selected, remove it from the array
+        updatedGenre = selectedGenre.filter((genre) => genre !== value);
+      } else {
+        // If not selected, add it to the array
+        updatedGenre = [...selectedGenre, value];
+      }
+      setSelectedGenre(updatedGenre);
+
+      if (updatedGenre.length > 0) {
+        filters.with_genres = updatedGenre.join(",");
+      } else {
+        filters.with_genres = ""; // or any other default value you want
+      }
     } else if (selectType === "sort") {
       setSelectedSort(value);
       filters.sort_by = value;
-    } else if (selectType === "language") {
-      setSelectedLanguages(value);
-      filters.with_original_language = value;
     }
 
     setPageNumber(1);
@@ -110,6 +143,12 @@ const ExplorePage = () => {
 
   const toggleShowFilter = () => {
     setShowFilter(!showFilter);
+  };
+
+  const toggleShowOption = (index) => {
+    setShowOptions((prevOptions) =>
+      prevOptions.map((option, i) => (i === index ? !option : false))
+    );
   };
 
   return (
@@ -131,56 +170,153 @@ const ExplorePage = () => {
       </div>
 
       <div className=" min-h-[700px] flex mx-10 md:mx-12  md:gap-4">
-        <div className={`flex flex-col md:w-[20%] md:gap-4`}>
+        <div className={`flex flex-col md:w-[20%]`}>
           <div
             className={`flex ${
               !showFilter && isMobile ? "hidden" : "flex-col"
-            } gap-8 `}
+            } gap-6`}
           >
-            <select
-              className="py-3 text-white bg-slate-500 rounded-lg"
-              onChange={(e) => onchange(e, "genre")}
-              value={selectedGenre}
-            >
-              <option value="" disabled hidden>
-                Select Genres
-              </option>
-              {genreData?.genres?.map((genre) => (
-                <option key={genre.id} value={genre.id}>
-                  {genre.name}
-                </option>
-              ))}
-            </select>
+            {/* filter card 1 */}
+            <div className="flex-col w-full py-3  bg-slate-900 rounded-md px-3 border border-gray-600">
+              <div
+                className="flex justify-between items-center"
+                onClick={() => toggleShowOption(0)}
+              >
+                <h1 className="text-white text-lg font-semibold">Genres</h1>
+                {!showOptions ? (
+                  <MdKeyboardArrowRight className="text-2xl text-white" />
+                ) : (
+                  <MdKeyboardArrowDown className="text-2xl text-white" />
+                )}
+              </div>
+              {showOptions[0] && (
+                <>
+                  <div className="w-full h-2 border-b border-gray-600"></div>
 
-            <select
-              className="py-3 rounded-lg text-white bg-slate-500"
-              onChange={(e) => onchange(e, "sort")}
-              value={selectedSort}
-            >
-              <option value="" disabled hidden>
-                Sort by
-              </option>
-              {sortbyData?.map((sort) => (
-                <option key={sort.value} value={sort.value}>
-                  {sort.label}
-                </option>
-              ))}
-            </select>
-            <select
-              className="py-3 rounded-lg text-white bg-slate-500"
-              onChange={(e) => onchange(e, "language")}
-              value={selectedLanguages}
-            >
-              <option value="" disabled hidden>
-                Selet Languages
-              </option>
+                  <div className="text-white flex flex-wrap py-2">
+                    {genreData?.genres?.map((genre) => (
+                      <button
+                        className={`px-3.5 py-1 m-1 rounded-2xl bg-slate-800  border border-gray-400 ${
+                          selectedGenre.includes(genre.id.toString())
+                            ? "bg-sky-700"
+                            : ""
+                        }`}
+                        key={genre.id}
+                        value={genre.id}
+                        onClick={(e) => onchange(e, "genre")}
+                      >
+                        {genre.name}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+            {/* filter card 2 */}
+            <div className="flex-col w-full py-3  bg-slate-900 rounded-md px-3 border-b border-gray-600">
+              <div
+                className="flex justify-between items-center"
+                onClick={() => toggleShowOption(1)}
+              >
+                <h1 className="text-white text-lg font-semibold">Sort</h1>
+                {!showOptions ? (
+                  <MdKeyboardArrowRight className="text-2xl text-white" />
+                ) : (
+                  <MdKeyboardArrowDown className="text-2xl text-white" />
+                )}
+              </div>
+              {showOptions[1] && (
+                <>
+                  <div className="w-full h-2 border-b border-gray-600"></div>
+                  <div className="text-white">
+                    <h1 className="py-2 text-sm font-light">Sort Results By</h1>
+                    <select
+                      className="py-2 rounded-lg text-white bg-slate-800 w-full"
+                      onChange={(e) => onchange(e, "sort")}
+                      value={selectedSort}
+                    >
+                      <option value="" disabled hidden>
+                        Sort by
+                      </option>
+                      {sortbyData?.map((sort) => (
+                        <option key={sort.value} value={sort.value}>
+                          {sort.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
+            </div>
+            {/* filter card 3 */}
+            <div className="flex-col w-full py-3  bg-slate-900 rounded-md px-3 border-b border-gray-600">
+              <div
+                className="flex justify-between items-center"
+                onClick={() => toggleShowOption(2)}
+              >
+                <h1 className="text-white text-lg font-semibold">Languages</h1>
+                {!showOptions ? (
+                  <MdKeyboardArrowRight className="text-2xl text-white" />
+                ) : (
+                  <MdKeyboardArrowDown className="text-2xl text-white" />
+                )}
+              </div>
+              {showOptions[2] && (
+                <>
+                  <div className="w-full h-2 border-b border-gray-600"></div>
+                  <div className="text-white">
+                    {/* <h1 className="py-2 text-sm font-light">
+                      Sort By Languages{" "}
+                    </h1> */}
+                    {/* <select
+                      className="py-2 rounded-lg text-white bg-slate-500 w-full "
+                      onChange={(e) => onchange(e, "language")}
+                      value={selectedLanguages}
+                    >
+                      <option value="" disabled hidden>
+                        Selet Languages
+                      </option>
 
-              {SELECT_LANGUAGES?.map((lan) => (
-                <option key={lan.identifier} value={lan.identifier}>
-                  {lan.name}
-                </option>
-              ))}
-            </select>
+                      {languages?.map((lan) => (
+                        <option key={lan.iso_639_1} value={lan.iso_639_1}>
+                          {lan.english_name}
+                        </option>
+                      ))}
+                    </select> */}
+
+                    <Select
+                      options={languages.slice(1)}
+                      // value={selectedLanguages}
+                      defaultValue={selectedLanguages}
+                      placeholder={"Select Your Language"}
+                      getOptionLabel={(option) => option.english_name}
+                      getOptionValue={(option) => option.iso_639_1}
+                      // onChange={(e) => onchange(e, "language")}
+                      onChange={(selectedOption) =>
+                        onchanges(selectedOption, "language")
+                      }
+                      isSearchable
+                      noOptionsMessage={() => "No Option Found"}
+                      styles={{
+                        menuList: (baseStyles, state) => ({
+                          ...baseStyles,
+                          backgroundColor: "#0b131c",
+                          color: "white",
+                        }),
+
+                        option: (baseStyles, state) => ({
+                          ...baseStyles,
+                          backgroundColor: "#0b131c",
+                          ":hover": {
+                            backgroundColor: "#2a2d3b", // Adjust hover background color as needed
+                          },
+                        }),
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -250,3 +386,4 @@ const ExplorePage = () => {
 };
 
 export default ExplorePage;
+
