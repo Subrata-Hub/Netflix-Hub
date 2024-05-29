@@ -7,5 +7,3 @@ const openai = new OpenAI({
 });
 
 export default openai;
-
-// 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
