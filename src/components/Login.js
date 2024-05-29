@@ -112,15 +112,18 @@ const Login = () => {
   return (
     <div>
       <Header />
-      {user && navigate("/browse")}
+      {/* {user && navigate("/")} */}
 
-      <div className="absolute">
-        <img src={BACKGROUND_IMG} alt="bg-img" />
+      <div className="absolute h-full w-full">
+        <img
+          src={BACKGROUND_IMG}
+          className="w-full h-full object-cover object-center"
+          alt="bg-img"
+        />
       </div>
-
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="p-14 bg-black absolute my-28 mx-auto right-0 left-0 w-[29%] text-white rounded-sm bg-opacity-85"
+        className="p-14 bg-black absolute my-28  mx-auto right-0 left-0 w-full md:w-[29%] text-white rounded-sm bg-opacity-85"
       >
         <h1 className="font-bold text-3xl pb-5">
           {isSignInFrom ? "Sign In" : "Sign Up"}

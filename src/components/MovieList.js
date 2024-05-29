@@ -12,11 +12,11 @@ const MovieList = ({ title, movies, loading }) => {
   const handleDirection = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 70;
     if (direction === "left" && sliderPosition > 0) {
-      listRef.current.style.transform = `translateX(${740 + distance}px)`;
+      listRef.current.style.transform = `translateX(${780 + distance}px)`;
       setSliderPosition(sliderPosition - 1);
     }
     if (direction === "right" && sliderPosition < 4) {
-      listRef.current.style.transform = `translateX(${-762 + distance}px)`;
+      listRef.current.style.transform = `translateX(${-800 + distance}px)`;
       setSliderPosition(sliderPosition + 1);
     }
   };

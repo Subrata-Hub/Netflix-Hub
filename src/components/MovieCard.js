@@ -31,6 +31,10 @@ const MovieCard = ({
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
+  const handleSavedButtom = () => {
+    console.log("Hellow world");
+  };
+
   return (
     <>
       <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
@@ -68,7 +72,10 @@ const MovieCard = ({
             </div>
 
             <div className="absolute  mr-2 mt-1 top-0 right-0">
-              <FaRegBookmark className="text-yellow-400 text-[24px]" />
+              <FaRegBookmark
+                className="text-yellow-400 text-[24px]"
+                onClick={handleSavedButtom}
+              />
             </div>
           </div>
         </div>
