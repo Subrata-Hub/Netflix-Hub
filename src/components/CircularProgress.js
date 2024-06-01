@@ -11,8 +11,15 @@ const CircularProgress = ({ rating, size }) => {
         text={rating}
         maxValue={10}
         styles={buildStyles({
-          pathColor: rating < 5 ? "red" : rating < 7 ? "orange" : "green",
-          textSize: "28px",
+          pathColor:
+            rating < 5
+              ? "rgb(157, 8, 8)"
+              : rating < 7
+              ? "orange"
+              : "rgb(25, 154, 13)",
+          textSize: "30px",
+          textColor: "black",
+          trailColor: "rgb(181, 176, 176)",
         })}
       />
     </div>

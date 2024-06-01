@@ -27,9 +27,10 @@ const ExplorePage = () => {
   const [data, setData] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
-  const [selectedLanguages, setSelectedLanguages] = useState("");
+
+  const [selectedOption, setSelectedOption] = useState("");
   const [listView, setListView] = useState(false);
   const [gridView, setgridView] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
@@ -71,27 +72,23 @@ const ExplorePage = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect called");
     filters = {};
     setData(null);
     setPageNumber(1);
 
     setSelectedGenre("");
     setSelectedSort("");
-    setSelectedLanguages("");
+    setSelectedOption("");
+
     fetchData();
     dispatch(changeMediaType(mediaType));
   }, [mediaType]);
 
   const onchanges = (selectedOption, selectType) => {
-    console.log("onchange called");
-    // const value = selectedOption ? selectedOption.iso_639_1 : e.target.value;
     const value = selectedOption ? selectedOption.iso_639_1 : "";
 
-    console.log(value);
-
     if (selectType === "language") {
-      setSelectedLanguages(value);
+      setSelectedOption(value);
       filters.with_original_language = value;
     }
 
@@ -101,7 +98,7 @@ const ExplorePage = () => {
 
   const onchange = (e, selectType) => {
     console.log("onchange called");
-    // const value = selectedOption ? selectedOption.iso_639_1 : e.target.value;
+
     const value = e.target.value;
 
     console.log(value);
@@ -120,7 +117,8 @@ const ExplorePage = () => {
       if (updatedGenre.length > 0) {
         filters.with_genres = updatedGenre.join(",");
       } else {
-        filters.with_genres = ""; // or any other default value you want
+        // filters.with_genres = ""; // or any other default value you want
+        delete filters.with_genres; // remove filter if no genres are selected
       }
     } else if (selectType === "sort") {
       setSelectedSort(value);
@@ -169,12 +167,16 @@ const ExplorePage = () => {
         </div>
       </div>
 
-      <div className=" min-h-[700px] flex mx-10 md:mx-12  md:gap-4">
-        <div className={`flex flex-col md:w-[20%]`}>
+      <div
+        className={` min-h-[700px] ${
+          showFilter && isMobile ? "flex-col" : "flex"
+        } mx-10 md:mx-12  md:gap-4`}
+      >
+        <div className={`flex flex-col  md:w-[20%]`}>
           <div
-            className={`flex ${
+            className={`flex gap-4 ${
               !showFilter && isMobile ? "hidden" : "flex-col"
-            } gap-6`}
+            }  `}
           >
             {/* filter card 1 */}
             <div className="flex-col w-full py-3  bg-slate-900 rounded-md px-3 border border-gray-600">
@@ -196,10 +198,10 @@ const ExplorePage = () => {
                   <div className="text-white flex flex-wrap py-2">
                     {genreData?.genres?.map((genre) => (
                       <button
-                        className={`px-3.5 py-1 m-1 rounded-2xl bg-slate-800  border border-gray-400 ${
+                        className={`px-3.5 py-1 m-1 rounded-2xl border border-gray-400 ${
                           selectedGenre.includes(genre.id.toString())
-                            ? "bg-sky-800"
-                            : ""
+                            ? "bg-fuchsia-700"
+                            : "bg-slate-800"
                         }`}
                         key={genre.id}
                         value={genre.id}
@@ -265,37 +267,17 @@ const ExplorePage = () => {
                 <>
                   <div className="w-full h-2 border-b border-gray-600"></div>
                   <div className="text-white">
-                    {/* <h1 className="py-2 text-sm font-light">
-                      Sort By Languages{" "}
-                    </h1> */}
-                    {/* <select
-                      className="py-2 rounded-lg text-white bg-slate-500 w-full "
-                      onChange={(e) => onchange(e, "language")}
-                      value={selectedLanguages}
-                    >
-                      <option value="" disabled hidden>
-                        Selet Languages
-                      </option>
-
-                      {languages?.map((lan) => (
-                        <option key={lan.iso_639_1} value={lan.iso_639_1}>
-                          {lan.english_name}
-                        </option>
-                      ))}
-                    </select> */}
-
                     <Select
                       options={languages.slice(1)}
-                      // value={selectedLanguages}
-                      defaultValue={selectedLanguages}
-                      placeholder={"Select Your Language"}
+                      defaultValue={selectedOption}
+                      placeholder={"Select languages"}
                       getOptionLabel={(option) => option.english_name}
                       getOptionValue={(option) => option.iso_639_1}
-                      // onChange={(e) => onchange(e, "language")}
                       onChange={(selectedOption) =>
                         onchanges(selectedOption, "language")
                       }
                       isSearchable
+                      isClearable
                       noOptionsMessage={() => "No Option Found"}
                       styles={{
                         menuList: (baseStyles, state) => ({
@@ -320,10 +302,11 @@ const ExplorePage = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-[80%] mt-0">
+        <div className={`w-full md:w-[80%] mt-6 md:mt-0`}>
           {loading && (
             <Shimmer className="w-[125px] md:w-52 h-[185px] md:h-80 bg-stone-700 rounded-xl" />
           )}
+
           {!loading && (
             <>
               {data?.results?.length > 0 ? (
@@ -375,7 +358,10 @@ const ExplorePage = () => {
                   })}
                 </InfiniteScroll>
               ) : (
-                <span>Result not found</span>
+                <div className="text-white font-bold text-3xl text-center">
+                  <span>Result not found </span>
+                  <span>Try to unselect some genre</span>
+                </div>
               )}
             </>
           )}

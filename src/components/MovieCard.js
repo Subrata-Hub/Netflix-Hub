@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { IMG_CDN_URL5 } from "../utils/constants";
-// import HoverMovieCard from "./HoverMovieCard";
+
 import PosterFallImage from "../assets/no-poster2.jpeg";
 
 import LeLazyLoadImage from "./LeLazyLoadImage";
@@ -9,14 +9,13 @@ import LeLazyLoadImage from "./LeLazyLoadImage";
 import { FaRegBookmark } from "react-icons/fa6";
 import useDate from "../hooks/useDate";
 import { useMediaQuery } from "react-responsive";
+import CircularProgress from "./CircularProgress";
 
 const MovieCard = ({
   posterPath,
   title,
-  backImg,
   genreIds,
   cardMovieId,
-  overView,
   releaseDate,
 
   rating,
@@ -44,12 +43,6 @@ const MovieCard = ({
               isMobile ? 125 : 216
             }px] movie-card-container bg-slate-900`}
           >
-            {/* <LeLazyLoadImage
-              src={posterPath ? IMG_CDN_URL + posterPath : PosterFallImage}
-              alt="poser_img"
-              height={300}
-              width={216}
-            /> */}
             <LeLazyLoadImage
               src={posterPath ? IMG_CDN_URL5 + posterPath : PosterFallImage}
               alt="poser_img"
@@ -57,8 +50,8 @@ const MovieCard = ({
               width={isMobile ? 130 : 216}
             />
 
-            <div className="flex absolute bottom-1 mb-14 left-1 text-base md:w-12 w-10 h-10 md:h-12 rounded-full bg-orange-600 text-white font-bold items-center justify-center">
-              {rating}
+            <div className="flex absolute bottom-1 mb-14 left-1 text-base">
+              <CircularProgress rating={rating} size={"w-12 h-12"} />
             </div>
 
             <div className="bg-slate-950 pt-6">
