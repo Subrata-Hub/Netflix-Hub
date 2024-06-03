@@ -6,6 +6,7 @@ import configReducer from "./configSlice";
 
 import mediaReducer from "./mediaSlice";
 import searchReducer from "./searchSlice";
+import savedReducer from "./savedSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const appStore = configureStore({
 
     media: mediaReducer,
     search: searchReducer,
+    saved: savedReducer,
   },
 });
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IMG_CDN_URL } from "../utils/constants";
 
 import PosterFallImage from "../assets/no-poster2.jpeg";
@@ -15,15 +15,19 @@ import VideoPopup from "./VideoPopup";
 
 import LeLazyLoadImage from "./LeLazyLoadImage";
 import { useMediaQuery } from "react-responsive";
+import { FaRegBookmark } from "react-icons/fa6";
+import { FaBookmark } from "react-icons/fa";
+import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
 
 const MediaInfo = ({ mediaType, id }) => {
   const [videoPopup, setVideoPopup] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const mediaInfoData = useSelector((store) => store.media?.mediaInfo);
 
   const mediaTrailerVideo = useSelector((store) => store.media?.mediaTrailer);
-
-  // useMediaInfo(mediaType, id);
+  const savedMoviesOrTVShow = useSelector(
+    (store) => store.saved.savedMovieOrTVShow
+  );
 
   useMediaTrailer(mediaType, id);
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -56,7 +60,34 @@ const MediaInfo = ({ mediaType, id }) => {
     setVideoPopup(false);
   };
 
-  // if (!mediaInfoData) return <LodingSkeleton />;
+  const posterPath = mediaInfoData.poster_path;
+  const title = mediaInfoData.title || mediaInfoData.name;
+  const overView = mediaInfoData?.overview;
+  const cardMovieId = mediaInfoData.id;
+  const releaseDate =
+    mediaInfoData?.release_date || mediaInfoData?.first_air_date;
+  const mediaTypes = mediaType;
+
+  const savedData = {
+    posterPath,
+    title,
+    overView,
+    cardMovieId,
+    releaseDate,
+    mediaTypes,
+  };
+
+  const isBookedMark = savedMoviesOrTVShow.some(
+    (movie) => movie.cardMovieId === cardMovieId
+  );
+
+  const handleSavedButton = () => {
+    if (isBookedMark) {
+      dispatch(removeMovieOrTVShow(cardMovieId));
+    } else {
+      dispatch(addMovieOrTVShow(savedData));
+    }
+  };
 
   return (
     <>
@@ -116,19 +147,34 @@ const MediaInfo = ({ mediaType, id }) => {
                 </button>
               ))}
             </div>
-            <div className="flex gap-6 align-middle">
-              <div className="mt-1.5">
+            <div className="flex gap-5 align-middle">
+              <div className="mt-1.6">
                 <CircularProgress
                   rating={mediaInfoData?.vote_average?.toFixed(1)}
                   size={"w-16 h-16"}
                 />
               </div>
+
               <div
-                className="text-white flex items-center gap-2 text-xl"
+                className="text-white flex items-center gap-1 text-lg"
                 onClick={handleShowPopup}
               >
-                <AiOutlinePlayCircle className="text-yellow-500 text-[74px]" />{" "}
+                <AiOutlinePlayCircle className="text-yellow-500 text-[66px]" />{" "}
                 Watch Trailer
+              </div>
+
+              <div className="mt-2">
+                {!isBookedMark ? (
+                  <FaRegBookmark
+                    className="text-yellow-400 text-[44px]"
+                    onClick={handleSavedButton}
+                  />
+                ) : (
+                  <FaBookmark
+                    className="text-yellow-400 text-[44px]"
+                    onClick={handleSavedButton}
+                  />
+                )}
               </div>
             </div>
 

@@ -18,7 +18,7 @@ const CircularProgress = ({ rating, size }) => {
               ? "orange"
               : "rgb(25, 154, 13)",
           textSize: "30px",
-          textColor: "black",
+          textColor: "white",
           trailColor: "rgb(181, 176, 176)",
         })}
       />

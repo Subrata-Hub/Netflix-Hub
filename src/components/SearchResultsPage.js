@@ -58,14 +58,6 @@ const SearchResultsPage = () => {
         </div>
 
         <div className="flex gap-5 md:mx-52 mx-1">
-          {/* <div className=" text-white w-3/12  bg-slate-900 h-screen">
-            <ul className="flex flex-col gap-6 text-lg pl-4">
-              <li>Movie</li>
-              <li>TV Show</li>
-              <li>People</li>
-            </ul>
-          </div> */}
-
           <div className="w-full">
             <div className="">
               {loading && (

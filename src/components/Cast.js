@@ -6,11 +6,11 @@ import LeLazyLoadImage from "./LeLazyLoadImage";
 import { Link } from "react-router-dom";
 
 const Cast = ({ cast }) => {
-  console.log(cast);
   const handleMoreInfoClick = () => {
     // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: "instant" });
   };
+
   return (
     <div className="relative md:px-20 px-4 w-full">
       <h1 className="text-white md:text-3xl text-2xl pl-4 font-semibold pb-6">
@@ -20,7 +20,7 @@ const Cast = ({ cast }) => {
         {cast?.map((act, index) => (
           <Link to={`/person/${act.id}`}>
             <div
-              key={index}
+              key={act.id}
               className="flex flex-col items-center text-center "
               onClick={handleMoreInfoClick}
             >

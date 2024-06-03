@@ -26,7 +26,7 @@ let filters = {};
 const ExplorePage = () => {
   const [data, setData] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
 

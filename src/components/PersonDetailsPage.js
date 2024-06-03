@@ -39,6 +39,8 @@ const PersonDetailsPage = () => {
     getPersonalDetais();
   }, []);
 
+  console.log(data);
+
   return (
     <>
       {loading ? (
@@ -139,7 +141,9 @@ const PersonDetailsPage = () => {
                         cardMovieId={credit?.id}
                         // character={credit?.character}
                         releaseDate={
-                          credit?.release_date || credit?.first_air_date
+                          credit.release_date
+                            ? credit?.release_date
+                            : credit?.first_air_date
                         }
                         rating={credit?.vote_average?.toFixed(1)}
                         mediaTypes={credit?.media_type}
@@ -186,8 +190,9 @@ const PersonDetailsPage = () => {
                               cardMovieId={credit?.id}
                               character={credit?.character}
                               releaseDate={
-                                new Date(credit?.release_date).getFullYear() ||
-                                new Date(credit?.first_air_date).getFullYear()
+                                credit?.release_date
+                                  ? new Date(credit?.release_date)
+                                  : new Date(credit?.first_air_date)
                               }
                               rating={credit?.vote_average?.toFixed(1)}
                               mediaTypes={credit?.media_type}

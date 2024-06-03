@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -281,7 +282,7 @@ const Header = () => {
                 className="font-code text-2xl uppercase cursor-pointer text-white transition-colors hover:text-purple-400 px-6 py-6 lg:text-xs lg:font-semibold lg:leading-4 lg:hover:text-white md:px-1"
                 onClick={handleClick}
               >
-                <Link to="/favorite">Favorite</Link>
+                <Link to="/watchlist">WatchList</Link>
               </li>
             </ul>
           </nav>
@@ -386,7 +387,7 @@ const Header = () => {
               className="block relative font-code text-2xl uppercase text-white transition-colors hover:text-purple-400 px-6 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
               onClick={handleClick}
             >
-              <Link to="/favorite">Favorite</Link>
+              <Link to="/watchlist">WatchList</Link>
             </li>
           </ul>
           <IoMdClose

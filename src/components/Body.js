@@ -6,6 +6,7 @@ import DetailsPage from "./DetailsPage";
 
 import SearchResultsPage from "./SearchResultsPage";
 import GptSearchPage from "./GptSearchPage";
+import WatchList from "./WatchList";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -32,6 +33,10 @@ const Body = () => {
     {
       path: "/gptsearch",
       element: <GptSearchPage />,
+    },
+    {
+      path: "/watchlist",
+      element: <WatchList />,
     },
   ]);
 

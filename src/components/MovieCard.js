@@ -1,15 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IMG_CDN_URL5 } from "../utils/constants";
-
 import PosterFallImage from "../assets/no-poster2.jpeg";
-
 import LeLazyLoadImage from "./LeLazyLoadImage";
-
 import { FaRegBookmark } from "react-icons/fa6";
+import { FaBookmark } from "react-icons/fa";
 import useDate from "../hooks/useDate";
 import { useMediaQuery } from "react-responsive";
 import CircularProgress from "./CircularProgress";
+import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
 
 const MovieCard = ({
   posterPath,
@@ -17,31 +17,61 @@ const MovieCard = ({
   genreIds,
   cardMovieId,
   releaseDate,
-
+  overView,
   rating,
   mediaTypes,
 }) => {
+  const dispatch = useDispatch();
   const mediaType = useSelector((store) => store.config.mediaType);
+  const savedMoviesOrTVShow = useSelector(
+    (store) => store.saved.savedMovieOrTVShow
+  );
+  const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
+  // const [isBookedMark, setIsBookedMark] = useState(false);
+
   const formattedDate = useDate(releaseDate);
+
+  const isBookedMark = savedMoviesOrTVShow.some(
+    (movie) => movie.cardMovieId === cardMovieId
+  );
+
   const handleMoreInfoClick = () => {
     // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
-  const handleSavedButtom = () => {
-    console.log("Hellow world");
+  const savedData = {
+    posterPath,
+    title,
+    overView,
+    cardMovieId,
+    releaseDate,
+    mediaTypes,
+  };
+
+  const handleSavedButton = () => {
+    if (!user) {
+      navigate("/login");
+    }
+    if (isBookedMark) {
+      dispatch(removeMovieOrTVShow(cardMovieId));
+    } else {
+      dispatch(addMovieOrTVShow(savedData));
+    }
   };
 
   return (
     <>
-      <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
-        <div className="relative md:mb-8 mb-4" onClick={handleMoreInfoClick}>
+      <div className="relative md:mb-8 mb-4">
+        <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
           <div
             className={`w-[${
               isMobile ? 125 : 216
             }px] movie-card-container bg-slate-900`}
+            onClick={handleMoreInfoClick}
           >
             <LeLazyLoadImage
               src={posterPath ? IMG_CDN_URL5 + posterPath : PosterFallImage}
@@ -63,16 +93,22 @@ const MovieCard = ({
                 {formattedDate}
               </div>
             </div>
-
-            <div className="absolute  mr-2 mt-1 top-0 right-0">
-              <FaRegBookmark
-                className="text-yellow-400 text-[24px]"
-                onClick={handleSavedButtom}
-              />
-            </div>
           </div>
+        </Link>
+        <div className="absolute  mr-2 mt-1 top-0 right-0">
+          {!isBookedMark ? (
+            <FaRegBookmark
+              className="text-yellow-400 text-[22px]"
+              onClick={handleSavedButton}
+            />
+          ) : (
+            <FaBookmark
+              className="text-yellow-400 text-[22px]"
+              onClick={handleSavedButton}
+            />
+          )}
         </div>
-      </Link>
+      </div>
     </>
   );
 };

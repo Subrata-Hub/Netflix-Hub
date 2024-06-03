@@ -2,7 +2,7 @@ import Header from "./Header";
 import { useParams } from "react-router-dom";
 import MediaInfo from "./MediaInfo";
 import MediaVideos from "./MediaVideos";
-import SimilarMovieOrShow from "./SimilarMovieOrShow";
+// import SimilarMovieOrShow from "./SimilarMovieOrShow";
 import Recommendations from "./Recommendations";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -14,6 +14,7 @@ import PersonDetailsPage from "./PersonDetailsPage";
 
 const DetailsPage = () => {
   const { mediaType, id } = useParams();
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
