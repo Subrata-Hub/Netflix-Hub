@@ -146,7 +146,7 @@ const PersonDetailsPage = () => {
                             : credit?.first_air_date
                         }
                         rating={credit?.vote_average?.toFixed(1)}
-                        mediaTypes={credit?.media_type}
+                        mediaType={credit?.media_type}
                       />
                     </div>
                   ))}
@@ -195,7 +195,7 @@ const PersonDetailsPage = () => {
                                   : new Date(credit?.first_air_date)
                               }
                               rating={credit?.vote_average?.toFixed(1)}
-                              mediaTypes={credit?.media_type}
+                              mediaType={credit?.media_type}
                             />
                           </div>
                         ))}

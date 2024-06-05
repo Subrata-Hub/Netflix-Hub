@@ -19,18 +19,16 @@ const MovieCard = ({
   releaseDate,
   overView,
   rating,
-  mediaTypes,
+  mediaType,
 }) => {
   const dispatch = useDispatch();
-  const mediaType = useSelector((store) => store.config.mediaType);
+
   const savedMoviesOrTVShow = useSelector(
     (store) => store.saved.savedMovieOrTVShow
   );
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const isMobile = useMediaQuery({ maxWidth: 768 });
-
-  // const [isBookedMark, setIsBookedMark] = useState(false);
 
   const formattedDate = useDate(releaseDate);
 
@@ -40,7 +38,12 @@ const MovieCard = ({
 
   const handleMoreInfoClick = () => {
     // Scroll to the top of the page
-    window.scrollTo({ top: 0, behavior: "instant" });
+
+    if (isMobile) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const savedData = {
@@ -49,7 +52,7 @@ const MovieCard = ({
     overView,
     cardMovieId,
     releaseDate,
-    mediaTypes,
+    mediaType,
   };
 
   const handleSavedButton = () => {
@@ -63,10 +66,12 @@ const MovieCard = ({
     }
   };
 
+  console.log(mediaType);
+
   return (
     <>
       <div className="relative md:mb-8 mb-4">
-        <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
+        <Link to={`/${mediaType}/${cardMovieId}`}>
           <div
             className={`w-[${
               isMobile ? 125 : 216

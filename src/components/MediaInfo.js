@@ -66,7 +66,6 @@ const MediaInfo = ({ mediaType, id }) => {
   const cardMovieId = mediaInfoData.id;
   const releaseDate =
     mediaInfoData?.release_date || mediaInfoData?.first_air_date;
-  const mediaTypes = mediaType;
 
   const savedData = {
     posterPath,
@@ -74,7 +73,7 @@ const MediaInfo = ({ mediaType, id }) => {
     overView,
     cardMovieId,
     releaseDate,
-    mediaTypes,
+    mediaType,
   };
 
   const isBookedMark = savedMoviesOrTVShow.some(

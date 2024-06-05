@@ -12,17 +12,15 @@ const MovieCardHorizontal = ({
   posterPath,
   profilePath,
   title,
-
   cardMovieId,
   overView,
   releaseDate,
-
   department,
   knownFor,
-  mediaTypes,
+  mediaType,
   character,
 }) => {
-  const mediaType = useSelector((store) => store.config.mediaType);
+  // const mediaType = useSelector((store) => store.config.mediaType);
 
   const formattedDate = useDate(releaseDate);
 
@@ -34,10 +32,10 @@ const MovieCardHorizontal = ({
   const knownForMedia = knownFor?.map((n) => n.title || n.name);
   return (
     <>
-      <Link to={`/${mediaTypes || mediaType}/${cardMovieId}`}>
+      <Link to={`/${mediaType}/${cardMovieId}`}>
         <div className=" mb-5" onClick={handleMoreInfoClick}>
           <div className="movie-card-container bg-slate-900 flex">
-            {mediaTypes !== "person" ? (
+            {mediaType !== "person" ? (
               <div className="w-[140px]">
                 <LeLazyLoadImage
                   src={posterPath ? IMG_CDN_URL2 + posterPath : PosterFallImage}
@@ -68,7 +66,7 @@ const MovieCardHorizontal = ({
               <div className="text-gray-100 text-[15px] mt-1">
                 {formattedDate}
               </div>
-              {mediaTypes !== "person" ? (
+              {mediaType !== "person" ? (
                 <>
                   {overView && (
                     <div className="text-gray-400 mt-4 line-clamp-1 md:line-clamp-2 text-base cursor-default mr-4">

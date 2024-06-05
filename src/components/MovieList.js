@@ -4,7 +4,7 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import MovieCard from "./MovieCard";
 import Shimmer from "./Shimmer";
 
-const MovieList = ({ title, movies, loading }) => {
+const MovieList = ({ title, movies, loading, mediaType }) => {
   const listRef = useRef();
   const [sliderPosition, setSliderPosition] = useState(0);
   const [showControls, setShowControls] = useState(false);
@@ -24,8 +24,6 @@ const MovieList = ({ title, movies, loading }) => {
   if (!movies) {
     return <Shimmer />;
   }
-
-  // if (loading && (!movies || movies.length === 0)) return <Shimmer />;
 
   return (
     <div
@@ -59,7 +57,7 @@ const MovieList = ({ title, movies, loading }) => {
                 overView={movie?.overview}
                 releaseDate={movie?.release_date || movie?.first_air_date}
                 rating={movie?.vote_average?.toFixed(1)}
-                mediaTypes={movie?.media_type ? movie?.media_type : "movie"}
+                mediaType={mediaType}
               />
             ))}
           </div>

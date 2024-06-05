@@ -2,7 +2,7 @@ import Header from "./Header";
 import { useParams } from "react-router-dom";
 import MediaInfo from "./MediaInfo";
 import MediaVideos from "./MediaVideos";
-// import SimilarMovieOrShow from "./SimilarMovieOrShow";
+import SimilarMovieOrShow from "./SimilarMovieOrShow";
 import Recommendations from "./Recommendations";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -39,24 +39,6 @@ const DetailsPage = () => {
   }, [dispatch, mediaType, id]);
 
   return (
-    // <div className="bg-slate-950">
-    //   <Header />
-    //   {loading ? (
-    //     <LodingSkeleton />
-    //   ) : (
-
-    //       {mediaType === "person" ? <PersonDetailsPage /> :
-    //       <>
-    //       <MediaInfo mediaType={mediaType} id={id} />
-    //       <MediaVideos mediaType={mediaType} id={id} loading={loading} />
-    //       <SimilarMovieOrShow mediaType={mediaType} id={id} loading={loading} />
-    //       <Recommendations mediaType={mediaType} id={id} loading={loading} />
-    //       </>
-    //   }
-
-    //   )}
-    // </div>
-
     <div className="bg-slate-950">
       <Header />
       {loading ? (
@@ -67,7 +49,7 @@ const DetailsPage = () => {
         <>
           <MediaInfo mediaType={mediaType} id={id} />
           <MediaVideos mediaType={mediaType} id={id} loading={loading} />
-          {/* <SimilarMovieOrShow mediaType={mediaType} id={id} loading={loading} /> */}
+          <SimilarMovieOrShow mediaType={mediaType} id={id} loading={loading} />
           <Recommendations mediaType={mediaType} id={id} loading={loading} />
         </>
       )}

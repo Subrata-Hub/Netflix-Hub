@@ -50,7 +50,7 @@ const WatchList = () => {
                     overView={saved.overView}
                     cardMovieId={saved.cardMovieId}
                     releaseDate={saved.releaseDate}
-                    mediaTypes={saved.mediaTypes}
+                    mediaType={saved.mediaType}
                   />
                 </>
               ))}

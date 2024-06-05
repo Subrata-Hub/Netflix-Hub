@@ -5,7 +5,6 @@ import Header from "./Header";
 import { API_OPTIONS } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import InfiniteScroll from "react-infinite-scroll-component";
-// import MovieCard from "./MovieCard";
 import Spinner from "./Spinner";
 import MovieCardHorizontal from "./MovieCardHorizontal";
 
@@ -97,7 +96,7 @@ const SearchResultsPage = () => {
                               rating={item?.vote_average?.toFixed(1)}
                               department={item?.known_for_department}
                               knownFor={item?.known_for}
-                              mediaTypes={item?.media_type}
+                              mediaType={item?.media_type}
                             />
                           </div>
                         );

@@ -3,12 +3,10 @@ import Header from "./Header";
 import { useParams } from "react-router-dom";
 import { API_OPTIONS } from "../utils/constants";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import Shimmer from "./Shimmer";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MovieCard from "./MovieCard";
 import MovieCardHorizontal from "./MovieCardHorizontal";
-import { changeMediaType } from "../utils/configSlice";
 import useGenre from "../hooks/useGenre";
 import { useMediaQuery } from "react-responsive";
 import { sortbyData } from "../utils/constants";
@@ -37,7 +35,7 @@ const ExplorePage = () => {
   const [showOptions, setShowOptions] = useState([true, false, false]);
 
   const { mediaType } = useParams();
-  const dispatch = useDispatch();
+
   const genreData = useGenre();
   const languages = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -81,7 +79,6 @@ const ExplorePage = () => {
     setSelectedOption("");
 
     fetchData();
-    dispatch(changeMediaType(mediaType));
   }, [mediaType]);
 
   const onchanges = (selectedOption, selectType) => {
@@ -332,6 +329,7 @@ const ExplorePage = () => {
                               item?.release_date || item?.first_air_date
                             }
                             rating={item?.vote_average?.toFixed(1)}
+                            mediaType={mediaType}
                           />
                         )}
 
@@ -350,7 +348,7 @@ const ExplorePage = () => {
                             rating={item?.vote_average?.toFixed(1)}
                             department={item?.known_for_department}
                             knownFor={item?.known_for}
-                            mediaTypes={item?.media_type}
+                            mediaType={mediaType}
                           />
                         )}
                       </div>

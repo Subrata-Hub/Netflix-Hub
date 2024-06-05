@@ -20,19 +20,6 @@ const LodingSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="relative px-20 w-full">
-        <div className="flex flex-wrap gap-6">
-          {Array(7)
-            .fill("")
-            .map((e, index) => (
-              <div className="flex flex-col" key={index}>
-                <div className="w-44 h-44  bg-stone-700 rounded-full"></div>
-                <div className="w-36 h-4 mt-2 bg-stone-700 "></div>
-                <div className="w-32 h-4 mt-2 bg-stone-700 "></div>
-              </div>
-            ))}
-        </div>
-      </div>
     </>
   );
 };
