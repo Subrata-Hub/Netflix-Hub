@@ -97,7 +97,7 @@ const MediaInfo = ({ mediaType, id }) => {
             src={`${IMG_CDN_URL}${mediaInfoData?.backdrop_path}`}
             alt="media_banar"
             // height={850}
-            // width={1580}850
+            // width={1580}
             height={isMobile ? 500 : 850}
             width={isMobile ? 400 : 1580}
             className="object-center object-cover"
@@ -186,7 +186,7 @@ const MediaInfo = ({ mediaType, id }) => {
                     videoPopup={videoPopup}
                   />
                   <button
-                    className="absolute top-60 md:top-20 right-0 md:right-[300px] text-white text-2xl cursor-pointer"
+                    className="absolute top-56 md:top-20 right-2 md:right-[300px] text-white text-2xl cursor-pointer"
                     onClick={handleHidePopup}
                   >
                     <IoMdClose className="text-white text-3xl" />

@@ -68,7 +68,7 @@ const MediaVideos = ({ mediaType, id, loading }) => {
               nextVideo={handleNextVideo}
             />
             <button
-              className="absolute top-60 md:top-20 right-0 md:right-[300px] text-white text-2xl cursor-pointer"
+              className="absolute top-56 md:top-20 right-2 md:right-[300px] text-white text-2xl cursor-pointer"
               onClick={handleHidePopup}
             >
               <IoMdClose className="text-white text-3xl" />

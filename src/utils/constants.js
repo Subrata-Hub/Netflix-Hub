@@ -3,9 +3,6 @@ export const LOGO =
 export const USER_AVATAR =
   "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg";
 
-// const TMDB_API = process.env.REACT_APP_TMDB_KEY;
-// console.log(TMDB_API);
-
 export const API_OPTIONS = {
   method: "GET",
   headers: {
@@ -15,6 +12,7 @@ export const API_OPTIONS = {
 };
 
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/original";
+export const IMG_CDN_URL6 = "https://image.tmdb.org/t/p/w780";
 export const IMG_CDN_URL2 = "https://image.tmdb.org/t/p/w185";
 export const IMG_CDN_URL3 = "https://image.tmdb.org/t/p/w92";
 export const IMG_CDN_URL4 = "https://image.tmdb.org/t/p/w300";

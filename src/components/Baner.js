@@ -6,13 +6,15 @@ import VideoBackground from "./VideoBackground";
 import { GoUnmute } from "react-icons/go";
 import { BiVolumeMute } from "react-icons/bi";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useMediaQuery } from "react-responsive";
 
 const Baner = () => {
+  const videoRef = useRef(null);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleMovieCount = 5;
   const [showVideo, setShowVideo] = useState(false);
   const [mute, setMute] = useState(true);
-  const videoRef = useRef(null);
 
   const movies = useSelector((store) => store.movies?.trending);
 
@@ -47,7 +49,7 @@ const Baner = () => {
       videoRef.current.seekTo(0); // Reset video to the beginning
     }
     setShowVideo(false);
-    setTimeout(() => setShowVideo(true), 1500);
+    setTimeout(() => setShowVideo(true), 2000);
   }, [currentIndex]);
 
   if (!movies) return null;
@@ -62,12 +64,14 @@ const Baner = () => {
     <div className="relative overflow-hidden w-screen h-[44rem] bg-slate-950">
       <div className="">
         {!showVideo && (
-          <div className="w-[1920px] h-[1080px] movie-card-container bg-slate-900">
+          <div className="w-full h-full  mt-6 md:mt-4 md:w-[1580px] md:h-[1080px] movie-card-container bg-slate-900">
             <LazyLoadImage
               src={IMG_CDN_URL + currentMovie?.backdrop_path}
-              className="w-full h-full object-cover object-center transition-opacity duration-500"
-              width={1920}
-              height={1080}
+              className="object-cover object-center transition-opacity duration-500"
+              // width={1920}
+              // height={1080}
+              height={isMobile ? 600 : 1080}
+              width={isMobile ? 500 : 1580}
               alt="banar"
             />
           </div>
