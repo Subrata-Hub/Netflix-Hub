@@ -228,7 +228,7 @@ const ExplorePage = () => {
                 <>
                   <div className="w-full h-2 border-b border-gray-600"></div>
                   <div className="text-white">
-                    <h1 className="py-2 text-sm font-light">Sort Results By</h1>
+                    {/* <h1 className="py-2 text-sm font-light">Sort Results By</h1> */}
                     <select
                       className="py-2 rounded-lg text-white bg-slate-800 w-full"
                       onChange={(e) => onchange(e, "sort")}

@@ -3,13 +3,13 @@
 import React, { forwardRef } from "react";
 import { useSelector } from "react-redux";
 import ReactPlayer from "react-player/youtube";
-// import useMovieTrailer from "../hooks/useMovieTrailer";
+
 import useMediaTrailer from "../hooks/useMediaTrailer";
 
 const VideoBackground = forwardRef(
   ({ movieId, mediaType, mute, nextVideo }, ref) => {
     const mediaTrailerVideo = useSelector((store) => store.media?.mediaTrailer);
-    // useMovieTrailer(movieId);
+
     useMediaTrailer(mediaType, movieId);
 
     if (!mediaTrailerVideo || !mediaTrailerVideo.key) return null;

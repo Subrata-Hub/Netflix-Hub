@@ -28,19 +28,21 @@ const MovieList = ({ title, movies, loading, mediaType }) => {
   return (
     <div
       className="mx-4 md:mx-20 py-1 relative flex-col overflow-x-scroll md:overflow-hidden z-10"
-      showControls={showControls}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
       <h1 className="md:text-3xl text-2xl pb-3 text-white">{title}</h1>
       <div className="flex">
-        <div
-          className={`absolute z-30 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 left-0 text-white text-3xl ${
-            !showControls ? "hidden" : ""
-          } flex justify-center items-center`}
-        >
-          <AiOutlineLeft onClick={() => handleDirection("left")} />
-        </div>
+        {showControls && (
+          <div
+            className={`absolute z-30 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 left-0 -mt-6 text-white text-3xl flex justify-center items-center`}
+          >
+            <AiOutlineLeft
+              className="bg-slate-900 opacity-60 w-8 h-8 rounded-full"
+              onClick={() => handleDirection("left")}
+            />
+          </div>
+        )}
         <div className="">
           <div
             className="flex gap-3 w-max translate-x-0 transition-all duration-300 ease-in-out"
@@ -62,14 +64,16 @@ const MovieList = ({ title, movies, loading, mediaType }) => {
             ))}
           </div>
         </div>
-
-        <div
-          className={`absolute z-50 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 right-0 text-white text-3xl ${
-            !showControls ? "hidden" : ""
-          } flex justify-center items-center`}
-        >
-          <AiOutlineRight onClick={() => handleDirection("right")} />
-        </div>
+        {showControls && (
+          <div
+            className={`absolute z-50 h-full transition-all duration-300 ease-in-out font-bold top-0 bottom-0 w-1/12 right-0 -mt-6 text-white text-3xl flex justify-center items-center`}
+          >
+            <AiOutlineRight
+              className="bg-slate-900 opacity-60 w-8 h-8 rounded-full"
+              onClick={() => handleDirection("right")}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

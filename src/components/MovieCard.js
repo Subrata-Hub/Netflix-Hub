@@ -66,8 +66,6 @@ const MovieCard = ({
     }
   };
 
-  console.log(mediaType);
-
   return (
     <>
       <div className="relative md:mb-8 mb-4">

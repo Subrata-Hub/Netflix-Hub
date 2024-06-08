@@ -18,6 +18,7 @@ import { useMediaQuery } from "react-responsive";
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
 import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
+import { IoMdClose } from "react-icons/io";
 
 const MediaInfo = ({ mediaType, id }) => {
   const [videoPopup, setVideoPopup] = useState(false);
@@ -185,10 +186,10 @@ const MediaInfo = ({ mediaType, id }) => {
                     videoPopup={videoPopup}
                   />
                   <button
-                    className="absolute top-36 right-[356px] text-white text-2xl cursor-pointer"
+                    className="absolute top-60 md:top-20 right-0 md:right-[300px] text-white text-2xl cursor-pointer"
                     onClick={handleHidePopup}
                   >
-                    Close
+                    <IoMdClose className="text-white text-3xl" />
                   </button>
                 </div>
                 <div className="fixed w-full top-0 left-0 bg-gray-900 h-full opacity-90 z-30"></div>

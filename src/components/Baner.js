@@ -11,7 +11,7 @@ const Baner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleMovieCount = 5;
   const [showVideo, setShowVideo] = useState(false);
-  const [mute, setMute] = useState(1);
+  const [mute, setMute] = useState(true);
   const videoRef = useRef(null);
 
   const movies = useSelector((store) => store.movies?.trending);
@@ -34,7 +34,7 @@ const Baner = () => {
   };
 
   const handleMute = () => {
-    setMute((prevMute) => (prevMute ? 0 : 1));
+    setMute((prevMute) => (prevMute ? false : true));
   };
 
   const handleNextVideo = () => {
@@ -62,20 +62,20 @@ const Baner = () => {
     <div className="relative overflow-hidden w-screen h-[44rem] bg-slate-950">
       <div className="">
         {!showVideo && (
-          // <div className="w-[1920px] h-[1080px] movie-card-container bg-slate-900">
-          //   <LazyLoadImage
-          //     src={IMG_CDN_URL + currentMovie?.backdrop_path}
-          //     className="w-full h-full object-cover object-center transition-opacity duration-500"
-          //     width={1920}
-          //     height={1080}
-          //     alt="banar"
-          //   />
-          // </div>
-          <img
-            src={IMG_CDN_URL + currentMovie?.backdrop_path}
-            className="w-full h-full object-cover object-center transition-opacity duration-500 mt-10 md:mt-4"
-            alt="banar"
-          />
+          <div className="w-[1920px] h-[1080px] movie-card-container bg-slate-900">
+            <LazyLoadImage
+              src={IMG_CDN_URL + currentMovie?.backdrop_path}
+              className="w-full h-full object-cover object-center transition-opacity duration-500"
+              width={1920}
+              height={1080}
+              alt="banar"
+            />
+          </div>
+          // <img
+          //   src={IMG_CDN_URL + currentMovie?.backdrop_path}
+          //   className="w-full h-full object-cover object-center transition-opacity duration-500 mt-10 md:mt-4"
+          //   alt="banar"
+          // />
         )}
       </div>
 
@@ -97,7 +97,7 @@ const Baner = () => {
       />
       <div className="absolute w-screen h-[1000px] top-0 left-0 bg-gradient-to-r from-black z-10"></div>
       <div className="absolute top-24 md:top-[420px] z-40 right-10 md:right-28">
-        {mute === 1 ? (
+        {mute ? (
           <BiVolumeMute className="text-white text-2xl" onClick={handleMute} />
         ) : (
           <GoUnmute className="text-white text-2xl" onClick={handleMute} />
