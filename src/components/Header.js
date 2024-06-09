@@ -156,6 +156,15 @@ const Header = () => {
     setShowSuggestion(false);
   };
 
+  const gptSearchButton = user && (
+    <button
+      className="px-3 py-1 mx-2 my-1 mb-2 bg-violet-800 text-sm font-semibold text-white ml-0 md:ml-20 hidden md:flex"
+      onClick={handleGptSearchClicked}
+    >
+      GPT Search
+    </button>
+  );
+
   return (
     <div className="fixed top-0 left-0 w-full z-50 border-b border-b-slate-800 lg:border-b-slate-900 lg:backdrop-blur-sm">
       <div className={`flex items-center px-2 lg:px-7.5 xl:px-10 max-lg:py-4`}>
@@ -278,12 +287,14 @@ const Header = () => {
               >
                 TV Shows
               </li>
-              <li
-                className="font-code text-2xl uppercase cursor-pointer text-white transition-colors hover:text-purple-400 px-6 py-6 lg:text-xs lg:font-semibold lg:leading-4 lg:hover:text-white md:px-1"
-                onClick={handleClick}
-              >
-                <Link to="/watchlist">WatchList</Link>
-              </li>
+              {user && (
+                <li
+                  className="font-code text-2xl uppercase cursor-pointer text-white transition-colors hover:text-purple-400 px-6 py-6 lg:text-xs lg:font-semibold lg:leading-4 lg:hover:text-white md:px-1"
+                  onClick={handleClick}
+                >
+                  <Link to="/watchlist">WatchList</Link>
+                </li>
+              )}
             </ul>
           </nav>
 
@@ -299,12 +310,7 @@ const Header = () => {
               ))}
             </select>
           ) : (
-            <button
-              className="px-3 py-1 mx-2 my-1 mb-2 bg-violet-800 text-sm font-semibold text-white ml-0 md:ml-20 hidden md:flex "
-              onClick={handleGptSearchClicked}
-            >
-              GPT Search
-            </button>
+            gptSearchButton
           )}
 
           <IoMdMenu
@@ -314,8 +320,8 @@ const Header = () => {
             onClick={toggleNavigation}
           />
           {!user ? (
-            <div className="button   text-white transition-colors hover:text-white lg:block">
-              <Link to={"/login"}>Sigin</Link>
+            <div className="button   text-white transition-colors hover:text-white lg:block ml-0 md:pl-20">
+              <Link to={"/login"}>Login</Link>
             </div>
           ) : (
             <ul className="flex items-center space-x-1">
@@ -355,25 +361,31 @@ const Header = () => {
         <div className="flex flex-col items-center justify-center m-auto">
           <ul className="text-white flex flex-col gap-4 text-lg mt-16">
             <li
-              className="block relative font-code text-2xl uppercase text-white transition-colors hover:text-purple-400 px-6 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
+              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
               onClick={handleClick}
             >
-              <Link to="/browse">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li
-              className="block relative font-code text-2xl uppercase text-white transition-colors hover:text-purple-400 px-6 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
+              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
               onClick={handleMovieClick}
             >
               Movies
             </li>
             <li
-              className="block relative font-code text-2xl uppercase text-white transition-colors hover:text-purple-400 px-6 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
+              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
               onClick={handleTVShowClick}
             >
               TV Shows
             </li>
             <li
-              className="block relative font-code text-2xl uppercase text-white transition-colors hover:text-purple-400 px-6 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
+              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
+              onClick={handleClick}
+            >
+              <Link to="/watchlist">WatchList</Link>
+            </li>
+            <li
+              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
               onClick={handleClick}
             >
               <button
@@ -382,12 +394,6 @@ const Header = () => {
               >
                 GPT Search
               </button>
-            </li>
-            <li
-              className="block relative font-code text-2xl uppercase text-white transition-colors hover:text-purple-400 px-6 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
-              onClick={handleClick}
-            >
-              <Link to="/watchlist">WatchList</Link>
             </li>
           </ul>
           <IoMdClose

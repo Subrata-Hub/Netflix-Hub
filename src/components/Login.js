@@ -1,7 +1,4 @@
 import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { useSelector } from "react-redux";
 
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
@@ -18,9 +15,6 @@ import { BACKGROUND_IMG, USER_AVATAR } from "../utils/constants";
 const Login = () => {
   const [isSignInFrom, setIsSignInFrom] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
-  const user = useSelector((store) => store.user);
-
-  const navigate = useNavigate();
 
   // const user = useSelector((store) => store.user);
 

@@ -61,17 +61,29 @@ const Baner = () => {
   );
 
   return (
-    <div className="relative overflow-hidden w-screen h-[44rem] bg-slate-950">
+    <div className="relative overflow-hidden w-screen h-[44rem]  bg-slate-950">
       <div className="">
         {!showVideo && (
-          <div className="w-full h-full  mt-6 md:mt-4 md:w-[1580px] md:h-[1080px] movie-card-container bg-slate-900">
+          // <div className="w-full h-full  mt-6 md:mt-4 md:w-[1580px] md:h-[1080px] movie-card-container bg-slate-900">
+          //   <LazyLoadImage
+          //     src={IMG_CDN_URL + currentMovie?.backdrop_path}
+          //     className="object-cover object-center transition-opacity duration-500"
+          //     // width={1920}
+          //     // height={1080}
+          //     height={isMobile ? 600 : 1080}
+          //     width={isMobile ? 500 : 1580}
+          //     alt="banar"
+          //   />
+          // </div>
+
+          <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900  movie-card-container mt-8 md:mt-4">
             <LazyLoadImage
               src={IMG_CDN_URL + currentMovie?.backdrop_path}
               className="object-cover object-center transition-opacity duration-500"
               // width={1920}
               // height={1080}
-              height={isMobile ? 600 : 1080}
-              width={isMobile ? 500 : 1580}
+              height={isMobile ? 300 : 1080}
+              width={isMobile ? 400 : 1580}
               alt="banar"
             />
           </div>
