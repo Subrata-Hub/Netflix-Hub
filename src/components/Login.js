@@ -13,12 +13,9 @@ import { addUser } from "../utils/userSlice";
 import { BACKGROUND_IMG, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [isSignInFrom, setIsSignInFrom] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
-
-  // const user = useSelector((store) => store.user);
-
-  const dispatch = useDispatch();
 
   const email = useRef(null);
   const password = useRef(null);

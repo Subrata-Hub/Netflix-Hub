@@ -1,17 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem("savedState");
+    if (serializedState === null) {
+      return { savedMovieOrTVShow: [] }; // default initial state
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return { savedMovieOrTVShow: [] }; // default initial state
+  }
+};
+
 const savedSlice = createSlice({
   name: "saved",
-  initialState: {
-    savedMovieOrTVShow: [],
-  },
-
+  initialState: loadState(),
   reducers: {
     addMovieOrTVShow: (state, action) => {
-      // state.savedMovieOrTVShow.push(action.payload);
       const newItem = {
         ...action.payload,
-        addedAt: new Date().toISOString(), // Add the current timestamp
+        addedAt: new Date().toISOString(),
       };
       state.savedMovieOrTVShow.push(newItem);
     },

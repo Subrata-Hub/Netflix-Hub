@@ -7,6 +7,7 @@ import configReducer from "./configSlice";
 import mediaReducer from "./mediaSlice";
 import searchReducer from "./searchSlice";
 import savedReducer from "./savedSlice";
+import { localStorageMiddleware } from "./localStorageMiddleware";
 
 const appStore = configureStore({
   reducer: {
@@ -19,6 +20,8 @@ const appStore = configureStore({
     search: searchReducer,
     saved: savedReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(localStorageMiddleware),
 });
 
 export default appStore;
