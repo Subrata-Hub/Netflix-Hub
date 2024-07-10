@@ -149,7 +149,6 @@ const ExplorePage = () => {
   return (
     <div className="bg-slate-950 overflow-hidden">
       <Header />
-
       <div className="pt-20 md:pt-[68px] pb-4 mx-4 md:mx-14 flex justify-between items-center">
         <IoMdMenu
           className="text-white text-2xl md:hidden"

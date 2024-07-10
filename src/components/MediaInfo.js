@@ -23,6 +23,7 @@ import { IoMdClose } from "react-icons/io";
 const MediaInfo = ({ mediaType, id }) => {
   const [videoPopup, setVideoPopup] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const mediaInfoData = useSelector((store) => store.media?.mediaInfo);
 
   const mediaTrailerVideo = useSelector((store) => store.media?.mediaTrailer);
@@ -164,13 +165,13 @@ const MediaInfo = ({ mediaType, id }) => {
               </div>
 
               <div className="mt-2">
-                {!isBookedMark ? (
-                  <FaRegBookmark
+                {user && isBookedMark ? (
+                  <FaBookmark
                     className="text-yellow-400 text-[44px]"
                     onClick={handleSavedButton}
                   />
                 ) : (
-                  <FaBookmark
+                  <FaRegBookmark
                     className="text-yellow-400 text-[44px]"
                     onClick={handleSavedButton}
                   />

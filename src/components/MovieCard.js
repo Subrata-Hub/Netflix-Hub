@@ -10,6 +10,7 @@ import useDate from "../hooks/useDate";
 import { useMediaQuery } from "react-responsive";
 import CircularProgress from "./CircularProgress";
 import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
+import { toast } from "react-toastify";
 
 const MovieCard = ({
   posterPath,
@@ -56,13 +57,20 @@ const MovieCard = ({
   };
 
   const handleSavedButton = () => {
-    if (!user) {
-      navigate("/login");
-    }
-    if (isBookedMark) {
-      dispatch(removeMovieOrTVShow(cardMovieId));
+    // if (!user) {
+    //   navigate("/login");
+    // }
+
+    if (user) {
+      if (isBookedMark) {
+        dispatch(removeMovieOrTVShow(cardMovieId));
+        toast.success("Remove from Bookmark");
+      } else {
+        dispatch(addMovieOrTVShow(savedData));
+        toast.success("Added to Bookmark");
+      }
     } else {
-      dispatch(addMovieOrTVShow(savedData));
+      navigate("/login");
     }
   };
 
@@ -99,13 +107,13 @@ const MovieCard = ({
           </div>
         </Link>
         <div className="absolute  mr-2 mt-1 top-0 right-0">
-          {!isBookedMark ? (
-            <FaRegBookmark
+          {user && isBookedMark ? (
+            <FaBookmark
               className="text-yellow-400 text-[22px]"
               onClick={handleSavedButton}
             />
           ) : (
-            <FaBookmark
+            <FaRegBookmark
               className="text-yellow-400 text-[22px]"
               onClick={handleSavedButton}
             />

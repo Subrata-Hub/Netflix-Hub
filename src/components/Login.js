@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
@@ -54,6 +55,8 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
+
+              toast.success("Successfully Signed Up");
             })
             .catch((error) => {
               // An error occurred
@@ -87,6 +90,7 @@ const Login = () => {
               photoURL: photoURL || USER_AVATAR,
             })
           );
+          toast.success("Successfully Signed In");
         })
         .catch((error) => {
           const errorCode = error.code;

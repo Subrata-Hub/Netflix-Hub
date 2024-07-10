@@ -12,11 +12,11 @@ const MovieList = ({ title, movies, loading, mediaType }) => {
   const handleDirection = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 70;
     if (direction === "left" && sliderPosition > 0) {
-      listRef.current.style.transform = `translateX(${780 + distance}px)`;
+      listRef.current.style.transform = `translateX(${799 + distance}px)`;
       setSliderPosition(sliderPosition - 1);
     }
     if (direction === "right" && sliderPosition < 4) {
-      listRef.current.style.transform = `translateX(${-800 + distance}px)`;
+      listRef.current.style.transform = `translateX(${-755 + distance}px)`;
       setSliderPosition(sliderPosition + 1);
     }
   };
@@ -27,7 +27,7 @@ const MovieList = ({ title, movies, loading, mediaType }) => {
 
   return (
     <div
-      className="mx-4 md:mx-20 py-1 relative flex-col overflow-x-scroll md:overflow-hidden z-10"
+      className="mx-4 md:mx-12 py-1 relative flex-col overflow-x-scroll md:overflow-hidden z-10"
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >

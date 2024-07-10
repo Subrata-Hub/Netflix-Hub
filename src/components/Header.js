@@ -177,25 +177,26 @@ const Header = () => {
           <img src={LOGO} alt="logo" width={190} height={40} />
         </Link>
 
-        <div className="hidden md:flex h-9 px-5 bg-slate-800 rounded-2xl items-center shadow-lg w-screen overflow-x-auto md:w-[500px]">
-          <input
-            className="text-white w-full bg-slate-800 outline-none"
-            type="text"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setShowSuggestion(true)}
-          />
-          <IoIosSearch
-            className="font-bold text-2xl text-white cursor-pointer ml-2"
-            onClick={() => handleSearchBtn(searchQuery)}
-          />
-          <IoMdClose
-            className="font-bold text-2xl text-white cursor-pointer ml-2 md:hidden"
-            onClick={handleShowSearchBar}
-          />
-        </div>
-
+        {!showGptSearch && (
+          <div className="hidden md:flex h-9 px-5 bg-slate-800 rounded-2xl items-center shadow-lg w-screen overflow-x-auto md:w-[500px]">
+            <input
+              className="text-white w-full bg-slate-800 outline-none"
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setShowSuggestion(true)}
+            />
+            <IoIosSearch
+              className="font-bold text-2xl text-white cursor-pointer ml-2"
+              onClick={() => handleSearchBtn(searchQuery)}
+            />
+            <IoMdClose
+              className="font-bold text-2xl text-white cursor-pointer ml-2 md:hidden"
+              onClick={handleShowSearchBar}
+            />
+          </div>
+        )}
         <div
           className={`${
             showSearchBar ? "flex" : "hidden"
@@ -213,7 +214,6 @@ const Header = () => {
             className="font-bold text-2xl text-white cursor-pointer ml-2"
             onClick={() => handleSearchBtn(searchQuery)}
           />
-
           <IoMdClose
             className="font-bold text-2xl text-white cursor-pointer ml-2 md:hidden"
             onClick={handleShowSearchBar}
@@ -260,12 +260,14 @@ const Header = () => {
         </div>
 
         <>
-          <IoIosSearch
-            className={`text-white text-2xl ${
-              showSearchBar ? "hidden" : ""
-            } md:hidden ml-12 `}
-            onClick={handleShowSearchBar}
-          />
+          {!showGptSearch && (
+            <IoIosSearch
+              className={`text-white text-2xl ${
+                showSearchBar ? "hidden" : ""
+              } md:hidden ml-12 `}
+              onClick={handleShowSearchBar}
+            />
+          )}
 
           <nav className={`hidden lg:flex lg:ml-auto`}>
             <ul className="flex gap-6 text-lg">
