@@ -9,7 +9,7 @@ const useTrending = () => {
 
   const getTrending = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/trending/all/week?language=en-US",
+      "https://api.themoviedb.org/3/trending/all/day?language=en-US",
       API_OPTIONS
     );
     const responce = await data.json();

@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { useSelector } from "react-redux";
 
-const useGenre = () => {
+const useGenre = (mediaType) => {
   const [genreName, setGenreName] = useState(null);
-
-  const mediaType = useSelector((store) => store.config?.mediaType);
 
   const getGenreName = async () => {
     const data = await fetch(

@@ -12,8 +12,8 @@ const Cast = ({ cast }) => {
   };
 
   return (
-    <div className="relative md:px-20 px-4 w-full">
-      <h1 className="text-white md:text-3xl text-2xl pl-4 font-semibold pb-6">
+    <div className="relative md:px-10 px-4 w-full">
+      <h1 className="text-white md:text-3xl text-2xl pl-2 font-semibold pb-6">
         Top Cast
       </h1>
       <div className="flex gap-6 overflow-scroll">
@@ -42,7 +42,7 @@ const Cast = ({ cast }) => {
               <div className=" text-white font-bold text-lg mt-2 ">
                 {act?.original_name}
               </div>
-              <div className="text-pretty text-neutral-300">
+              <div className="text-pretty text-neutral-300 ml-2">
                 {act?.character}
               </div>
             </div>

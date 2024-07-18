@@ -36,7 +36,7 @@ const ExplorePage = () => {
 
   const { mediaType } = useParams();
 
-  const genreData = useGenre();
+  const genreData = useGenre(mediaType);
   const languages = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
 

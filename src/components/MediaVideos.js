@@ -37,7 +37,7 @@ const MediaVideos = ({ mediaType, id, loading }) => {
   }
 
   return (
-    <div className="pb-4 md:pb-8 px-4 md:px-20 text-white">
+    <div className="pb-4 md:pb-8 px-4 md:px-12 text-white">
       <div className="font-semibold text-3xl py-5">Official Videos</div>
       <div className="flex gap-6 overflow-scroll">
         {mediaVideos?.map((video, index) => (
