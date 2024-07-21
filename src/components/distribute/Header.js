@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { signOut } from "firebase/auth";
-import { auth } from "../utils/firebase";
+import { auth } from "../../utils/firebase";
 import { useSelector } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
-import { cacheResults } from "../utils/searchSlice";
-import { API_OPTIONS, SUPPORTED_LANGUAGES } from "../utils/constants";
-import LOGO from "../assets/logo.png";
+import { addUser, removeUser } from "../../utils/userSlice";
+import { cacheResults } from "../../utils/searchSlice";
+import { API_OPTIONS, SUPPORTED_LANGUAGES } from "../../utils/constants";
+import LOGO from "../../assets/logo.png";
 import { IoIosSearch, IoMdMenu, IoMdClose } from "react-icons/io";
-import { toggleGptSearchView } from "../utils/gptSlice";
-import { changeLanguage } from "../utils/configSlice";
-import { IMG_CDN_URL3 } from "../utils/constants";
+import { toggleGptSearchView } from "../../utils/gptSlice";
+import { changeLanguage } from "../../utils/configSlice";
+import { IMG_CDN_URL3 } from "../../utils/constants";
 
 const Header = () => {
   const [openNavigation, setOpenNavigation] = useState(false);

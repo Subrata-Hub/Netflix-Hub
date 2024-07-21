@@ -1,8 +1,8 @@
 import React from "react";
 import useSimilar from "../hooks/useSimilar";
 import { useSelector } from "react-redux";
-import MovieList from "./MovieList";
-import Shimmer from "./Shimmer";
+import MovieList from "./distribute/MovieList";
+import Shimmer from "./distribute/Shimmer";
 
 const SimilarMovieOrShow = ({ mediaType, id, loading }) => {
   const similarData = useSelector((store) => store.media?.similar);

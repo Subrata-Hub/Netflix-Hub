@@ -1,16 +1,16 @@
-import Header from "./Header";
+import Header from "../distribute/Header";
 import { useParams } from "react-router-dom";
-import MediaInfo from "./MediaInfo";
-import MediaVideos from "./MediaVideos";
-import SimilarMovieOrShow from "./SimilarMovieOrShow";
-import Recommendations from "./Recommendations";
+import MediaInfo from "../MediaInfo";
+import MediaVideos from "../MediaVideos";
+import SimilarMovieOrShow from "../SimilarMovieOrShow";
+import Recommendations from "../Recommendations";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { API_OPTIONS } from "../utils/constants";
+import { API_OPTIONS } from "../../utils/constants";
 
-import { addMediaInfo } from "../utils/mediaSlice";
-import LodingSkeleton from "./LodingSkeleton";
+import { addMediaInfo } from "../../utils/mediaSlice";
 import PersonDetailsPage from "./PersonDetailsPage";
+import LodingSkeleton from "../distribute/LodingSkeleton";
 
 const DetailsPage = () => {
   const { mediaType, id } = useParams();

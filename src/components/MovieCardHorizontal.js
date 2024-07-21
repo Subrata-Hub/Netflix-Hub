@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { IMG_CDN_URL2 } from "../utils/constants";
 
 import PosterFallImage from "../assets/no-poster2.jpeg";
 import PersonFallbackImage from "../assets/person-fallback.png";
-import LeLazyLoadImage from "./LeLazyLoadImage";
 import useDate from "../hooks/useDate";
+import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
 
 const MovieCardHorizontal = ({
   posterPath,
@@ -20,8 +19,6 @@ const MovieCardHorizontal = ({
   mediaType,
   character,
 }) => {
-  // const mediaType = useSelector((store) => store.config.mediaType);
-
   const formattedDate = useDate(releaseDate);
 
   const handleMoreInfoClick = () => {

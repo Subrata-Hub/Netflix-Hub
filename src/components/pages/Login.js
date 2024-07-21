@@ -1,17 +1,17 @@
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
-import Header from "./Header";
-import { checkValidateData } from "../utils/validate";
+import Header from "../distribute/Header";
+import { checkValidateData } from "../../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../utils/firebase";
+import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
-import { BACKGROUND_IMG, USER_AVATAR } from "../utils/constants";
+import { addUser } from "../../utils/userSlice";
+import { BACKGROUND_IMG, USER_AVATAR } from "../../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();

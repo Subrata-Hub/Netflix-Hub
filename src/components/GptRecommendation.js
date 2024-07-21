@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import MovieCard from "./MovieCard";
+import MovieCard from "./distribute/MovieCard";
 // import Shimmer from "./Shimmer";
 
 const GptRecommendation = () => {

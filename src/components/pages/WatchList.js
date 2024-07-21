@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MovieCardHorizontal from "./MovieCardHorizontal";
-import Header from "./Header";
+import MovieCardHorizontal from "../MovieCardHorizontal";
+import Header from "../distribute/Header";
 import { RxCross2 } from "react-icons/rx";
-import { removeMovieOrTVShow } from "../utils/savedSlice";
+import { removeMovieOrTVShow } from "../../utils/savedSlice";
 
 const WatchList = () => {
   const dispatch = useDispatch();

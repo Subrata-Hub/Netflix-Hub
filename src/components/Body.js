@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Browse from "./Browse";
-import Login from "./Login";
-import ExplorePage from "./ExplorePage";
-import DetailsPage from "./DetailsPage";
+import Browse from "./pages/Browse";
+import Login from "./pages/Login";
+import SearchResultsPage from "./pages/SearchResultsPage";
+import GptSearchPage from "./pages/GptSearchPage";
 
-import SearchResultsPage from "./SearchResultsPage";
-import GptSearchPage from "./GptSearchPage";
-import WatchList from "./WatchList";
+import ExplorePage from "./pages/ExplorePage";
+import DetailsPage from "./pages/DetailsPage";
+import WatchList from "./pages/WatchList";
 
 const Body = () => {
   const appRouter = createBrowserRouter([

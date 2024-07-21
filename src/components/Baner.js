@@ -8,9 +8,12 @@ import { BiVolumeMute } from "react-icons/bi";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useMediaQuery } from "react-responsive";
 
+import Spinner from "./distribute/Spinner";
+
 const Baner = () => {
   const videoRef = useRef(null);
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleMovieCount = 5;
   const [showVideo, setShowVideo] = useState(false);
@@ -36,7 +39,7 @@ const Baner = () => {
   };
 
   const handleMute = () => {
-    setMute((prevMute) => (prevMute ? false : true));
+    setMute((prevMute) => !prevMute);
   };
 
   const handleNextVideo = () => {
@@ -45,14 +48,26 @@ const Baner = () => {
   };
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.seekTo(0); // Reset video to the beginning
-    }
-    setShowVideo(false);
-    setTimeout(() => setShowVideo(true), 2000);
-  }, [currentIndex]);
+    if (movies && movies.length > 0) {
+      setLoading(false);
+      if (videoRef.current) {
+        videoRef.current.seekTo(0); // Reset video to the beginning
+      }
 
-  if (!movies) return null;
+      setShowVideo(false);
+      setTimeout(() => setShowVideo(true), 2000);
+    }
+  }, [currentIndex, movies]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center w-screen h-[46rem] bg-slate-950">
+        <Spinner show={true} position={"bottom-[400px]"} sized={"size-16"} />
+      </div>
+    );
+  }
+
+  // if (!movies) return null;
 
   const currentMovie = movies[currentIndex];
   const displayedMovies = movies.slice(
@@ -61,39 +76,18 @@ const Baner = () => {
   );
 
   return (
-    <div className="relative overflow-hidden w-screen h-[44rem]  bg-slate-950">
-      <div className="">
-        {!showVideo && (
-          // <div className="w-full h-full  mt-6 md:mt-4 md:w-[1580px] md:h-[1080px] movie-card-container bg-slate-900">
-          //   <LazyLoadImage
-          //     src={IMG_CDN_URL + currentMovie?.backdrop_path}
-          //     className="object-cover object-center transition-opacity duration-500"
-          //     // width={1920}
-          //     // height={1080}
-          //     height={isMobile ? 600 : 1080}
-          //     width={isMobile ? 500 : 1580}
-          //     alt="banar"
-          //   />
-          // </div>
-
-          <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900  movie-card-container mt-8 md:mt-4">
-            <LazyLoadImage
-              src={IMG_CDN_URL + currentMovie?.backdrop_path}
-              className="object-cover object-center transition-opacity duration-500"
-              // width={1920}
-              // height={1080}
-              height={isMobile ? 300 : 1080}
-              width={isMobile ? 400 : 1580}
-              alt="banar"
-            />
-          </div>
-          // <img
-          //   src={IMG_CDN_URL + currentMovie?.backdrop_path}
-          //   className="w-full h-full object-cover object-center transition-opacity duration-500 mt-10 md:mt-4"
-          //   alt="banar"
-          // />
-        )}
-      </div>
+    <div className="relative overflow-hidden w-screen h-[44rem] bg-slate-950">
+      {!showVideo && (
+        <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-8 md:mt-4">
+          <LazyLoadImage
+            src={IMG_CDN_URL + currentMovie?.backdrop_path}
+            className="object-cover object-center transition-opacity duration-500"
+            height={isMobile ? 300 : 1080}
+            width={isMobile ? 400 : 1580}
+            alt="banar"
+          />
+        </div>
+      )}
 
       {showVideo && (
         <VideoBackground
@@ -112,14 +106,14 @@ const Baner = () => {
         mediaType={currentMovie.media_type}
       />
       <div className="absolute w-screen h-[1000px] top-0 left-0 bg-gradient-to-r from-black z-10"></div>
-      <div className="absolute top-24 md:top-[420px] z-40 right-10 md:right-28">
+      <div className="absolute top-24 md:top-[440px] z-40 right-10 md:right-20">
         {mute ? (
           <BiVolumeMute className="text-white text-2xl" onClick={handleMute} />
         ) : (
           <GoUnmute className="text-white text-2xl" onClick={handleMute} />
         )}
       </div>
-      <div className="absolute  top-56 md:top-[31rem] md:right-24 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
+      <div className="absolute top-56 md:top-[32rem] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
         {currentIndex >= 0 && (
           <div
             className="absolute top-0 bottom-0 left-0 w-10 h-10 bg-transparent text-white flex justify-center items-center cursor-pointer z-50"

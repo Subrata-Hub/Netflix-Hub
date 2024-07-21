@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { API_OPTIONS } from "../utils/constants";
-import LeLazyLoadImage from "./LeLazyLoadImage";
-import { IMG_CDN_URL } from "../utils/constants";
-import PosterFallImage from "../assets/no-poster2.jpeg";
-import MovieCard from "./MovieCard";
-import LodingSkeleton from "./LodingSkeleton";
-import useDate from "../hooks/useDate";
-import MovieCardHorizontal from "./MovieCardHorizontal";
+import { API_OPTIONS } from "../../utils/constants";
+import { IMG_CDN_URL } from "../../utils/constants";
+import PosterFallImage from "../../assets/no-poster2.jpeg";
+import MovieCard from "../distribute/MovieCard";
+import useDate from "../../hooks/useDate";
+import MovieCardHorizontal from "../MovieCardHorizontal";
+import LeLazyLoadImage from "../distribute/LeLazyLoadImage";
+import LodingSkeleton from "../distribute/LodingSkeleton";
 
 const PersonDetailsPage = () => {
   const [data, setData] = useState(null);

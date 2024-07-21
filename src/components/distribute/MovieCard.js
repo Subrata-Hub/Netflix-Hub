@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { IMG_CDN_URL5 } from "../utils/constants";
-import PosterFallImage from "../assets/no-poster2.jpeg";
+import { IMG_CDN_URL5 } from "../../utils/constants";
+import PosterFallImage from "../../assets/no-poster2.jpeg";
 import LeLazyLoadImage from "./LeLazyLoadImage";
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
-import useDate from "../hooks/useDate";
+import useDate from "../../hooks/useDate";
 import { useMediaQuery } from "react-responsive";
 import CircularProgress from "./CircularProgress";
-import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
+import { addMovieOrTVShow, removeMovieOrTVShow } from "../../utils/savedSlice";
 import { toast } from "react-toastify";
 
 const MovieCard = ({
