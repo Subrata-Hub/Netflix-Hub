@@ -53,7 +53,7 @@ const SearchResultsPage = () => {
     <div className="bg-slate-950">
       <Header />
       <div className="pt-16 min-h-[700px] ml-4 md:ml-10">
-        <div className="pb-3 pt-2 text-lg text-white">
+        <div className="pb-3 pt-2 text-lg text-white text-center">
           Search results for "{query}"
         </div>
 

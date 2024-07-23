@@ -193,9 +193,8 @@ const Header = () => {
       <div className={`flex items-center px-2 lg:px-7.5 xl:px-10 max-lg:py-4`}>
         <Link
           to="/"
-          className={`block w-[12rem] xl:mr-8 ${
-            showSearchBar ? "hidden" : ""
-          } md:flex`}
+          className={`block w-[12rem] xl:mr-8  md:flex`}
+          onClick={handleClick}
         >
           <img src={LOGO} alt="logo" width={190} height={40} />
         </Link>
@@ -351,7 +350,9 @@ const Header = () => {
 
                 <button
                   type="button"
-                  class="py-1 px-6 me-2  text-base font-medium text-gray-900  focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                  className={`py-1 px-6  me-2 ${
+                    showSearchBar ? "hidden" : ""
+                  } md:flex  text-base font-medium text-gray-900  focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`}
                 >
                   LogIn
                 </button>

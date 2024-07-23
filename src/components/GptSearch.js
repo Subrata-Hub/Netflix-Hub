@@ -1,57 +1,68 @@
 import React, { useRef } from "react";
-
-import lang from "../utils/languageConstants";
 import { useSelector, useDispatch } from "react-redux";
-import openai from "../utils/openAI";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptMoviesResult } from "../utils/gptSlice";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import lang from "../utils/languageConstants";
 
 const GptSearch = () => {
   const langKey = useSelector((store) => store.config.lang);
-
   const searchText = useRef(null);
   const dispatch = useDispatch();
 
-  // Search movie in TMDB
-
   const searchMovieTmdb = async (movie) => {
-    const data = await fetch(
-      `
-    https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-      movie
-    )}&include_adult=false&language=en-US&page=1`,
-      API_OPTIONS
-    );
+    try {
+      const data = await fetch(
+        `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(
+          movie
+        )}&include_adult=false&language=en-US&page=1`,
+        API_OPTIONS
+      );
 
-    const json = await data.json();
-    console.log(json.results.filter((result) => result.title === movie));
-    return json.results.filter((result) => result.title === movie);
+      const json = await data.json();
+      return json.results.filter(
+        (result) =>
+          (result.title || result.original_name === movie) &&
+          result.poster_path != null
+      );
+    } catch (error) {
+      console.error("Error fetching TMDB results:", error);
+      return [];
+    }
   };
 
   const handleGptSearchClick = async () => {
-    const gptQuery = `Act as a Movie Recommendation system and suggest some movies for the query : ${searchText.current.value}.only give me names of 20 movies, comma seperated like the example results given ahead.Example results: Gadar, Sholay, Don, Golmal, Dhoom 3`;
-    const gptResults = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
+    dispatch(addGptMoviesResult({ loading: true }));
+    const gptQuery = `Act as a Movie web series tv show  Recommendation system and suggest some movies web series tv show for the query: ${searchText.current.value}. Only give me names of 10 movies web series tv show, comma separated. Example results: Gadar, Sholay, Don, Golmal, Dhoom 3.`;
 
-    if (!gptResults.choices) {
-      // write error handaling
+    const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    try {
+      const gptResults = await model.generateContent(gptQuery);
+
+      if (!gptResults) {
+        dispatch(addGptMoviesResult({ loading: false }));
+        return null;
+      }
+
+      const gptMovies = gptResults.response.text().split(",");
+      const promiseArray = gptMovies.map((movie) =>
+        searchMovieTmdb(movie.trim())
+      );
+      const movieResults = await Promise.all(promiseArray);
+
+      dispatch(
+        addGptMoviesResult({
+          movieName: gptMovies,
+          movieResults: movieResults,
+          loading: false,
+        })
+      );
+    } catch (error) {
+      console.error("Error fetching GPT results:", error);
+      dispatch(addGptMoviesResult({ loading: false }));
     }
-
-    console.log(gptResults.choices?.[0]?.message?.content);
-    const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
-    const promiseArray = gptMovies.map((movie) =>
-      searchMovieTmdb(movie.trim())
-    );
-    const movieResults = await Promise.all(promiseArray);
-
-    dispatch(
-      addGptMoviesResult({
-        movieName: gptMovies,
-        movieResults: movieResults,
-      })
-    );
   };
 
   return (
@@ -78,4 +89,3 @@ const GptSearch = () => {
 };
 
 export default GptSearch;
-

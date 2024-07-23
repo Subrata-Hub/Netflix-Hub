@@ -153,7 +153,7 @@ const ExplorePage = () => {
           showFilter && isMobile ? "flex-col" : "flex"
         } mx-10 md:mx-12  md:gap-4`}
       >
-        <div className={`flex flex-col  md:w-[20%]`}>
+        <div className={`flex flex-col md:w-[20%] `}>
           <div
             className={`flex gap-4 ${
               !showFilter && isMobile ? "hidden" : "flex-col"

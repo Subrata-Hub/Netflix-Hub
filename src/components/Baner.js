@@ -62,7 +62,7 @@ const Baner = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center w-screen h-[46rem] bg-slate-950">
-        <Spinner show={true} position={"bottom-[400px]"} sized={"size-16"} />
+        <Spinner show={true} position={"bottom-[350px]"} sized={"size-16"} />
       </div>
     );
   }

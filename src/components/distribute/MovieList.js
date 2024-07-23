@@ -25,7 +25,7 @@ const MovieList = ({ title, movies, loading, mediaType }) => {
     return (
       <div className="w-full">
         <Shimmer
-          className="w-[125px] md:w-[217px] h-[185px] md:h-[300px] bg-stone-700 rounded-xl"
+          className="w-[115px] md:w-[230px] h-[185px] md:h-[300px] bg-stone-700 rounded-xl"
           size={6}
         />
       </div>
