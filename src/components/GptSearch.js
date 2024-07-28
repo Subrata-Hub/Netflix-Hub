@@ -32,7 +32,7 @@ const GptSearch = () => {
   };
 
   const handleGptSearchClick = async () => {
-    dispatch(addGptMoviesResult({ loading: true }));
+    dispatch(addGptMoviesResult({ loading: true, hasSearched: true }));
     const gptQuery = `Act as a Movie web series tv show  Recommendation system and suggest some movies web series tv show for the query: ${searchText.current.value}. Only give me names of 10 movies web series tv show, comma separated. Example results: Gadar, Sholay, Don, Golmal, Dhoom 3.`;
 
     const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_KEY);
@@ -42,7 +42,7 @@ const GptSearch = () => {
       const gptResults = await model.generateContent(gptQuery);
 
       if (!gptResults) {
-        dispatch(addGptMoviesResult({ loading: false }));
+        dispatch(addGptMoviesResult({ loading: false, hasSearched: true }));
         return null;
       }
 
@@ -57,11 +57,12 @@ const GptSearch = () => {
           movieName: gptMovies,
           movieResults: movieResults,
           loading: false,
+          hasSearched: true,
         })
       );
     } catch (error) {
       console.error("Error fetching GPT results:", error);
-      dispatch(addGptMoviesResult({ loading: false }));
+      dispatch(addGptMoviesResult({ loading: false, hasSearched: true }));
     }
   };
 

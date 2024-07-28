@@ -5,9 +5,13 @@ import Spinner from "../components/distribute/Spinner";
 
 const GptRecommendation = () => {
   const gpt = useSelector((store) => store.gpt);
-  const { movieResults, loading, movieName } = gpt;
+  const { movieResults, loading, movieName, hasSearched } = gpt;
 
   console.log(movieName);
+
+  if (!hasSearched) {
+    return null;
+  }
 
   if (loading) {
     return <Spinner show={true} position={"bottom-60"} sized={"size-12"} />;
