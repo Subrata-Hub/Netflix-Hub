@@ -18,7 +18,7 @@ const WatchList = () => {
     dispatch(removeMovieOrTVShow(id));
   };
   return (
-    <div className="bg-slate-950">
+    <div className="bg-slate-950 h-full z-10">
       <Header />
       <div className="pt-20 min-h-[700px] ml-4 md:ml-10">
         <h1 className="text-lg text-white text-center mb-6">My Watchlist</h1>

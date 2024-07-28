@@ -1,12 +1,19 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Browse from "./pages/Browse";
 import Login from "./pages/Login";
 import SearchResultsPage from "./pages/SearchResultsPage";
-import GptSearchPage from "./pages/GptSearchPage";
+import FallbackSpinner from "./distribute/FallbackSpinner";
 
-import ExplorePage from "./pages/ExplorePage";
-import DetailsPage from "./pages/DetailsPage";
-import WatchList from "./pages/WatchList";
+// import ExplorePage from "./pages/ExplorePage";
+// import DetailsPage from "./pages/DetailsPage";
+// import WatchList from "./pages/WatchList";
+// import GptSearchPage from "./pages/GptSearchPage";
+
+const WatchList = lazy(() => import("./pages/WatchList"));
+const DetailsPage = lazy(() => import("./pages/DetailsPage"));
+const ExplorePage = lazy(() => import("./pages/ExplorePage"));
+const GptSearchPage = lazy(() => import("./pages/GptSearchPage"));
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -20,11 +27,19 @@ const Body = () => {
     },
     {
       path: "/explore/:mediaType",
-      element: <ExplorePage />,
+      element: (
+        <Suspense fallback={<FallbackSpinner />}>
+          <ExplorePage />
+        </Suspense>
+      ),
     },
     {
       path: "/:mediaType/:id",
-      element: <DetailsPage />,
+      element: (
+        <Suspense fallback={<FallbackSpinner />}>
+          <DetailsPage />
+        </Suspense>
+      ),
     },
     {
       path: "/search/:query",
@@ -32,18 +47,26 @@ const Body = () => {
     },
     {
       path: "/gptsearch",
-      element: <GptSearchPage />,
+      element: (
+        <Suspense fallback={<FallbackSpinner />}>
+          <GptSearchPage />
+        </Suspense>
+      ),
     },
     {
       path: "/watchlist",
-      element: <WatchList />,
+      element: (
+        <Suspense fallback={<FallbackSpinner />}>
+          <WatchList />
+        </Suspense>
+      ),
     },
   ]);
 
   // get navigate from the router
 
   return (
-    <div className="">
+    <div>
       <RouterProvider router={appRouter} />
     </div>
   );
