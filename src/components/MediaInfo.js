@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { IMG_CDN_URL } from "../utils/constants";
@@ -18,6 +18,7 @@ import { FaBookmark } from "react-icons/fa";
 import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
 import { IoMdClose } from "react-icons/io";
 import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 const MediaInfo = ({ mediaType, id }) => {
   const [videoPopup, setVideoPopup] = useState(false);
@@ -36,6 +37,10 @@ const MediaInfo = ({ mediaType, id }) => {
   const formattedDate = useDate(
     mediaInfoData?.release_date || mediaInfoData?.first_air_date
   );
+
+  const videoPopupContainerRef = useRef(null);
+
+  useOutsideClick(videoPopupContainerRef, () => setVideoPopup(false));
 
   const convertHourAndMinute = convertHoursAndMinutes(mediaInfoData?.runtime);
 
@@ -158,6 +163,7 @@ const MediaInfo = ({ mediaType, id }) => {
               <div
                 className="text-white flex items-center gap-1 text-lg"
                 onClick={handleShowPopup}
+                ref={videoPopupContainerRef}
               >
                 <AiOutlinePlayCircle className="text-yellow-500 text-[66px]" />{" "}
                 Watch Trailer

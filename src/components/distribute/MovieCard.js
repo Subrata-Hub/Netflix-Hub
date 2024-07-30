@@ -89,6 +89,8 @@ const MovieCard = ({
               alt="poser_img"
               height={isMobile ? 185 : 300}
               width={isMobile ? 130 : 216}
+              threshold={0.09}
+              offset={100}
             />
 
             <div className="flex absolute bottom-1 mb-14 left-1 text-base">

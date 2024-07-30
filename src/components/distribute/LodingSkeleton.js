@@ -3,7 +3,7 @@ import React from "react";
 const LodingSkeleton = () => {
   return (
     <>
-      <div className="relative flex flex-col pt-52 w-full h-full pb-14">
+      <div className="relative flex flex-col pt-52 w-full h-full pb-24">
         <div className="w-full h-full absolute top-0 left-0 overflow-hidden bg-slate-900 -z-20"></div>
         <div className="md:flex gap-6 md:gap-12 pl-10 md:pl-52">
           <div className="w-[260px] md:w-[25rem] h-[370px] md:h-[440px] bg-slate-700 mb-10 md:mb-0 ">

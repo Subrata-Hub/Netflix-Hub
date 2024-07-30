@@ -15,6 +15,8 @@ import { IoIosSearch, IoMdMenu, IoMdClose } from "react-icons/io";
 import { toggleGptSearchView } from "../../utils/gptSlice";
 import { changeLanguage } from "../../utils/configSlice";
 import { IMG_CDN_URL3 } from "../../utils/constants";
+import MobileNavigation from "./MobileNavigation";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 const Header = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
@@ -32,6 +34,13 @@ const Header = () => {
   const searchCache = useSelector((store) => store.search);
   const initialRender = useRef(true);
   const profileContainerRef = useRef(null);
+  const searchBarContainerRef = useRef(null);
+
+  useOutsideClick(profileContainerRef, () => setShowProfile(false));
+  useOutsideClick(searchBarContainerRef, () => {
+    setShowSuggestion(!showSuggestion);
+    setSuggestion([]);
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -171,29 +180,14 @@ const Header = () => {
     setShowProfile(!showProfile);
   };
 
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        profileContainerRef.current &&
-        !profileContainerRef.current.contains(event.target)
-      ) {
-        setShowProfile(false);
-      }
-    };
-
-    document.addEventListener("click", handleOutsideClick);
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
-
   return (
     <div className="fixed top-0 left-0 w-full z-50 border-b border-b-slate-800 lg:border-b-slate-900 lg:backdrop-blur-sm">
       <div className={`flex items-center px-2 lg:px-7.5 xl:px-10 max-lg:py-4`}>
         <Link
           to="/"
-          className={`block w-[12rem] xl:mr-8  md:flex`}
+          className={`w-[12rem] xl:mr-8 ${
+            showSearchBar ? "hidden" : "block"
+          }  md:flex`}
           onClick={handleClick}
         >
           <img src={LOGO} alt="logo" width={190} height={40} />
@@ -242,7 +236,10 @@ const Header = () => {
           />
         </div>
 
-        <div className="bg-slate-950 absolute top-20 min-w-[380px] md:min-w-[500px] ml-1.5 lg:ml-56 lg:top-14 z-50 ">
+        <div
+          className="bg-slate-950 absolute top-20 min-w-[380px] md:min-w-[500px] ml-1.5 lg:ml-56 lg:top-14 z-50"
+          ref={searchBarContainerRef}
+        >
           {showSuggestion && (
             <div className="bg-slate-950 text-left px-4 text-sm text-white">
               <ul>
@@ -273,7 +270,7 @@ const Header = () => {
               </ul>
             </div>
           )}
-          {showSuggestion && suggestion?.results.length > 0 && (
+          {showSuggestion && suggestion?.results?.length > 0 && (
             <IoMdClose
               className="text-white text-2xl hidden md:absolute top-5 right-5"
               onClick={handleSearchSeggestion}
@@ -392,55 +389,15 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <nav
-        className={`lg:hidden fixed top-0 left-0 w-full h-full ${
-          openNavigation ? "block" : "hidden"
-        } bg-slate-950 z-50`}
-      >
-        <div className="flex flex-col items-center justify-center m-auto">
-          <ul className="text-white flex flex-col gap-4 text-lg mt-16">
-            <li
-              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
-              onClick={handleClick}
-            >
-              <Link to="/">Home</Link>
-            </li>
-            <li
-              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
-              onClick={handleMovieClick}
-            >
-              Movies
-            </li>
-            <li
-              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
-              onClick={handleTVShowClick}
-            >
-              TV Shows
-            </li>
-            <li
-              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
-              onClick={handleClick}
-            >
-              <Link to="/watchlist">WatchList</Link>
-            </li>
-            <li
-              className="block relative font-code text-xl uppercase text-white transition-colors hover:text-purple-400 px-10 py-6 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-white xl:px-6"
-              onClick={handleClick}
-            >
-              <button
-                className="px-3 py-1 mx-2 my-1 mb-2 bg-violet-800 font-semibold text-white ml-0 md:ml-20 "
-                onClick={handleGptSearchClicked}
-              >
-                GPT Search
-              </button>
-            </li>
-          </ul>
-          <IoMdClose
-            className="text-white text-2xl md:hidden absolute top-5 right-5"
-            onClick={toggleNavigation}
-          />
-        </div>
-      </nav>
+
+      <MobileNavigation
+        handleClick={handleClick}
+        openNavigation={openNavigation}
+        handleMovieClick={handleMovieClick}
+        handleTVShowClick={handleTVShowClick}
+        handleGptSearchClicked={handleGptSearchClicked}
+        toggleNavigation={toggleNavigation}
+      />
     </div>
   );
 };

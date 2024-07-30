@@ -113,7 +113,7 @@ const Baner = () => {
           <GoUnmute className="text-white text-2xl" onClick={handleMute} />
         )}
       </div>
-      <div className="absolute bottom-[28rem] md:bottom-[8rem] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
+      <div className="absolute bottom-[462px] md:bottom-[8rem] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
         {currentIndex >= 0 && (
           <div
             className="absolute top-0 bottom-0 left-0 w-10 h-10 bg-transparent text-white flex justify-center items-center cursor-pointer z-50"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
@@ -6,13 +6,16 @@ import VideoPopup from "./VideoPopup";
 import Shimmer from "./distribute/Shimmer";
 import useMediaVideos from "../hooks/useMediaVideos";
 import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 const MediaVideos = ({ mediaType, id, loading }) => {
   const [videoPopup, setVideoPopup] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const mediaVideos = useSelector((store) => store.media?.mediaVideos);
-
   useMediaVideos(mediaType, id);
+
+  const videoPopupContainerRef = useRef(null);
+  useOutsideClick(videoPopupContainerRef, () => setVideoPopup(false));
 
   const handleShowPopup = (index) => {
     setVideoPopup(true);
@@ -39,7 +42,7 @@ const MediaVideos = ({ mediaType, id, loading }) => {
   return (
     <div className="pb-4 md:pb-8 px-4 md:px-12 text-white">
       <div className="font-semibold text-3xl py-5">Official Videos</div>
-      <div className="flex gap-6 overflow-scroll">
+      <div className="flex gap-6 overflow-scroll" ref={videoPopupContainerRef}>
         {mediaVideos?.map((video, index) => (
           <div className="relative cursor-pointer" key={video.id}>
             <div
