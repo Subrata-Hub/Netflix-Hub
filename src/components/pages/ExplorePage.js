@@ -203,7 +203,7 @@ const ExplorePage = () => {
                     <Spinner
                       show={true}
                       position={"bottom-0"}
-                      sized={"size-12"}
+                      sized={"size-8"}
                     />
                   }
                 >

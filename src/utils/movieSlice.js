@@ -8,6 +8,7 @@ const movieSlice = createSlice({
     topRatedMovies: null,
     allTimeFavourites: null,
     newIndianMovies: null,
+
     trending: null,
     trendingShow: null,
   },
@@ -48,6 +49,7 @@ export const {
   addTopRatedMovies,
   addAllTimeFavourites,
   addNewIndianMovies,
+
   addTrending,
   addTrendingShow,
 } = movieSlice.actions;
