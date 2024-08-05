@@ -14,9 +14,10 @@ import LOGO from "../../assets/logo.png";
 import { IoIosSearch, IoMdMenu, IoMdClose } from "react-icons/io";
 import { toggleGptSearchView } from "../../utils/gptSlice";
 import { changeLanguage } from "../../utils/configSlice";
-import { IMG_CDN_URL3 } from "../../utils/constants";
 import MobileNavigation from "./MobileNavigation";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import Profile from "../Profile";
+import SearchSuggestion from "../SearchSuggestion";
 
 const Header = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
@@ -41,6 +42,35 @@ const Header = () => {
     setShowSuggestion(!showSuggestion);
     setSuggestion([]);
   });
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+
+        if (!initialRender.current && window.location.pathname !== "/") {
+          navigate("/");
+        }
+        initialRender.current = false;
+      } else {
+        dispatch(removeUser());
+        if (!initialRender.current && window.location.pathname !== "/") {
+          navigate("/");
+        }
+        initialRender.current = false;
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -77,35 +107,6 @@ const Header = () => {
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
-
-        if (!initialRender.current && window.location.pathname !== "/") {
-          navigate("/");
-        }
-        initialRender.current = false;
-      } else {
-        dispatch(removeUser());
-        if (!initialRender.current && window.location.pathname !== "/") {
-          navigate("/");
-        }
-        initialRender.current = false;
-      }
-    });
-
-    return () => unsubscribe();
-  }, [dispatch, navigate]);
 
   const handleGptSearchClicked = () => {
     navigate("/gptsearch");
@@ -180,6 +181,8 @@ const Header = () => {
     setShowProfile(!showProfile);
   };
 
+  
+
   return (
     <div className="fixed top-0 left-0 w-full z-50 border-b border-b-slate-800 lg:border-b-slate-900 lg:backdrop-blur-sm">
       <div className={`flex items-center px-2 lg:px-7.5 xl:px-10 max-lg:py-4`}>
@@ -213,6 +216,8 @@ const Header = () => {
             />
           </div>
         )}
+
+        {/* for mobile searchbar */}
         <div
           className={`${
             showSearchBar ? "flex" : "hidden"
@@ -236,47 +241,15 @@ const Header = () => {
           />
         </div>
 
-        <div
-          className="bg-slate-950 absolute top-20 min-w-[380px] md:min-w-[500px] ml-1.5 lg:ml-56 lg:top-14 z-50"
-          ref={searchBarContainerRef}
-        >
-          {showSuggestion && (
-            <div className="bg-slate-950 text-left px-4 text-sm text-white">
-              <ul>
-                {suggestion?.results?.slice(0, 12).map((s) => (
-                  <li
-                    className="py-1 shadow-sm hover:bg-slate-900 cursor-pointer"
-                    key={s.id}
-                    onClick={() => handleSearchClicked(s.title || s.name)}
-                  >
-                    <div className="flex gap-2 items-center">
-                      <div className="w-10 h-10 ">
-                        {s.poster_path || s.profile_path ? (
-                          <img
-                            className="w-full h-full object-cover object-center rounded-lg"
-                            src={`${IMG_CDN_URL3}${
-                              s.poster_path || s.profile_path
-                            }`}
-                            alt="search-img"
-                          />
-                        ) : (
-                          <IoIosSearch className="text-lg mt-3 ml-3" />
-                        )}
-                      </div>
-                      <div>{s.name || s.title}</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {showSuggestion && suggestion?.results?.length > 0 && (
-            <IoMdClose
-              className="text-white text-2xl hidden md:absolute top-5 right-5"
-              onClick={handleSearchSeggestion}
-            />
-          )}
-        </div>
+        {/* SearchSuggestion   */}
+
+        <SearchSuggestion
+          searchBarContainerRef={searchBarContainerRef}
+          showSuggestion={showSuggestion}
+          suggestion={suggestion}
+          handleSearchSeggestion={handleSearchSeggestion}
+          handleSearchClicked={handleSearchClicked}
+        />
 
         <>
           {!showGptSearch && (
@@ -340,51 +313,15 @@ const Header = () => {
             } ml-auto md:hidden lg:hidden text-white text-2xl m-3 `}
             onClick={toggleNavigation}
           />
-          {!user ? (
-            <div className="button text-white transition-colors font-medium text-lg hover:text-white lg:block ml-0 md:pl-20">
-              <Link to={"/login"}>
-                {/* <button className="px-6 py-2 bg-pink-700">LogIn</button> */}
-
-                <button
-                  type="button"
-                  className={`py-1 px-6  me-2 ${
-                    showSearchBar ? "hidden" : ""
-                  } md:flex  text-base font-medium text-gray-900  focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`}
-                >
-                  LogIn
-                </button>
-              </Link>
-            </div>
-          ) : (
-            <div
-              className="relative flex items-center space-x-1 ml-0 md:ml-6"
-              ref={profileContainerRef}
-            >
-              <img
-                className={`w-8 h-8 rounded-full ${
-                  showSearchBar ? "hidden" : ""
-                } md:flex`}
-                src={user.photoURL}
-                alt="user-icon"
-                onClick={handleProfileClick}
-              />
-            </div>
-          )}
-          {showProfile && user && (
-            <div className="absolute mt-36 right-10 px-10 py-2 bg-slate-800 hover:bg-slate-900 text-white">
-              <h1 className=" text-white text-[17px] text-center">
-                {user.displayName}
-              </h1>
-
-              <button
-                type="button"
-                onClick={handleSignOut}
-                class="py-1 px-6 me-2 mt-2  text-base font-medium text-gray-900  focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-              >
-                Logout
-              </button>
-            </div>
-          )}
+          {/* profile Section */}
+          <Profile
+            user={user}
+            showSearchBar={showSearchBar}
+            profileContainerRef={profileContainerRef}
+            handleProfileClick={handleProfileClick}
+            showProfile={showProfile}
+            handleSignOut={handleSignOut}
+          />
         </>
       </div>
 

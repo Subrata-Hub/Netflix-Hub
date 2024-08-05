@@ -18,9 +18,8 @@ const Cast = ({ cast }) => {
       </h1>
       <div className="flex gap-6 overflow-scroll">
         {cast?.map((act, index) => (
-          <Link to={`/person/${act.id}`}>
+          <Link to={`/person/${act.id}`} key={act.id}>
             <div
-              key={act.id}
               className="flex flex-col items-center text-center "
               onClick={handleMoreInfoClick}
             >

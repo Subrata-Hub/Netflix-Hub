@@ -5,7 +5,7 @@ const FallbackSpinner = () => {
   return (
     <>
       <div className="flex justify-center items-center w-screen h-screen bg-slate-950">
-        <Spinner show={true} position={"bottom-80"} sized={"size-12"} />
+        <Spinner show={true} position={"bottom-80"} sized={"size-16"} />
       </div>
     </>
   );

@@ -17,6 +17,7 @@ const WatchList = () => {
   const handleRemoveButton = (id) => {
     dispatch(removeMovieOrTVShow(id));
   };
+
   return (
     <div className="bg-slate-950 h-full z-10">
       <Header />
@@ -32,11 +33,10 @@ const WatchList = () => {
           <div className="w-full">
             <div className="relative">
               {sortedSavedData?.map((saved) => (
-                <>
+                <div key={saved.cardMovieId} className="relative">
                   <div
-                    className=" flex gap-2 absolute  right-0 md:right-4  mt-0 md:mt-2 items-center "
+                    className="flex gap-2 absolute right-0 md:right-4 mt-0 md:mt-2 items-center "
                     onClick={() => handleRemoveButton(saved.cardMovieId)}
-                    key={saved.cardMovieId}
                   >
                     <div className="flex justify-center items-center w-6 md:w-9 h-6 md:h-9 rounded-full bg-white ">
                       <RxCross2 className="text-black text-xl" />
@@ -52,7 +52,7 @@ const WatchList = () => {
                     releaseDate={saved.releaseDate}
                     mediaType={saved.mediaType}
                   />
-                </>
+                </div>
               ))}
             </div>
           </div>

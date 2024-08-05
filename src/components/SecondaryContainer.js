@@ -46,5 +46,3 @@ const SecondaryContainer = () => {
 };
 
 export default SecondaryContainer;
-
-// -mt-[16.6rem] md:-mt-[80px]

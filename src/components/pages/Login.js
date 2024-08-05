@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
-import Header from "../distribute/Header";
+// import Header from "../distribute/Header";
 import { checkValidateData } from "../../utils/validate";
 import {
   createUserWithEmailAndPassword,
@@ -9,14 +9,18 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { BACKGROUND_IMG, USER_AVATAR } from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const dispatch = useDispatch();
   const [isSignInFrom, setIsSignInFrom] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
+  const user = useSelector((state) => state.user.user);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -33,6 +37,7 @@ const Login = () => {
 
     if (!isSignInFrom) {
       // Sign Up
+
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -106,8 +111,8 @@ const Login = () => {
 
   return (
     <div>
-      <Header />
-      {/* {user && navigate("/")} */}
+      {/* <Header /> */}
+      {user && navigate("/")}
 
       <div className="absolute h-full w-full">
         <img

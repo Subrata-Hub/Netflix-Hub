@@ -13,6 +13,9 @@ const useTrending = () => {
       API_OPTIONS
     );
     const responce = await data.json();
+    // const showsWithPoster = responce.results.filter(
+    //   (show) => show.poster_path != null
+    // );
 
     dispatch(addTrending(responce.results));
   };

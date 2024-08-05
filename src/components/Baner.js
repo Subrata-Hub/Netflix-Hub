@@ -81,7 +81,7 @@ const Baner = () => {
         <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-10 md:mt-4">
           <LeLazyLoadImage
             src={IMG_CDN_URL + currentMovie?.backdrop_path}
-            className="object-cover object-center transition-opacity duration-500"
+            // className="object-cover object-center transition-opacity duration-500"
             height={isMobile ? 200 : 1080}
             width={isMobile ? 400 : 1580}
             alt="banar"
