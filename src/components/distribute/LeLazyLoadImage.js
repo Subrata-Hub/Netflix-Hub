@@ -9,6 +9,7 @@ const LeLazyLoadImage = ({
   width,
   threshold = 0.1,
   offset = 100,
+  handleImageVisible,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -21,6 +22,7 @@ const LeLazyLoadImage = ({
       width={width}
       threshold={threshold}
       offset={offset}
+      onContentVisible={handleImageVisible}
     >
       <img
         className={`w-full h-full object-center object-cover object-top rounded-xl blur-effect ${

@@ -61,7 +61,10 @@ const SearchResultsPage = () => {
           <div className="w-full">
             <div className="">
               {loading && (
-                <Shimmer className="w-full h-44 bg-stone-700 rounded-xl" />
+                <Shimmer
+                  className="w-full h-44 bg-stone-700 rounded-xl"
+                  size={6}
+                />
               )}
               {!loading && (
                 <>

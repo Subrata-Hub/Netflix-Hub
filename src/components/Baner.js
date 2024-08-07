@@ -18,6 +18,7 @@ const Baner = () => {
   const visibleMovieCount = 5;
   const [showVideo, setShowVideo] = useState(false);
   const [mute, setMute] = useState(true);
+  const [imageVisible, setImageVisible] = useState(false);
 
   const movies = useSelector((store) => store.movies?.trending);
 
@@ -26,6 +27,7 @@ const Baner = () => {
       currentIndex + visibleMovieCount,
       movies.length - 1
     );
+
     setCurrentIndex(nextIndex);
   };
 
@@ -47,6 +49,10 @@ const Baner = () => {
     setCurrentIndex(Math.min(nextIndex, movies.length - 1));
   };
 
+  const handleImageVisible = () => {
+    setImageVisible(true);
+  };
+
   useEffect(() => {
     if (movies && movies.length > 0) {
       setLoading(false);
@@ -55,7 +61,12 @@ const Baner = () => {
       }
 
       setShowVideo(false);
-      setTimeout(() => setShowVideo(true), 2000);
+
+      const timer = setTimeout(() => setShowVideo(true), 2000);
+
+      return () => {
+        clearTimeout(timer);
+      };
     }
   }, [currentIndex, movies]);
 
@@ -85,11 +96,12 @@ const Baner = () => {
             height={isMobile ? 200 : 1080}
             width={isMobile ? 400 : 1580}
             alt="banar"
+            handleImageVisible={handleImageVisible}
           />
         </div>
       )}
 
-      {showVideo && (
+      {showVideo && imageVisible && (
         <VideoBackground
           ref={videoRef}
           movieId={currentMovie.id}
