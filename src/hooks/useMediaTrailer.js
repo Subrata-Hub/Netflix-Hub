@@ -6,7 +6,6 @@ import { addMediaTrailer } from "../utils/mediaSlice";
 import { useDispatch } from "react-redux";
 
 const useMediaTrailer = (mediaType, id) => {
-  // const mediaType = useSelector((store) => store.config.mediaType);
   const dispatch = useDispatch();
 
   const getTrailerVideos = async () => {

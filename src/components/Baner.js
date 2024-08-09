@@ -6,9 +6,9 @@ import VideoBackground from "./VideoBackground";
 import { GoUnmute } from "react-icons/go";
 import { BiVolumeMute } from "react-icons/bi";
 import { useMediaQuery } from "react-responsive";
-
 import Spinner from "./distribute/Spinner";
 import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import useTrending from "../hooks/useTrending";
 
 const Baner = () => {
   const videoRef = useRef(null);
@@ -20,6 +20,7 @@ const Baner = () => {
   const [mute, setMute] = useState(true);
   const [imageVisible, setImageVisible] = useState(false);
 
+  const { hasError } = useTrending(); // Access hasError state
   const movies = useSelector((store) => store.movies?.trending);
 
   const handleNext = () => {
@@ -27,7 +28,6 @@ const Baner = () => {
       currentIndex + visibleMovieCount,
       movies.length - 1
     );
-
     setCurrentIndex(nextIndex);
   };
 
@@ -62,13 +62,23 @@ const Baner = () => {
 
       setShowVideo(false);
 
-      const timer = setTimeout(() => setShowVideo(true), 2000);
+      const timer = setTimeout(() => setShowVideo(true), 2500);
 
       return () => {
         clearTimeout(timer);
       };
     }
   }, [currentIndex, movies]);
+
+  if (hasError) {
+    return (
+      <div className="flex justify-center items-center bg-slate-950 text-white h-screen">
+        <h1 className="text-3xl">
+          Failed to fetch Trending Movies or TV Shows 😒😒.
+        </h1>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -77,8 +87,6 @@ const Baner = () => {
       </div>
     );
   }
-
-  // if (!movies) return null;
 
   const currentMovie = movies[currentIndex];
   const displayedMovies = movies.slice(
@@ -92,7 +100,6 @@ const Baner = () => {
         <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-10 md:mt-4">
           <LeLazyLoadImage
             src={IMG_CDN_URL + currentMovie?.backdrop_path}
-            // className="object-cover object-center transition-opacity duration-500"
             height={isMobile ? 200 : 1080}
             width={isMobile ? 400 : 1580}
             alt="banar"
@@ -161,7 +168,3 @@ const Baner = () => {
 };
 
 export default Baner;
-
-// h-[44rem]
-
-// top-56 md:top-[32rem]

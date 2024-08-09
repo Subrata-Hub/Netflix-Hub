@@ -17,6 +17,7 @@ const DetailsPage = () => {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -31,12 +32,21 @@ const DetailsPage = () => {
         dispatch(addMediaInfo(json));
         setLoading(false);
       } catch (error) {
+        setHasError(true);
         console.error("Error fetching media info:", error);
       }
     };
 
     getMediaInfo();
   }, [dispatch, mediaType, id]);
+
+  if (hasError) {
+    return (
+      <div className="h-screen flex justify-center items-center bg-slate-950 text-white">
+        <h1 className="text-3xl">Failed to fetching media info 😒😒.</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-950">

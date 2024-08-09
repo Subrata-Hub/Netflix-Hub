@@ -4,6 +4,7 @@ import Browse from "./pages/Browse";
 import Login from "./pages/Login";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import FallbackSpinner from "./distribute/FallbackSpinner";
+import Error from "./Error";
 
 // import ExplorePage from "./pages/ExplorePage";
 // import DetailsPage from "./pages/DetailsPage";
@@ -20,6 +21,7 @@ const Body = () => {
     {
       path: "/",
       element: <Browse />,
+      errorElement: <Error />,
     },
     {
       path: "/login",
