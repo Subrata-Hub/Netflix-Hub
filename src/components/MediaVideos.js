@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 import VideoPopup from "./VideoPopup";
-import Shimmer from "./distribute/Shimmer";
+import Shimmer from "./shared/Shimmer";
 import useMediaVideos from "../hooks/useMediaVideos";
-import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import LeLazyLoadImage from "./shared/LeLazyLoadImage";
 import useOutsideClick from "../hooks/useOutsideClick";
 
 const MediaVideos = ({ mediaType, id, loading }) => {

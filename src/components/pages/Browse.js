@@ -1,4 +1,4 @@
-import Header from "../distribute/Header";
+import Header from "../shared/Header";
 import useNowPlayingMovies from "../../hooks/useNowPlayingMovies";
 
 import SecondaryContainer from "../SecondaryContainer";

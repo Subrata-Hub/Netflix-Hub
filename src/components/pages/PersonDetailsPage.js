@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { API_OPTIONS } from "../../utils/constants";
 import { IMG_CDN_URL } from "../../utils/constants";
 import PosterFallImage from "../../assets/no-poster2.jpeg";
-import MovieCard from "../distribute/MovieCard";
+import MovieCard from "../shared/MovieCard";
 import useDate from "../../hooks/useDate";
 import MovieCardHorizontal from "../MovieCardHorizontal";
-import LeLazyLoadImage from "../distribute/LeLazyLoadImage";
-import LodingSkeleton from "../distribute/LodingSkeleton";
+import LeLazyLoadImage from "../shared/LeLazyLoadImage";
+import LodingSkeleton from "../shared/LodingSkeleton";
 
 const PersonDetailsPage = () => {
   const [data, setData] = useState(null);

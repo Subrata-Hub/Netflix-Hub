@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MovieCard from "./distribute/MovieCard";
-import Spinner from "../components/distribute/Spinner";
+import MovieCard from "./shared/MovieCard";
+import Spinner from "./shared/Spinner";
 
 const GptRecommendation = () => {
   const gpt = useSelector((store) => store.gpt);

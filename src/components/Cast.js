@@ -3,7 +3,7 @@ import React from "react";
 import { IMG_CDN_URL } from "../utils/constants";
 import profileFallbackImage from "../assets/default_Profile.jpg";
 import { Link } from "react-router-dom";
-import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import LeLazyLoadImage from "./shared/LeLazyLoadImage";
 
 const Cast = ({ cast }) => {
   const handleMoreInfoClick = () => {

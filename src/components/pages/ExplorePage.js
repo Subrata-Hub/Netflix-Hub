@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Header from "../distribute/Header";
+import Header from "../shared/Header";
 import { useParams } from "react-router-dom";
 import { API_OPTIONS } from "../../utils/constants";
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import MovieCard from "../distribute/MovieCard";
+import MovieCard from "../shared/MovieCard";
 import MovieCardHorizontal from "../MovieCardHorizontal";
 import useGenre from "../../hooks/useGenre";
 import { useMediaQuery } from "react-responsive";
 import { sortbyData } from "../../utils/constants";
-import Spinner from "../distribute/Spinner";
+import Spinner from "../shared/Spinner";
 import { IoGridOutline } from "react-icons/io5";
 
 import useLanguage from "../../hooks/useLanguage";
@@ -18,7 +18,7 @@ import SortFilter from "../filters/SortFilter";
 import LanguageFilter from "../filters/LanguageFilter";
 import { MdViewList } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
-import Shimmer from "../distribute/Shimmer";
+import Shimmer from "../shared/Shimmer";
 
 let filters = {};
 

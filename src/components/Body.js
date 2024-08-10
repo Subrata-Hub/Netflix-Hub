@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Browse from "./pages/Browse";
 import Login from "./pages/Login";
 import SearchResultsPage from "./pages/SearchResultsPage";
-import FallbackSpinner from "./distribute/FallbackSpinner";
+
 import Error from "./Error";
+import FallbackSpinner from "./shared/FallbackSpinner";
 
 // import ExplorePage from "./pages/ExplorePage";
 // import DetailsPage from "./pages/DetailsPage";

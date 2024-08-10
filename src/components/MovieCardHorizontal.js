@@ -5,7 +5,7 @@ import { IMG_CDN_URL2 } from "../utils/constants";
 import PosterFallImage from "../assets/no-poster2.jpeg";
 import PersonFallbackImage from "../assets/person-fallback.png";
 import useDate from "../hooks/useDate";
-import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import LeLazyLoadImage from "./shared/LeLazyLoadImage";
 
 const MovieCardHorizontal = ({
   posterPath,

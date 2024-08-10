@@ -1,8 +1,8 @@
 import React from "react";
 import useRecommendations from "../hooks/useRecommendations";
 import { useSelector } from "react-redux";
-import MovieList from "./distribute/MovieList";
-import Shimmer from "./distribute/Shimmer";
+import MovieList from "./shared/MovieList";
+import Shimmer from "./shared/Shimmer";
 
 const Recommendations = ({ mediaType, id, loading }) => {
   // const loading = useSelector((state) => state.loading);

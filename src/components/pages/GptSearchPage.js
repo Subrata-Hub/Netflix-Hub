@@ -2,7 +2,7 @@ import React from "react";
 import GptSearch from "../GptSearch";
 import GptRecommendation from "../GptRecommendation";
 import { BACKGROUND_IMG } from "../../utils/constants";
-import Header from "../distribute/Header";
+import Header from "../shared/Header";
 
 const GptSearchPage = () => {
   return (

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IMG_CDN_URL } from "../utils/constants";
 
 import PosterFallImage from "../assets/no-poster2.jpeg";
-import CircularProgress from "./distribute/CircularProgress";
+import CircularProgress from "./shared/CircularProgress";
 
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import useDate from "../hooks/useDate";
@@ -17,7 +17,7 @@ import { FaRegBookmark } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
 import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
 import { IoMdClose } from "react-icons/io";
-import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import LeLazyLoadImage from "./shared/LeLazyLoadImage";
 import useOutsideClick from "../hooks/useOutsideClick";
 
 const MediaInfo = ({ mediaType, id }) => {

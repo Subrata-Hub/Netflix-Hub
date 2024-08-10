@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "../distribute/Header";
+import Header from "../shared/Header";
 import { API_OPTIONS } from "../../utils/constants";
 // import Shimmer from "../Shimmer";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Spinner from "../distribute/Spinner";
+import Spinner from "../shared/Spinner";
 import MovieCardHorizontal from "../MovieCardHorizontal";
-import Shimmer from "../distribute/Shimmer";
+import Shimmer from "../shared/Shimmer";
 
 const SearchResultsPage = () => {
   const [data, setData] = useState(null);

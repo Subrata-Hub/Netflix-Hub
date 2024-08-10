@@ -6,8 +6,8 @@ import VideoBackground from "./VideoBackground";
 import { GoUnmute } from "react-icons/go";
 import { BiVolumeMute } from "react-icons/bi";
 import { useMediaQuery } from "react-responsive";
-import Spinner from "./distribute/Spinner";
-import LeLazyLoadImage from "./distribute/LeLazyLoadImage";
+import Spinner from "./shared/Spinner";
+import LeLazyLoadImage from "./shared/LeLazyLoadImage";
 import useTrending from "../hooks/useTrending";
 
 const Baner = () => {
@@ -97,7 +97,7 @@ const Baner = () => {
   return (
     <div className="relative overflow-hidden w-screen h-[45rem] md:h-screen bg-slate-950">
       {!showVideo && (
-        <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-16 md:mt-4">
+        <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-16 md:mt-1">
           <LeLazyLoadImage
             src={IMG_CDN_URL + currentMovie?.backdrop_path}
             height={isMobile ? 200 : 1080}

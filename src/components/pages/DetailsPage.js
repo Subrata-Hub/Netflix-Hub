@@ -1,4 +1,4 @@
-import Header from "../distribute/Header";
+import Header from "../shared/Header";
 import { useParams } from "react-router-dom";
 import MediaInfo from "../MediaInfo";
 import MediaVideos from "../MediaVideos";
@@ -10,7 +10,7 @@ import { API_OPTIONS } from "../../utils/constants";
 
 import { addMediaInfo } from "../../utils/mediaSlice";
 import PersonDetailsPage from "./PersonDetailsPage";
-import LodingSkeleton from "../distribute/LodingSkeleton";
+import LodingSkeleton from "../shared/LodingSkeleton";
 
 const DetailsPage = () => {
   const { mediaType, id } = useParams();
