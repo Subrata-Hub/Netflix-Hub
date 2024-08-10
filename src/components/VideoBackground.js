@@ -14,7 +14,7 @@ const VideoBackground = forwardRef(
     // if (!mediaTrailerVideo || !mediaTrailerVideo.key) return;
 
     return (
-      <div className="w-screen relative pb-[56.25%] md:-mt-10 mt-10 z-0">
+      <div className="w-screen relative pb-[56.25%] md:-mt-10 mt-14 z-0">
         {mediaTrailerVideo && mediaTrailerVideo.key && (
           <ReactPlayer
             ref={ref}

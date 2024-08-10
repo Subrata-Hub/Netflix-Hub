@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const VideoTitle = ({ title, overview, id, mediaType }) => {
   return (
-    <div className="w-[400px] md:w-[488px] aspect-video bottom-[220px] md:bottom-[200px] z-30 px-6 md:px-12 mt-0 text-white absolute">
+    <div className="w-[400px] md:w-[488px] aspect-video bottom-[210px] md:bottom-[200px] z-30 px-6 md:px-12 mt-0 text-white absolute">
       <h1 className="text-2xl md:text-5xl font-bold">{title}</h1>
 
       <p className="py-3 md:py-6 text-[12px] md:text-sm font-normal w-full">

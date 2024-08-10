@@ -97,7 +97,7 @@ const Baner = () => {
   return (
     <div className="relative overflow-hidden w-screen h-[45rem] md:h-screen bg-slate-950">
       {!showVideo && (
-        <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-10 md:mt-4">
+        <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-16 md:mt-4">
           <LeLazyLoadImage
             src={IMG_CDN_URL + currentMovie?.backdrop_path}
             height={isMobile ? 200 : 1080}
@@ -132,7 +132,7 @@ const Baner = () => {
           <GoUnmute className="text-white text-2xl" onClick={handleMute} />
         )}
       </div>
-      <div className="absolute bottom-[462px] md:bottom-[8rem] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
+      <div className="absolute bottom-[445px] md:bottom-[8rem] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
         {currentIndex >= 0 && (
           <div
             className="absolute top-0 bottom-0 left-0 w-10 h-10 bg-transparent text-white flex justify-center items-center cursor-pointer z-50"
