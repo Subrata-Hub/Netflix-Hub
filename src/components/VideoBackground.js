@@ -14,17 +14,17 @@ const VideoBackground = forwardRef(
     // if (!mediaTrailerVideo || !mediaTrailerVideo.key) return;
 
     return (
-      <div className="w-screen relative pb-[56.25%] md:-mt-10 mt-14 z-0">
+      <div className="w-screen relative  pb-[56.25%]  md:-mt-10 mt-14 z-0">
         {mediaTrailerVideo && mediaTrailerVideo.key && (
           <ReactPlayer
             ref={ref}
             url={`https://www.youtube.com/watch?v=${mediaTrailerVideo?.key}`}
-            className="video"
             playing={true}
             muted={mute}
             controls={false}
             pip={true}
             onEnded={nextVideo}
+            className="video"
           />
         )}
       </div>

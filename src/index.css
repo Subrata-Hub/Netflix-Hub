@@ -12,11 +12,6 @@
   padding: 0px;
 }
 
-/* .lazy-load-image-background {
-  width: 100%;
-  height: 100%;
-} */
-
 /* MovieCard.css */
 .movie-card-container .blur-effect {
   filter: blur(16px);

@@ -75,4 +75,46 @@ const Body = () => {
   );
 };
 
+// const Body = () => {
+//   const appRouter = createBrowserRouter([
+//     {
+//       path: "/",
+//       element: <Browse />,
+//       errorElement: <Error />,
+//     },
+//     {
+//       path: "/login",
+//       element: <Login />,
+//     },
+//     {
+//       path: "/explore/:mediaType",
+//       element: <ExplorePage />,
+//     },
+//     {
+//       path: "/:mediaType/:id",
+//       element: <DetailsPage />,
+//     },
+//     {
+//       path: "/search/:query",
+//       element: <SearchResultsPage />,
+//     },
+//     {
+//       path: "/gptsearch",
+//       element: <GptSearchPage />,
+//     },
+//     {
+//       path: "/watchlist",
+//       element: <WatchList />,
+//     },
+//   ]);
+
+//   // get navigate from the router
+
+//   return (
+//     <div>
+//       <RouterProvider router={appRouter} />
+//     </div>
+//   );
+// };
+
 export default Body;

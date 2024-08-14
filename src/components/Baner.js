@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { IMG_CDN_URL4, IMG_CDN_URL } from "../utils/constants";
+import { IMG_CDN_URL2, IMG_CDN_URL10 } from "../utils/constants";
 import VideoTitle from "./VideoTitle";
 import VideoBackground from "./VideoBackground";
 import { GoUnmute } from "react-icons/go";
@@ -99,7 +99,7 @@ const Baner = () => {
       {!showVideo && (
         <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-16 md:mt-1">
           <LeLazyLoadImage
-            src={IMG_CDN_URL + currentMovie?.backdrop_path}
+            src={IMG_CDN_URL10 + currentMovie?.backdrop_path}
             height={isMobile ? 200 : 1080}
             width={isMobile ? 400 : 1580}
             alt="banar"
@@ -125,14 +125,14 @@ const Baner = () => {
         mediaType={currentMovie.media_type}
       />
       <div className="absolute w-screen h-[1000px] top-0 left-0 bg-gradient-to-r from-black z-10"></div>
-      <div className="absolute bottom-[38rem] md:bottom-[14rem] z-40 right-6 md:right-20">
+      <div className="absolute bottom-[38rem] md:bottom-[220px] z-40 right-6 md:right-20">
         {mute ? (
           <BiVolumeMute className="text-white text-2xl" onClick={handleMute} />
         ) : (
           <GoUnmute className="text-white text-2xl" onClick={handleMute} />
         )}
       </div>
-      <div className="absolute bottom-[445px] md:bottom-[8rem] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
+      <div className="absolute bottom-[445px] md:bottom-[120px] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
         {currentIndex >= 0 && (
           <div
             className="absolute top-0 bottom-0 left-0 w-10 h-10 bg-transparent text-white flex justify-center items-center cursor-pointer z-50"
@@ -152,11 +152,11 @@ const Baner = () => {
         {displayedMovies.map((movie, index) => (
           <div
             key={index}
-            className="w-16 md:w-20 h-[40px] md:h-[44px] border border-spacing-2"
+            className="w-16 md:w-[76px] h-[40px] md:h-[42px] border border-spacing-2"
             onClick={() => handleBanarShow(currentIndex + index)}
           >
             <img
-              src={IMG_CDN_URL4 + movie?.backdrop_path}
+              src={IMG_CDN_URL2 + movie?.backdrop_path}
               className="w-full h-full object-cover object-center"
               alt="banar"
             />

@@ -15,7 +15,6 @@ const useTrending = () => {
         API_OPTIONS
       );
       const responce = await data.json();
-      console.log(responce.results);
 
       dispatch(addTrending(responce.results));
     } catch (error) {
