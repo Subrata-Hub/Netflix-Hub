@@ -28,7 +28,7 @@ const GenreFilter = ({
             <button
               className={`px-3.5 py-1 m-1 rounded-2xl border border-gray-400 ${
                 selectedGenre.includes(genre.id.toString())
-                  ? "bg-fuchsia-700"
+                  ? "bg-violet-700"
                   : "bg-slate-800"
               }`}
               key={genre.id}

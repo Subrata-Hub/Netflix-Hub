@@ -26,7 +26,7 @@ const useMediaTrailer = (mediaType, id) => {
 
   useEffect(() => {
     getTrailerVideos();
-  }, [id]);
+  }, [id, mediaType]);
 };
 
 export default useMediaTrailer;

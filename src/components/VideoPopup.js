@@ -20,11 +20,18 @@ const VideoPopup = ({ mediaVideo, videoPopup, nextVideo }) => {
         <ReactPlayer
           ref={playerRef}
           url={`https://www.youtube.com/watch?v=${mediaVideo}`}
-          className="video"
+          className="absolute top-0 left-0"
+          width="100%"
+          height="100%"
           playing={true}
           controls={true}
           pip={true}
           onEnded={nextVideo}
+          config={{
+            youtube: {
+              playerVars: { showinfo: 0, rel: 0 },
+            },
+          }}
         />
       ) : (
         <div className="flex items-center justify-center w-full h-full bg-black text-white">

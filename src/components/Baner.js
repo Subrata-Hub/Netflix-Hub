@@ -142,7 +142,7 @@ const Baner = () => {
             key={index}
             className={`w-16 md:w-[80px] h-[40px] md:h-[44px] border border-spacing-1 border-zinc-500 ${
               currentIndex + index === currentIndex
-                ? " border-2 border-neutral-50"
+                ? " border-2 border-white"
                 : ""
             }`}
             onClick={() => handleBanarShow(currentIndex + index)}
