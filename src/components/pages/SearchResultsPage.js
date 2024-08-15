@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../shared/Header";
 import { API_OPTIONS } from "../../utils/constants";
-// import Shimmer from "../Shimmer";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../shared/Spinner";
 import MovieCardHorizontal from "../MovieCardHorizontal";
@@ -46,8 +45,6 @@ const SearchResultsPage = () => {
     setPageNumber(1);
     fetchData();
   }, [query]);
-
-  console.log(data);
 
   return (
     <div className="bg-slate-950">

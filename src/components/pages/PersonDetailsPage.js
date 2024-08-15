@@ -17,8 +17,6 @@ const PersonDetailsPage = () => {
   const [showFullBiography, setShowFullBiography] = useState(false);
   const { mediaType, id } = useParams();
 
-  console.log(mediaType, id);
-
   const formatedDate = useDate(data?.birthday);
 
   const handleShowMore = () => {
@@ -39,8 +37,6 @@ const PersonDetailsPage = () => {
   useEffect(() => {
     getPersonalDetais();
   }, []);
-
-  console.log(data);
 
   return (
     <>
@@ -127,8 +123,7 @@ const PersonDetailsPage = () => {
               <div className="flex  gap-3 overflow-scroll">
                 {data?.combined_credits?.cast
                   .sort((a, b) => {
-                    // You can change the sorting criteria here
-                    // For example, sorting by vote_average in descending order
+                    // sorting by vote_average in descending order
                     return b.vote_count - a.vote_count;
                   })
                   .slice(0, 8)
@@ -140,7 +135,6 @@ const PersonDetailsPage = () => {
                         backImg={credit?.backdrop_path}
                         genreIds={credit?.genre_ids}
                         cardMovieId={credit?.id}
-                        // character={credit?.character}
                         releaseDate={
                           credit.release_date
                             ? credit?.release_date

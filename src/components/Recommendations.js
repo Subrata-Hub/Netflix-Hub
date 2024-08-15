@@ -5,7 +5,6 @@ import MovieList from "./shared/MovieList";
 import Shimmer from "./shared/Shimmer";
 
 const Recommendations = ({ mediaType, id, loading }) => {
-  // const loading = useSelector((state) => state.loading);
   const recommendationData = useSelector(
     (store) => store.media?.recommendations
   );

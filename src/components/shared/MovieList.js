@@ -87,5 +87,3 @@ const MovieList = ({ title, movies, loading, mediaType }) => {
 };
 
 export default MovieList;
-
-// h-[185px] md:h-[300px]

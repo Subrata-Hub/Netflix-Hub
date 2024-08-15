@@ -9,7 +9,6 @@ const VideoTitle = ({ title, overview, id, mediaType }) => {
       <h1 className="text-2xl md:text-5xl font-bold">{title}</h1>
 
       <p className="py-3 md:py-6 text-[12px] md:text-sm font-normal w-full">
-        {/* {overview.length < 220 ? overview : overview.substring(0, 220)} */}
         {overview.length < 120
           ? overview
           : window.innerWidth >= 768
@@ -34,7 +33,3 @@ const VideoTitle = ({ title, overview, id, mediaType }) => {
 };
 
 export default VideoTitle;
-
-// md:top-56
-
-//top-[285px]

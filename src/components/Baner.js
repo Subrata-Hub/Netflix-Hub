@@ -8,7 +8,6 @@ import { BiVolumeMute } from "react-icons/bi";
 import { useMediaQuery } from "react-responsive";
 import Spinner from "./shared/Spinner";
 import LeLazyLoadImage from "./shared/LeLazyLoadImage";
-import useTrending from "../hooks/useTrending";
 
 const Baner = () => {
   const videoRef = useRef(null);
@@ -20,7 +19,6 @@ const Baner = () => {
   const [mute, setMute] = useState(true);
   const [imageVisible, setImageVisible] = useState(false);
 
-  const { hasError } = useTrending(); // Access hasError state
   const movies = useSelector((store) => store.movies?.trending);
 
   const handleNext = () => {
@@ -69,16 +67,6 @@ const Baner = () => {
       };
     }
   }, [currentIndex, movies]);
-
-  if (hasError) {
-    return (
-      <div className="flex justify-center items-center bg-slate-950 text-white h-screen">
-        <h1 className="text-3xl">
-          Failed to fetch Trending Movies or TV Shows 😒😒.
-        </h1>
-      </div>
-    );
-  }
 
   if (loading) {
     return (
@@ -152,12 +140,16 @@ const Baner = () => {
         {displayedMovies.map((movie, index) => (
           <div
             key={index}
-            className="w-16 md:w-[76px] h-[40px] md:h-[42px] border border-spacing-2"
+            className={`w-16 md:w-[80px] h-[40px] md:h-[44px] border border-spacing-1 border-zinc-500 ${
+              currentIndex + index === currentIndex
+                ? " border-2 border-neutral-50"
+                : ""
+            }`}
             onClick={() => handleBanarShow(currentIndex + index)}
           >
             <img
               src={IMG_CDN_URL2 + movie?.backdrop_path}
-              className="w-full h-full object-cover object-center"
+              className={`w-full h-full object-cover object-center rounded-sm`}
               alt="banar"
             />
           </div>

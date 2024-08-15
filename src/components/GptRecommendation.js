@@ -5,9 +5,7 @@ import Spinner from "./shared/Spinner";
 
 const GptRecommendation = () => {
   const gpt = useSelector((store) => store.gpt);
-  const { movieResults, loading, movieName, hasSearched } = gpt;
-
-  console.log(movieName);
+  const { movieResults, loading, hasSearched } = gpt;
 
   if (!hasSearched) {
     return null;

@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch } from "react-redux";
 import { addTrending } from "../utils/movieSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 
 const useTrending = () => {
-  const [hasError, setHasError] = useState(false);
   const dispatch = useDispatch();
 
   const getTrending = async () => {
@@ -18,16 +17,13 @@ const useTrending = () => {
 
       dispatch(addTrending(responce.results));
     } catch (error) {
-      setHasError(true);
-      console.error("Faield to fetch Tending Movies or TV Show:", error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
     getTrending();
   }, []);
-
-  return { hasError };
 };
 
 export default useTrending;

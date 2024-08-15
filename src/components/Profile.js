@@ -15,8 +15,6 @@ const Profile = ({
       {!user ? (
         <div className="button text-white transition-colors font-medium text-lg hover:text-white lg:block ml-0 md:pl-20">
           <Link to={"/login"}>
-            {/* <button className="px-6 py-2 bg-pink-700">LogIn</button> */}
-
             <button
               type="button"
               className={`py-1 px-6  me-2 ${

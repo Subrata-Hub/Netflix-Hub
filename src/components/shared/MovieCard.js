@@ -57,10 +57,6 @@ const MovieCard = ({
   };
 
   const handleSavedButton = () => {
-    // if (!user) {
-    //   navigate("/login");
-    // }
-
     if (user) {
       if (isBookedMark) {
         dispatch(removeMovieOrTVShow(cardMovieId));

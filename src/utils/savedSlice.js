@@ -4,11 +4,11 @@ const loadState = () => {
   try {
     const serializedState = localStorage.getItem("savedState");
     if (serializedState === null) {
-      return { savedMovieOrTVShow: [] }; // default initial state
+      return { savedMovieOrTVShow: [] };
     }
     return JSON.parse(serializedState);
   } catch (err) {
-    return { savedMovieOrTVShow: [] }; // default initial state
+    return { savedMovieOrTVShow: [] };
   }
 };
 

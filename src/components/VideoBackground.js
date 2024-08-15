@@ -11,22 +11,20 @@ const VideoBackground = forwardRef(
 
     useMediaTrailer(mediaType, movieId);
 
-    // if (!mediaTrailerVideo || !mediaTrailerVideo.key) return;
-
     return (
-      <div className="w-screen relative  pb-[56.25%]  md:-mt-10 mt-14 z-0">
-        {mediaTrailerVideo && mediaTrailerVideo.key && (
-          <ReactPlayer
-            ref={ref}
-            url={`https://www.youtube.com/watch?v=${mediaTrailerVideo?.key}`}
-            playing={true}
-            muted={mute}
-            controls={false}
-            pip={true}
-            onEnded={nextVideo}
-            className="video"
-          />
-        )}
+      <div className="relative w-full h-0 pb-[56.25%] mt-14 md:-mt-10 z-0">
+        <ReactPlayer
+          ref={ref}
+          url={`https://www.youtube.com/watch?v=${mediaTrailerVideo?.key}`}
+          playing={true}
+          muted={mute}
+          controls={false}
+          pip={true}
+          onEnded={nextVideo}
+          width="100%"
+          height="100%"
+          className="absolute top-0 left-0"
+        />
       </div>
     );
   }

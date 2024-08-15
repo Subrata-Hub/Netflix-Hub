@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { IMG_CDN_URL } from "../utils/constants";
+import { IMG_CDN_URL10, IMG_CDN_URL5 } from "../utils/constants";
 
 import PosterFallImage from "../assets/no-poster2.jpeg";
 import CircularProgress from "./shared/CircularProgress";
@@ -99,10 +99,8 @@ const MediaInfo = ({ mediaType, id }) => {
       <div className="pt-48 md:pt-52 w-full pb-5">
         <div className="w-full h-full absolute md:top-0 top-0 left-0 overflow-hidden bg-slate-950 opacity-40">
           <LeLazyLoadImage
-            src={`${IMG_CDN_URL}${mediaInfoData?.backdrop_path}`}
+            src={`${IMG_CDN_URL10}${mediaInfoData?.backdrop_path}`}
             alt="media_banar"
-            // height={850}
-            // width={1580}
             height={isMobile ? 500 : 850}
             width={isMobile ? 400 : 1580}
             className="object-center object-cover"
@@ -116,12 +114,10 @@ const MediaInfo = ({ mediaType, id }) => {
             <LeLazyLoadImage
               src={
                 mediaInfoData?.poster_path
-                  ? `${IMG_CDN_URL}${mediaInfoData?.poster_path}`
+                  ? `${IMG_CDN_URL5}${mediaInfoData?.poster_path}`
                   : PosterFallImage
               }
               alt="poster"
-              // width={320}
-              // height={470}
               height={isMobile ? 370 : 470}
               width={isMobile ? 260 : 320}
             />
