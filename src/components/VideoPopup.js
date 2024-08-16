@@ -8,7 +8,7 @@ const VideoPopup = ({ mediaVideo, videoPopup, nextVideo }) => {
     if (playerRef.current) {
       playerRef.current.seekTo(0); // Reset video to the beginning
     }
-  }, [mediaVideo]);
+  }, [playerRef]);
 
   if (!videoPopup) {
     return null;
@@ -20,7 +20,7 @@ const VideoPopup = ({ mediaVideo, videoPopup, nextVideo }) => {
         <ReactPlayer
           ref={playerRef}
           url={`https://www.youtube.com/watch?v=${mediaVideo}`}
-          className="absolute top-0 left-0"
+          className="absolute top-0 left-0 bg-slate-900"
           width="100%"
           height="100%"
           playing={true}

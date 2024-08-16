@@ -23,7 +23,7 @@ const MovieList = ({ title, movies, loading, mediaType }) => {
 
   if (!movies) {
     return (
-      <div className="w-full">
+      <div className="w-full mt-10">
         <Shimmer
           className="w-[115px] md:w-[230px] h-[185px] md:h-[300px] bg-stone-700 rounded-xl"
           size={6}

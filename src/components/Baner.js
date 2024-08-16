@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { IMG_CDN_URL2, IMG_CDN_URL10 } from "../utils/constants";
 import VideoTitle from "./VideoTitle";
@@ -10,7 +10,6 @@ import Spinner from "./shared/Spinner";
 import LeLazyLoadImage from "./shared/LeLazyLoadImage";
 
 const Baner = () => {
-  const videoRef = useRef(null);
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -54,13 +53,10 @@ const Baner = () => {
   useEffect(() => {
     if (movies && movies.length > 0) {
       setLoading(false);
-      if (videoRef.current) {
-        videoRef.current.seekTo(0); // Reset video to the beginning
-      }
 
       setShowVideo(false);
 
-      const timer = setTimeout(() => setShowVideo(true), 2500);
+      const timer = setTimeout(() => setShowVideo(true), 2000);
 
       return () => {
         clearTimeout(timer);
@@ -98,7 +94,6 @@ const Baner = () => {
 
       {showVideo && imageVisible && (
         <VideoBackground
-          ref={videoRef}
           movieId={currentMovie.id}
           mute={mute}
           nextVideo={handleNextVideo}
@@ -139,12 +134,12 @@ const Baner = () => {
         )}
         {displayedMovies.map((movie, index) => (
           <div
-            key={index}
-            className={`w-16 md:w-[80px] h-[40px] md:h-[44px] border border-spacing-1 border-zinc-500 ${
+            key={movie.id}
+            className={`w-16 md:w-[80px] h-[40px] md:h-[44px] border ${
               currentIndex + index === currentIndex
-                ? " border-2 border-white"
-                : ""
-            }`}
+                ? "border-2 border-white"
+                : "border-spacing-1 border-zinc-500"
+            } hover:scale-110 transition-transform duration-200 cursor-pointer`}
             onClick={() => handleBanarShow(currentIndex + index)}
           >
             <img
