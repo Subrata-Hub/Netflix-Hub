@@ -5,6 +5,12 @@ const VideoPopup = ({ mediaVideo, videoPopup, nextVideo }) => {
   const playerRef = useRef(null);
 
   useEffect(() => {
+    if (playerRef.current) {
+      playerRef.current.seekTo(0); // Reset video to the beginning
+    }
+  }, [playerRef]);
+
+  useEffect(() => {
     // Capture the current player reference inside the effect
     const player = playerRef.current;
 

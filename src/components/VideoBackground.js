@@ -95,11 +95,6 @@ const VideoBackground = ({ movieId, mediaType, mute, nextVideo }) => {
           width="100%"
           height="100%"
           className="absolute top-0 left-0"
-          config={{
-            youtube: {
-              playerVars: { showinfo: 0, rel: 0 },
-            },
-          }}
         />
       )}
     </div>

@@ -217,12 +217,11 @@ const Baner = () => {
 
       const timer = setTimeout(() => {
         setShowVideo(true);
-      }, 1500); // Delay to ensure proper cleanup
+      }, 2000); // Delay to ensure proper cleanup
 
       return () => {
         clearTimeout(timer);
         setShowVideo(false);
-        setMute(true);
       };
     }
   }, [currentIndex, movies]);
@@ -231,7 +230,6 @@ const Baner = () => {
     return () => {
       // Cleanup logic when Baner component unmounts
       setShowVideo(false);
-      setMute(true);
     };
   }, []);
 
