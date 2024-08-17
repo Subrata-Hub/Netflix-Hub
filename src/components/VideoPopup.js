@@ -5,10 +5,19 @@ const VideoPopup = ({ mediaVideo, videoPopup, nextVideo }) => {
   const playerRef = useRef(null);
 
   useEffect(() => {
-    if (playerRef.current) {
-      playerRef.current.seekTo(0); // Reset video to the beginning
-    }
-  }, [playerRef]);
+    // Capture the current player reference inside the effect
+    const player = playerRef.current;
+
+    // Cleanup function to ensure the video is paused when the component unmounts
+    return () => {
+      if (player && player.getInternalPlayer) {
+        const internalPlayer = player.getInternalPlayer();
+        if (internalPlayer && internalPlayer.pauseVideo) {
+          internalPlayer.pauseVideo();
+        }
+      }
+    };
+  }, []);
 
   if (!videoPopup) {
     return null;
@@ -25,7 +34,6 @@ const VideoPopup = ({ mediaVideo, videoPopup, nextVideo }) => {
           height="100%"
           playing={true}
           controls={true}
-          pip={true}
           onEnded={nextVideo}
           config={{
             youtube: {

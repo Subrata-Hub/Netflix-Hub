@@ -19,11 +19,14 @@ import { addMovieOrTVShow, removeMovieOrTVShow } from "../utils/savedSlice";
 import { IoMdClose } from "react-icons/io";
 import LeLazyLoadImage from "./shared/LeLazyLoadImage";
 import useOutsideClick from "../hooks/useOutsideClick";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const MediaInfo = ({ mediaType, id }) => {
   const [videoPopup, setVideoPopup] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
   const mediaInfoData = useSelector((store) => store.media?.mediaInfo);
 
   const mediaTrailerVideo = useSelector((store) => store.media?.mediaTrailer);
@@ -87,10 +90,16 @@ const MediaInfo = ({ mediaType, id }) => {
   );
 
   const handleSavedButton = () => {
-    if (isBookedMark) {
-      dispatch(removeMovieOrTVShow(cardMovieId));
+    if (user) {
+      if (isBookedMark) {
+        dispatch(removeMovieOrTVShow(cardMovieId));
+        toast.success("Remove from Bookmark");
+      } else {
+        dispatch(addMovieOrTVShow(savedData));
+        toast.success("Added to Bookmark");
+      }
     } else {
-      dispatch(addMovieOrTVShow(savedData));
+      navigate("/login");
     }
   };
 
