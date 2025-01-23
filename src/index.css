@@ -15,7 +15,7 @@
 /* MovieCard.css */
 .movie-card-container .blur-effect {
   filter: blur(16px);
-  transition: filter 0.5s ease;
+  transition: filter 0.5s ease-in-out;
 }
 
 .movie-card-container .is-visible {

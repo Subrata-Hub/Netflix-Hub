@@ -93,8 +93,8 @@ const Baner = () => {
         <div className="w-full h-full md:w-[1580px] md:h-[1080px] bg-slate-900 movie-card-container mt-16 md:mt-1">
           <LeLazyLoadImage
             src={IMG_CDN_URL10 + currentMovie?.backdrop_path}
-            height={isMobile ? 200 : 1080}
-            width={isMobile ? 400 : 1580}
+            height={isMobile ? 210 : 1080}
+            width={isMobile ? 425 : 1580}
             alt="banar"
             handleImageVisible={handleImageVisible}
           />
@@ -125,7 +125,7 @@ const Baner = () => {
           <GoUnmute className="text-white text-2xl" onClick={handleMute} />
         )}
       </div>
-      <div className="absolute bottom-[445px] md:bottom-[120px] md:right-20 right-2 flex gap-1 z-40 md:max-w-[400px] mt-2">
+      <div className="absolute bottom-[445px] md:bottom-[120px] md:right-20  right-0  flex gap-1 z-40 w-full justify-center px-3 md:px-0 md:max-w-[400px] mt-2">
         {currentIndex >= 0 && (
           <div
             className="absolute top-0 bottom-0 left-0 w-10 h-10 bg-transparent text-white flex justify-center items-center cursor-pointer z-50"
@@ -145,7 +145,7 @@ const Baner = () => {
         {displayedMovies.map((movie, index) => (
           <div
             key={movie.id}
-            className={`w-16 md:w-[80px] h-[40px] md:h-[44px] border ${
+            className={`w-[68px] md:w-[80px] h-[40px] md:h-[44px] border ${
               currentIndex + index === currentIndex
                 ? "border-2 border-white"
                 : "border-spacing-1 border-zinc-500"
