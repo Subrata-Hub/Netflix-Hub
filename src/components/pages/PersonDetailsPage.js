@@ -82,8 +82,8 @@ const PersonDetailsPage = () => {
                 <div className="hidden md:block">
                   <h1 className="text-xl font-semibold">Also Known As</h1>
                   <div className="">
-                    {data?.also_known_as?.map((name) => (
-                      <ul className="">
+                    {data?.also_known_as?.map((name, index) => (
+                      <ul className="" key={index}>
                         <li className="mb-2">{name}</li>
                       </ul>
                     ))}
