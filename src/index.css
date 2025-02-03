@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.body {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* MovieCard.css */
+.movie-card-container .blur-effect {
+  filter: blur(16px);
+  transition: filter 0.5s ease-in-out;
+}
+
+.movie-card-container .is-visible {
+  filter: blur(0);
+}
+
+.blur-effect {
+  filter: blur(16px);
+  transition: filter 0.5s ease;
+}
+
+.is-visible {
+  filter: blur(0);
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.header {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+}
