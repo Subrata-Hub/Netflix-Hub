@@ -19,7 +19,7 @@ const Profile = ({
               type="button"
               className={`py-1 px-6  me-2 ${
                 showSearchBar ? "hidden" : ""
-              } md:flex  text-base font-medium text-gray-900  focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`}
+              } md:flex  text-base font-medium text-gray-900  focus:outline-hidden bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`}
             >
               LogIn
             </button>
@@ -49,7 +49,7 @@ const Profile = ({
           <button
             type="button"
             onClick={handleSignOut}
-            class="py-1 px-6 me-2 mt-2  text-base font-medium text-gray-900  focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            class="py-1 px-6 me-2 mt-2  text-base font-medium text-gray-900  focus:outline-hidden bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-slate-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           >
             Logout
           </button>

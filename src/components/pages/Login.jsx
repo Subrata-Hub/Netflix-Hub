@@ -123,7 +123,7 @@ const Login = () => {
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="p-14 bg-black absolute my-28  mx-auto right-0 left-0 w-full md:w-[29%] text-white rounded-sm bg-opacity-85"
+        className="p-14 bg-black absolute my-28  mx-auto right-0 left-0 w-full md:w-[29%] text-white rounded-xs bg-opacity-85"
       >
         <h1 className="font-bold text-3xl pb-5">
           {isSignInFrom ? "Sign In" : "Sign Up"}
@@ -133,24 +133,24 @@ const Login = () => {
             ref={name}
             type="text"
             placeholder=" Full Name"
-            className="p-3 my-2 w-full bg-neutral-700 rounded-sm"
+            className="p-3 my-2 w-full bg-neutral-700 rounded-xs"
           />
         )}
         <input
           ref={email}
           type="text"
           placeholder=" Email Address"
-          className="p-3 my-2 w-full bg-neutral-700 rounded-sm"
+          className="p-3 my-2 w-full bg-neutral-700 rounded-xs"
         />
         <input
           ref={password}
           type="password"
           placeholder="password"
-          className="p-3 my-2 w-full bg-neutral-700 rounded-sm"
+          className="p-3 my-2 w-full bg-neutral-700 rounded-xs"
         />
         <p className="text-red-500 font-bold text-base pt-1">{errorMsg}</p>
         <button
-          className="p-3 my-6 bg-red-700 w-full rounded-sm"
+          className="p-3 my-6 bg-red-700 w-full rounded-xs"
           onClick={handleButtonClick}
         >
           {isSignInFrom ? "Sign In" : "Sign Up"}

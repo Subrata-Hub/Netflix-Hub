@@ -117,7 +117,7 @@ const Baner = () => {
         id={currentMovie.id}
         mediaType={currentMovie.media_type}
       />
-      <div className="absolute w-screen h-[1000px] top-0 left-0 bg-gradient-to-r from-black z-10"></div>
+      <div className="absolute w-screen h-[1000px] top-0 left-0 bg-linear-to-r from-black z-10"></div>
       <div className="absolute bottom-[38rem] md:bottom-[220px] z-40 right-6 md:right-20">
         {mute ? (
           <BiVolumeMute className="text-white text-2xl" onClick={handleMute} />
@@ -154,7 +154,7 @@ const Baner = () => {
           >
             <img
               src={IMG_CDN_URL2 + movie?.backdrop_path}
-              className={`w-full h-full object-cover object-center rounded-sm`}
+              className={`w-full h-full object-cover object-center rounded-xs`}
               alt="banar"
             />
           </div>

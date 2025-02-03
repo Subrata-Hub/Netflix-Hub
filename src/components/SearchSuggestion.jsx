@@ -19,7 +19,7 @@ const SearchSuggestion = ({
           <ul>
             {suggestion?.results?.slice(0, 12).map((s) => (
               <li
-                className="py-1 shadow-sm hover:bg-slate-900 cursor-pointer"
+                className="py-1 shadow-xs hover:bg-slate-900 cursor-pointer"
                 key={s.id}
                 onClick={() => handleSearchClicked(s.title || s.name)}
               >

@@ -117,7 +117,7 @@ const MediaInfo = ({ mediaType, id }) => {
         </div>
 
         <div className="absolute w-full bottom-0 left-0 bg-slate-950 h-full opacity-40"></div>
-        <div className="absolute w-full bottom-0 left-0 bg-gradient-to-t from-slate-950 h-[500px] opacity-100"></div>
+        <div className="absolute w-full bottom-0 left-0 bg-linear-to-t from-slate-950 h-[500px] opacity-100"></div>
         <div className="relative  md:flex gap-12 pl-6 md:pl-52">
           <div className="block w-full md:w-[20rem] px-6 md:px-0">
             <LeLazyLoadImage

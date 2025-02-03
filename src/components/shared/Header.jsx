@@ -183,7 +183,7 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 border-b border-b-slate-800 md:border-b-slate-900 md:backdrop-blur-sm">
+    <div className="fixed top-0 left-0 w-full z-50 border-b border-b-slate-800 md:border-b-slate-900 md:backdrop-blur-xs">
       <div className={`flex items-center px-2 lg:px-7.5 xl:px-10 max-lg:py-4`}>
         <Link
           to="/"
@@ -198,7 +198,7 @@ const Header = () => {
         {!showGptSearch && (
           <div className="hidden md:flex md:h-9 h-0 px-5 bg-slate-800 rounded-2xl items-center shadow-lg w-screen overflow-x-auto md:w-[500px]">
             <input
-              className="text-white w-full bg-slate-800 outline-none"
+              className="text-white w-full bg-slate-800 outline-hidden"
               type="text"
               placeholder="Search"
               value={searchQuery}
@@ -223,7 +223,7 @@ const Header = () => {
           } md:hidden h-9 px-2 bg-slate-800 rounded-xl items-center shadow-lg w-screen min-h-12  z-50`}
         >
           <input
-            className="text-white w-full bg-slate-800 outline-none"
+            className="text-white w-full bg-slate-800 outline-hidden"
             type="text"
             placeholder="Search"
             value={searchQuery}
