@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-=======
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -22,7 +17,6 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
->>>>>>> merge-mobinfo
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
